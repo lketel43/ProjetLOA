@@ -5,8 +5,9 @@
 #ifndef PROJETLOA_AMAZONE_HPP
 #define PROJETLOA_AMAZONE_HPP
 
+#include "Personnage.hpp"
 
-class Amazone {
+class Amazone: public Personnage{
 
 };
 

@@ -5,8 +5,9 @@
 #ifndef PROJETLOA_GUERRIER_HPP
 #define PROJETLOA_GUERRIER_HPP
 
+#include "Personnage.hpp"
 
-class Guerrier {
+class Guerrier: public Personnage{
 
 };
 

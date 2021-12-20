@@ -5,8 +5,10 @@
 #ifndef PROJETLOA_SORCIERE_HPP
 #define PROJETLOA_SORCIERE_HPP
 
+#include "Personnage.hpp"
 
-class Sorciere {
+
+class Sorciere: public Personnage {
 
 };
 

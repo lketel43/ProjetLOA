@@ -5,8 +5,9 @@
 #ifndef PROJETLOA_MOINE_HPP
 #define PROJETLOA_MOINE_HPP
 
+#include "Personnage.hpp"
 
-class Moine {
+class Moine: public Personnage{
 
 };
 
