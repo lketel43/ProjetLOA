@@ -4,6 +4,6 @@
 
 #include "Moine.hpp"
 
-Moine::Moine(): attaquePhysique(7), attaqueMagique(13), resistanceMagique(10), resistancePhysique(10) {
+Moine::Moine(): Personnage("Moine", 7, 13, 10, 10) {
 
 }

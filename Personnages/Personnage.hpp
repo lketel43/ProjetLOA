@@ -7,17 +7,19 @@
 
 #include "../Objets/Objet.hpp"
 #include <utility>
+#include <iostream>
 
 
 class Personnage {
 
+protected:
+    Personnage(std::string, int, int, int, int );
 private:
 
     const std::string nom;
     int sante = 100;
     int habilite = 10;
     Objet* sac[4];
-
     int attaquePhysique;
     int attaqueMagique;
     int resistancePhysique;
@@ -28,6 +30,7 @@ public:
     std::pair<int, int> attaque();
     //Subit l'attaque <Physique, Magique> indiquée en tenant en compte la resistance du personnage
     void subitAttaque(std::pair<int, int>&);
+    virtual void virtu()=0;
 
 
 

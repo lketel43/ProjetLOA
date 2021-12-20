@@ -19,7 +19,7 @@ Chateau::Chateau(int w, int l) : width(w), length(l) {
         }
         mapInit.push_back(ligne);
     }
-    map{mapInit};
+    map = mapInit;
     initializeDirections();
 }
 
@@ -27,24 +27,24 @@ void Chateau::initializeDirections() {
     for (int i = 0; i < width; i++) {
         for (int j = 0; i < length; j++) {
             if (i == 0)
-                map[i][j].neighbors[north] = nullptr;
+                map[i][j]->neighbors[north] = nullptr;
             else
-                map[i][j].neighbors[north] = &(map[i - 1][j]);
+                map[i][j]->neighbors[north] = map[i - 1][j];
 
             if (i == width - 1)
-                map[i][j].neighbors[south] = nullptr;
+                map[i][j]->neighbors[south] = nullptr;
             else
-                map[i][j].neighbors[south] = &(map[i + 1][j]);
+                map[i][j]->neighbors[south] = map[i + 1][j];
 
             if (j == 0)
-                map[i][j].neighbors[west] = nullptr;
+                map[i][j]->neighbors[west] = nullptr;
             else
-                map[i][j].neighbors[west] = &(map[i][j - 1]);
+                map[i][j]->neighbors[west] = map[i][j - 1];
 
             if (j == length - 1)
-                map[i][j].neighbors[east] = nullptr;
+                map[i][j]->neighbors[east] = nullptr;
             else
-                map[i][j].neighbors[west] = &(map[i][j + 1]);
+                map[i][j]->neighbors[west] = map[i][j + 1];
 
         }
     }

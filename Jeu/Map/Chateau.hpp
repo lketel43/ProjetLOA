@@ -13,7 +13,7 @@ class Chateau {
 private:
     int width;
     int length;
-    const std::vector <vector<Salle *>> map;
+    std::vector < std::vector<Salle *>> map;
 
     //initializes the direction pointers of the salles inside the map
     void initializeDirections();

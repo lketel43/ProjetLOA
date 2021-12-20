@@ -9,16 +9,14 @@
 #include "../../Personnages/Personnage.hpp"
 #include "../../Objets/Objet.hpp"
 
-class Chateau;
-
 class Salle {
 
 private:
+    friend class Chateau;
     const int id;
     std::vector<Personnage*> personnages;
     std::vector<Objet*> objets;
     Salle* neighbors[4];
-    friend void Chateau::initializeDirections();
 
 public:
     Salle(int);
