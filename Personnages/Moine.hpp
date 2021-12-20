@@ -9,6 +9,9 @@
 
 class Moine: public Personnage{
 
+public:
+    Moine();
+
 };
 
 

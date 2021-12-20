@@ -9,6 +9,9 @@
 
 class Guerrier: public Personnage{
 
+public:
+    Guerrier();
+
 };
 
 

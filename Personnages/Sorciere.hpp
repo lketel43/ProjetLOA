@@ -10,6 +10,9 @@
 
 class Sorciere: public Personnage {
 
+public:
+    Sorciere();
+
 };
 
 

@@ -9,6 +9,9 @@
 
 class Amazone: public Personnage{
 
+public:
+    Amazone();
+
 };
 
 

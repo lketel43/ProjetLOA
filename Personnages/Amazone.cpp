@@ -3,3 +3,7 @@
 //
 
 #include "Amazone.hpp"
+
+Amazone::Amazone():attaquePhysique(11), attaqueMagique(9), resistanceMagique(10), resistancePhysique(10) {
+
+}
