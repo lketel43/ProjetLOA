@@ -4,6 +4,8 @@
 
 #include "Personnage.hpp"
 
+using namespace std;
+
 
 
 //TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
