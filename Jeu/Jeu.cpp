@@ -16,10 +16,18 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     chateau = new Chateau(chateauWidth, chateauLength);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
-    personnagesDisponibles.push_back(new Amazone());
-    personnagesDisponibles.push_back(new Guerrier());
-    personnagesDisponibles.push_back(new Moine());
-    personnagesDisponibles.push_back(new Sorciere());
+    pair<Personnage *, int> pair1(new Amazone(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair1);
+
+    pair<Personnage *, int> pair2(new Guerrier(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair2);
+
+    pair<Personnage *, int> pair3(new Moine(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair3);
+
+    pair<Personnage *, int> pair4(new Sorciere(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair4);
+
 
 }
 
@@ -27,10 +35,18 @@ Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
     chateau = new Chateau(5, 5);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
-    personnagesDisponibles.push_back(new Amazone());
-    personnagesDisponibles.push_back(new Guerrier());
-    personnagesDisponibles.push_back(new Moine());
-    personnagesDisponibles.push_back(new Sorciere());
+
+    pair<Personnage *, int> pair1(new Amazone(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair1);
+
+    pair<Personnage *, int> pair2(new Guerrier(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair2);
+
+    pair<Personnage *, int> pair3(new Moine(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair3);
+
+    pair<Personnage *, int> pair4(new Sorciere(), 0);
+    personnagesDisponiblesEtFrequences.push_back(pair4);
 
 }
 
@@ -45,10 +61,10 @@ void Jeu::setPlayers() {
     cout << "Il est temps pour chaque joueur de choisir son personnage." << endl
          << "Voici les personnages possibles, et leur stats." << endl;
 
-    for (long unsigned int i = 0; i < personnagesDisponibles.size(); i++) {
+    for (long unsigned int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
         cout << "Personnage " << i + 1 << ": " << endl;
-        cout << "Nom: " << personnagesDisponibles[i]->getName() << endl;
-        cout << personnagesDisponibles[i]->getStats() << endl;
+        cout << "Nom: " << personnagesDisponiblesEtFrequences[i].first->getName() << endl;
+        cout << personnagesDisponiblesEtFrequences[i].first->getStats() << endl;
     }
 
     cout << "Maintenant que vous connaissez les personnages, à vous de choisir lequel sera le vôtre." << endl;
@@ -62,14 +78,15 @@ void Jeu::setPlayers() {
 
         } else {
             cout << "À vous Joueur " << i + 1 << " de choisir votre personnage." << endl
-                 << "Choisissez un nombre entre 1 et " << personnagesDisponibles.size() << "." << endl
+                 << "Choisissez un nombre entre 1 et " << personnagesDisponiblesEtFrequences.size() << "." << endl
                  << "Attention! Ce choix est définitif." << endl;
             cin >> choice;
             //TODO: need to validate choice is in good range
             cout << " Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
             cin >> name;
         }
-        cout << "Le joueur " << name << " a choisi un(e) " << personnagesDisponibles[choice - 1]->getName() << endl;
+        cout << "Le joueur " << name << " a choisi un(e) "
+             << personnagesDisponiblesEtFrequences[choice - 1].first->getName() << endl;
 
         joueurs.push_back(new Joueur(name, forge(choice - 1), (i + 1 > nombreJoueurNonAutomatise)));
 
@@ -79,7 +96,7 @@ void Jeu::setPlayers() {
 }
 
 Personnage *Jeu::forge(int choice) {
-    string type = personnagesDisponibles[choice]->getName();
+    string type = personnagesDisponiblesEtFrequences[choice].first->getName();
     //switching on first letter of the type chosen
     switch (type[0]) {
         case 'a':
@@ -102,7 +119,17 @@ Personnage *Jeu::forge(int choice) {
 }
 
 int Jeu::choosePersonnageAutom() {
-    return 2;
+    int min = personnagesDisponiblesEtFrequences[0].second;
+    unsigned int choice = 1;
+    for (unsigned int i = 1; i < personnagesDisponiblesEtFrequences.size(); i++) {
+        if (min > personnagesDisponiblesEtFrequences[i].second) {
+            min = personnagesDisponiblesEtFrequences[i].second;
+            choice = i + 1;
+        }
+    }
+
+    personnagesDisponiblesEtFrequences[choice - 1].second +=1;
+    return choice;
 }
 
 void Jeu::lancePartie() {

@@ -10,6 +10,7 @@
 #include "Joueur.hpp"
 #include "vector"
 #include "Map/Chateau.hpp"
+#include <utility>
 
 class Jeu {
 
@@ -19,7 +20,7 @@ private:
     std::vector<Joueur *> joueurs;
     Chateau *chateau;
     //TODO: create destructor to delete the allocated personnages
-    std::vector<Personnage *> personnagesDisponibles;
+    std::vector<std::pair<Personnage *, int>> personnagesDisponiblesEtFrequences;
     Personnage* forge(int);
 
     //Permet de choisir les personnages pour tous les joueurs
