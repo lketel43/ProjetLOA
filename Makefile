@@ -46,17 +46,31 @@ main : main.o $(OBJ_OBJETS) $(OBJ_PERSONNAGES) $(OBJ_JEU) $(OBJ_MAP)
 main.o : main.cpp
 	$(CPP) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR_PERSONNAGES)%.o : $(PERSONNAGES_SRC)%.cpp
+$(OBJ_DIR_PERSONNAGES)%.o : $(PERSONNAGES_SRC)%.cpp | $(OBJ_DIR_PERSONNAGES)
 	$(CPP) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR_JEU)%.o : $(JEU_SRC)%.cpp
+$(OBJ_DIR_JEU)%.o : $(JEU_SRC)%.cpp | $(OBJ_DIR_JEU)
 	$(CPP) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR_MAP)%.o : $(MAP_SRC)%.cpp
+$(OBJ_DIR_MAP)%.o : $(MAP_SRC)%.cpp | $(OBJ_DIR_MAP)
 	$(CPP) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR_OBJETS)%.o : $(OBJETS_SRC)%.cpp
+$(OBJ_DIR_OBJETS)%.o : $(OBJETS_SRC)%.cpp | $(OBJ_DIR_OBJETS)
 	$(CPP) $(CFLAGS) -c $< -o $@
+
+
+
+$(OBJ_DIR_OBJETS):
+	@mkdir -p $(OBJ_DIR_OBJETS)
+
+$(OBJ_DIR_PERSONNAGES):
+	@mkdir -p $(OBJ_DIR_PERSONNAGES)
+
+$(OBJ_DIR_JEU):
+	@mkdir -p $(OBJ_DIR_JEU)
+
+$(OBJ_DIR_MAP):
+	@mkdir -p $(OBJ_DIR_MAP)
 
 clean:
 	rm Personnages/obj/*.o Jeu/obj/*.o Jeu/Map/obj/*.o Objets/obj/*.o main.o main rm Personnages/*.gch
