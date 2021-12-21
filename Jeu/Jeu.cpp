@@ -84,6 +84,7 @@ void Jeu::setPlayers() {
             //TODO: need to validate choice is in good range
             cout << " Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
             cin >> name;
+            personnagesDisponiblesEtFrequences[choice - 1].second +=1;
         }
         cout << "Le joueur " << name << " a choisi un(e) "
              << personnagesDisponiblesEtFrequences[choice - 1].first->getName() << endl;
