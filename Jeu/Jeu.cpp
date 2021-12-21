@@ -25,6 +25,12 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
 
 Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
     chateau = new Chateau(5, 5);
+    //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
+    // et effectuer un changement dans la fonction forge
+    personnagesDisponibles.push_back(new Amazone());
+    personnagesDisponibles.push_back(new Guerrier());
+    personnagesDisponibles.push_back(new Moine());
+    personnagesDisponibles.push_back(new Sorciere());
 
 }
 
@@ -36,37 +42,37 @@ void Jeu::setPlayers() {
 
     //TODO: need to figure out name situation
 
-    cout << "Il est temps pour chaque joueur de choisir son personnage" << endl
+    cout << "Il est temps pour chaque joueur de choisir son personnage." << endl
          << "Voici les personnages possibles, et leur stats." << endl;
 
     for (long unsigned int i = 0; i < personnagesDisponibles.size(); i++) {
         cout << "Personnage " << i + 1 << ": " << endl;
         cout << "Nom: " << personnagesDisponibles[i]->getName() << endl;
         cout << personnagesDisponibles[i]->getStats() << endl;
-        cout << endl;
     }
 
     cout << "Maintenant que vous connaissez les personnages, à vous de choisir lequel sera le vôtre." << endl;
-    if (nombreJoueurNonAutomatise > 1) {
-        for (int i = 0; i < nombreDeJoueurs; i++) {
+
+    for (int i = 0; i < nombreDeJoueurs; i++) {
+
+        //Si on a déjà demandé a tous les joueurs et il reste que les automatisés
+        if (i + 1 > nombreJoueurNonAutomatise) {
+            choice = choosePersonnageAutom();
+            name = std::to_string(i + 1);
+
+        } else {
             cout << "À vous Joueur " << i + 1 << " de choisir votre personnage." << endl
                  << "Choisissez un nombre entre 1 et " << personnagesDisponibles.size() << "." << endl
                  << "Attention! Ce choix est définitif." << endl;
-            //Si on a déjà demandé a tous les joueurs et il reste que les automatisés
-            if (i + 1 > nombreJoueurNonAutomatise) {
-                choice = choosePersonnageAutom();
-                name = std::to_string(i + 1);
-
-            } else {
-                cin >> choice;
-                //TODO: need to validate choice is in good range
-                cout<<" Vous êtes digne d'un prénom également. Quel est votre prénom?"<<endl;
-                cin>>name;
-            }
-            cout << "Le joueur " << name << " a choisi un "<< personnagesDisponibles[choice - 1]->getName()<<endl;
-            joueurs.push_back(new Joueur(name, forge(choice - 1),(i + 1 > nombreJoueurNonAutomatise)));
-
+            cin >> choice;
+            //TODO: need to validate choice is in good range
+            cout << " Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
+            cin >> name;
         }
+        cout << "Le joueur " << name << " a choisi un(e) " << personnagesDisponibles[choice - 1]->getName() << endl;
+
+        joueurs.push_back(new Joueur(name, forge(choice - 1), (i + 1 > nombreJoueurNonAutomatise)));
+
     }
 
 
@@ -77,16 +83,28 @@ Personnage *Jeu::forge(int choice) {
     //switching on first letter of the type chosen
     switch (type[0]) {
         case 'a':
+        case 'A':
             return new Amazone();
         case 'g':
+        case 'G':
             return new Guerrier();
         case 'm':
+        case 'M':
             return new Moine();
         case 's':
+        case 'S':
             return new Sorciere();
         default:
-            cout<<"Erreur réalisée en cours de forgement d'un personnage de type  "<<type<<endl;
+            cout << "Erreur réalisée en cours de forgement d'un personnage de type  " << type << endl;
             return nullptr;
 
     }
+}
+
+int Jeu::choosePersonnageAutom() {
+    return 2;
+}
+
+void Jeu::lancePartie() {
+    setPlayers();
 }

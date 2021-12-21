@@ -22,7 +22,7 @@ Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 
 void Chateau::initializeDirections() {
     for (int i = 0; i < width; i++) {
-        for (int j = 0; i < length; j++) {
+        for (int j = 0; j < length; j++) {
             if (i == 0)
                 map[i][j]->neighbors[north] = nullptr;
             else

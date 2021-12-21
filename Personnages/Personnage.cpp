@@ -34,4 +34,5 @@ string Personnage::getStats() {
     stat += "Résistance Physique: " + std::to_string(resistancePhysique) + "\n";
     stat += "Résistance Magique: " + std::to_string(resistanceMagique) + "\n";
 
+    return stat;
 }

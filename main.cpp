@@ -4,8 +4,11 @@
 
 #include <iostream>
 
-int main() {
+#include "Jeu.hpp"
 
+int main() {
+    Jeu jeu;
+    jeu.lancePartie();
     return 0;
 }
 
