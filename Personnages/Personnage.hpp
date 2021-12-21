@@ -13,13 +13,15 @@
 class Personnage {
 
 protected:
-    Personnage(std::string, int, int, int, int );
+    Personnage(std::string, int, int, int, int);
+    Personnage(Personnage*);
+
 private:
 
     const std::string nom;
     int sante = 100;
     int habilite = 10;
-    Objet* sac[4];
+    Objet *sac[4];
     int attaquePhysique;
     int attaqueMagique;
     int resistancePhysique;
@@ -28,11 +30,12 @@ private:
 public:
     //Retourne les dégats commits <Physique, Magique>
     std::pair<int, int> attaque();
+
     //Subit l'attaque <Physique, Magique> indiquée en tenant en compte la resistance du personnage
-    void subitAttaque(std::pair<int, int>&);
-    virtual void virtu()=0;
+    void subitAttaque(std::pair<int, int> &);
 
-
+    std::string getStats();
+    std::string getName();
 
 
 };

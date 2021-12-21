@@ -1,6 +1,3 @@
-//
-// Created by Laila ElKoussy on 12/20/21.
-//
 
 #ifndef PROJETLOA_CHATEAU_HPP
 #define PROJETLOA_CHATEAU_HPP
@@ -11,15 +8,15 @@
 class Chateau {
 
 private:
-    int width;
-    int length;
+    unsigned int width;
+    unsigned int length;
     std::vector < std::vector<Salle *>> map;
 
     //initializes the direction pointers of the salles inside the map
     void initializeDirections();
 
 public:
-    Chateau(int, int);
+    Chateau(unsigned int, unsigned int);
 
     //TODO: make destructor that deletes all the salles
 

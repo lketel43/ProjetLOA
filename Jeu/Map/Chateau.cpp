@@ -1,17 +1,14 @@
-//
-// Created by Laila ElKoussy on 12/20/21.
-//
 
 #include "Chateau.hpp"
 
 using namespace std;
 
-Chateau::Chateau(int w, int l) : width(w), length(l) {
+Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 
     int count = 0;
-    vector <vector<Salle *>> mapInit;
+    vector<vector<Salle *>> mapInit;
     for (int i = 0; i < w; i++) {
-        vector < Salle * > ligne;
+        vector<Salle *> ligne;
         for (int j = 0; j < l; j++) {
             Salle *salle = new Salle(count);
             ligne.push_back(salle);
@@ -45,7 +42,7 @@ void Chateau::initializeDirections() {
                 map[i][j]->neighbors[east] = nullptr;
             else
                 map[i][j]->neighbors[west] = map[i][j + 1];
-
         }
     }
 }
+

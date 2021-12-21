@@ -22,3 +22,16 @@ void Personnage::subitAttaque(pair<int, int> & pair) {
     sante -= ((pair.second - resistanceMagique) > 0)? pair.second - resistanceMagique : 0;
 
 }
+
+string Personnage::getName() {
+    return nom;
+}
+
+string Personnage::getStats() {
+    string stat;
+    stat = "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";
+    stat += "Attaque Magique: " + std::to_string(attaqueMagique) + "\n";
+    stat += "Résistance Physique: " + std::to_string(resistancePhysique) + "\n";
+    stat += "Résistance Magique: " + std::to_string(resistanceMagique) + "\n";
+
+}
