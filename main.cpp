@@ -3,12 +3,21 @@
 //
 
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
-#include "Jeu.hpp"
+#include "Jeu/Jeu.hpp"
+#include "Utilities/Utilities.cpp"
+
+using namespace std;
 
 int main() {
+    //TODO: make sure number of players is not > the number of chambers
+    srand(static_cast<unsigned int>(time(nullptr)));
     Jeu jeu;
     jeu.lancePartie();
+
+
     return 0;
 }
 

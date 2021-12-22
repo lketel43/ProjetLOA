@@ -6,6 +6,7 @@
 #include "../Personnages/Guerrier.hpp"
 #include "../Personnages/Moine.hpp"
 #include "../Personnages/Sorciere.hpp"
+#include "../Utilities/Utilities.cpp"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
 }
 
 Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
-    chateau = new Chateau(5, 5);
+    chateau = new Chateau(3, 3);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
 
@@ -50,7 +51,7 @@ Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
 
 }
 
-void Jeu::setPlayers() {
+void Jeu::initJoueurs() {
     int choice;
     string name;
     //TODO: ecrire text du début
@@ -81,10 +82,10 @@ void Jeu::setPlayers() {
                  << "Choisissez un nombre entre 1 et " << personnagesDisponiblesEtFrequences.size() << "." << endl
                  << "Attention! Ce choix est définitif." << endl;
             cin >> choice;
-            //TODO: need to validate choice is in good range
-            cout << " Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
+            choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
+            cout << "Bon choix. \n Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
             cin >> name;
-            personnagesDisponiblesEtFrequences[choice - 1].second +=1;
+            personnagesDisponiblesEtFrequences[choice - 1].second += 1;
         }
         cout << "Le joueur " << name << " a choisi un(e) "
              << personnagesDisponiblesEtFrequences[choice - 1].first->getName() << endl;
@@ -93,7 +94,17 @@ void Jeu::setPlayers() {
 
     }
 
+}
 
+
+Jeu::~Jeu() {
+    for (long int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
+        delete personnagesDisponiblesEtFrequences[i].first;
+    }
+
+    for (long int i = 0; i < joueurs.size(); i++) {
+        delete joueurs[i];
+    }
 }
 
 Personnage *Jeu::forge(int choice) {
@@ -119,7 +130,7 @@ Personnage *Jeu::forge(int choice) {
     }
 }
 
-int Jeu::choosePersonnageAutom() {
+unsigned int Jeu::choosePersonnageAutom() {
     int min = personnagesDisponiblesEtFrequences[0].second;
     unsigned int choice = 1;
     for (unsigned int i = 1; i < personnagesDisponiblesEtFrequences.size(); i++) {
@@ -129,10 +140,52 @@ int Jeu::choosePersonnageAutom() {
         }
     }
 
-    personnagesDisponiblesEtFrequences[choice - 1].second +=1;
+    personnagesDisponiblesEtFrequences[choice - 1].second += 1;
     return choice;
 }
 
+
 void Jeu::lancePartie() {
-    setPlayers();
+    initJoueurs();
+    placeJoueurs();
+//    placeObjets();
 }
+
+
+void Jeu::placeJoueurs() {
+    int x, y;
+
+    //Vrais joueurs sont placés de manière random
+    for (unsigned int i = 0; i < nombreJoueurNonAutomatise; i++) {
+        //TODO: careful, might be source of slow execution
+        do {
+            x = utilities::random(0, chateau->getWidth() - 1);
+            y = utilities::random(0, chateau->getLength() - 1);
+
+            if (chateau->map[x][y]->numOfPlayers() == 0) {
+
+                joueurs[i]->setPosition(x, y);
+                chateau->map[x][y]->addPlayer(joueurs[i]);
+                cout<<"Joueur "<<joueurs[i]->getName()<<" est placé dans la salle "<<chateau->map[x][y]->getId()<<"."<<endl;
+            }
+        } while (!joueurs[i]->isPlaced());
+    }
+
+    for (unsigned int i = nombreJoueurNonAutomatise; i < joueurs.size(); i++) {
+
+        pair<int, int> minCoords = chateau->getEmptiestRoom();
+        joueurs[i]->setPosition(minCoords.first, minCoords.second);
+        chateau->map[minCoords.first][minCoords.second]->addPlayer(joueurs[i]);
+        cout<<"Joueur "<<joueurs[i]->getName()<<" est placé dans la salle "<<chateau->map[minCoords.first][minCoords.second]->getId()<<"."<<endl;
+
+    }
+
+    for(int i = 0; i<chateau->getWidth(); i++){
+        for (int j = 0; j<chateau->getLength(); j++){
+            cout<<"Salle "<<chateau->map[i][j]->getId()<<" has "<<chateau->map[i][j]->numOfPlayers()<<" players."<<endl;
+        }
+    }
+
+}
+
+

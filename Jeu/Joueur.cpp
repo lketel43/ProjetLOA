@@ -15,3 +15,17 @@ void Joueur::setPosition(const int &x,const int &y){
     position.first = x;
     position.second = y;
 }
+
+Joueur::~Joueur(){
+  delete personnage;
+}
+
+std::string Joueur::getName() {
+    return nom;
+}
+
+bool Joueur::isPlaced() {
+
+
+    return (position.first != -1 && position.second != -1);
+}

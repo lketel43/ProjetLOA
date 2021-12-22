@@ -19,6 +19,12 @@ private:
 public:
     Joueur(std::string, Personnage*, bool);
     void setPosition(const int&, const int&);
+    //returns true if player is dead
+    std::string getName();
+    bool updateScore();
+    int getScore();
+    bool isPlaced();
+    ~Joueur();
 
 
 
