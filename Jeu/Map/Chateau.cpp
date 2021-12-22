@@ -1,6 +1,6 @@
 
 #include "Chateau.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../../Utilities/Utilities.cpp"
 using namespace std;
 
 Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
