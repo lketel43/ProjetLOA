@@ -60,8 +60,8 @@ pair<int, int> Chateau::getEmptiestRoom() {
     coords.first = 0;
     coords.second = 0;
     minNumOfPeople = map[0][0]->numOfPlayers();
-    int x_rand = utilities::random(0, width);
-    int y_rand = utilities::random(0, length);
+    int x_rand = utilities::random(0, width -1);
+    int y_rand = utilities::random(0, length -1);
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < length; j++) {

@@ -140,7 +140,6 @@ unsigned int Jeu::choosePersonnageAutom() {
             choice = i + 1;
         }
     }
-
     return choice;
 }
 
@@ -166,23 +165,24 @@ void Jeu::placeJoueurs() {
 
                 joueurs[i]->setPosition(x, y);
                 chateau->map[x][y]->addPlayer(joueurs[i]);
-                cout<<"Joueur "<<joueurs[i]->getName()<<" est placé dans la salle "<<chateau->map[x][y]->getId()<<"."<<endl;
+                cout << "Joueur " << joueurs[i]->getName() << " est placé dans la salle " << chateau->map[x][y]->getId()
+                     << "." << endl;
             }
         } while (!joueurs[i]->isPlaced());
     }
 
     for (unsigned int i = nombreJoueurNonAutomatise; i < joueurs.size(); i++) {
-
         pair<int, int> minCoords = chateau->getEmptiestRoom();
         joueurs[i]->setPosition(minCoords.first, minCoords.second);
         chateau->map[minCoords.first][minCoords.second]->addPlayer(joueurs[i]);
-        cout<<"Joueur "<<joueurs[i]->getName()<<" est placé dans la salle "<<chateau->map[minCoords.first][minCoords.second]->getId()<<"."<<endl;
+        // cout<<"Joueur "<<joueurs[i]->getName()<<" est placé dans la salle "<<chateau->map[minCoords.first][minCoords.second]->getId()<<"."<<endl;
 
     }
 
-    for(int i = 0; i<chateau->getWidth(); i++){
-        for (int j = 0; j<chateau->getLength(); j++){
-            cout<<"Salle "<<chateau->map[i][j]->getId()<<" has "<<chateau->map[i][j]->numOfPlayers()<<" players."<<endl;
+    for (int i = 0; i < chateau->getWidth(); i++) {
+        for (int j = 0; j < chateau->getLength(); j++) {
+            cout << "Salle " << chateau->map[i][j]->getId() << " has " << chateau->map[i][j]->numOfPlayers()
+                 << " players." << endl;
         }
     }
 
