@@ -10,11 +10,11 @@
 
 class Potion: public Objet{
     public:
-        Potion(std::string, int, float, std::pair<std::string, bool>);
+        Potion(std::string, int, float, std::string);
         float getBoost() const;
     private:
         const float boost;
-        const std::pair<std::string, bool> type;
+        const std::string type;
 };
 
 

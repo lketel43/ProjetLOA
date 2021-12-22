@@ -4,10 +4,10 @@
 
 #include "Armes.hpp"
 
-Armes::Armes(std::string _nom, int _rarete, float _dommagePhysiqye, float _dommageMagique, float _defensePhysique, float _defenseMagique): 
-    Objet::Objet(_nom, _rarete), 
-    dommagePhysique(_dommagePhysiqye), dommageMagique(_dommageMagique),
-    defensePhysique(_defensePhysique), defenseMagique(_defenseMagique){
+Armes::Armes(std::string _nom, int _rarete, float _dommagePhysique, float _dommageMagique, float _defensePhysique, float _defenseMagique):
+        Objet::Objet(_nom, _rarete),
+        dommagePhysique(_dommagePhysique), dommageMagique(_dommageMagique),
+        defensePhysique(_defensePhysique), defenseMagique(_defenseMagique){
 
 }
 

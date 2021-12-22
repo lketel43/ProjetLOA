@@ -4,7 +4,7 @@
 
 #include "Potion.hpp" 
 
-Potion::Potion(std::string _nom, int _rarete, float _boost, std::pair<std::string, bool> _type): Objet::Objet(_nom, _rarete), boost(_boost), type(_type){
+Potion::Potion(std::string _nom, int _rarete, float _boost, std::string _type): Objet::Objet(_nom, _rarete), boost(_boost), type(_type){
 
 }
 

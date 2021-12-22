@@ -1,6 +1,7 @@
 
 #include "Chateau.hpp"
 #include "../../Utilities/Utilities.cpp"
+
 using namespace std;
 
 Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
@@ -60,8 +61,8 @@ pair<int, int> Chateau::getEmptiestRoom() {
     coords.first = 0;
     coords.second = 0;
     minNumOfPeople = map[0][0]->numOfPlayers();
-    int x_rand = utilities::random(0, width -1);
-    int y_rand = utilities::random(0, length -1);
+    int x_rand = utilities::random(0, width - 1);
+    int y_rand = utilities::random(0, length - 1);
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < length; j++) {
@@ -73,7 +74,7 @@ pair<int, int> Chateau::getEmptiestRoom() {
         }
     }
 
-    if(map[x_rand][y_rand]->numOfPlayers() == minNumOfPeople){
+    if (map[x_rand][y_rand]->numOfPlayers() == minNumOfPeople) {
         coords.first = x_rand;
         coords.second = y_rand;
     }

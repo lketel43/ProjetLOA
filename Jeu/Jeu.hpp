@@ -21,6 +21,7 @@ private:
     std::vector<Joueur *> joueurs;
     Chateau *chateau;
     std::vector<std::pair<Personnage *, int> > personnagesDisponiblesEtFrequences;
+    std::vector<Objet*> objetsPossibles;
 
     //Input: index d'un type de personnage dans personnagesDisponiblesEtFrequences
     //Output: Nouveau personnage* à un personnage de ce type
@@ -31,7 +32,8 @@ private:
     //Pour les joueurs non automatisés, ils choisissent leur type de personnage
     //Pour les joueurs automatisés, l'ordinateur choisit les personnages tel qu'il y aie le plus de variété possible
     void initJoueurs();
-
+    void initVecteurPersonnages();
+    void initVecteurObjets();
     //Place les joueurs de manière uniforme aléatoire dans le chateau
     void placeJoueurs();
 

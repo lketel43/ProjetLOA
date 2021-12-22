@@ -14,7 +14,7 @@ class Armes: public Objet{
         const float defensePhysique;
         const float defenseMagique;
     public:
-        Armes(std::string, int, float, float, float, float);
+        Armes(std::string _nom, int _rarete, float _dommagePhysique, float _dommageMagique, float _defensePhysique, float _defenseMagique);
         float getDommagePhysique() const;
         float getDommageMagique() const;
         float getDefensePhysique() const;
