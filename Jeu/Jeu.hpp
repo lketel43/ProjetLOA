@@ -21,6 +21,7 @@ private:
     std::vector<Joueur *> joueurs;
     Chateau *chateau;
     std::vector<std::pair<Personnage *, int>> personnagesDisponiblesEtFrequences;
+    std::vector<std::pair<Objet*, int>> typesObjetsDisponibleEtProbabilite;
 
     //Input: index d'un type de personnage dans personnagesDisponiblesEtFrequences
     //Output: Nouveau personnage* à un personnage de ce type
