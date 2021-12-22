@@ -38,9 +38,22 @@ OBJ_OBJETS = $(notdir $(OBJETS_SRCS:.cpp=.o))
 OBJ_OBJETS := $(addprefix $(OBJ_DIR_OBJETS), $(OBJ_OBJETS))
 ###
 
+### VARIABLES Répertoire ./Utilities/ ###
+OBJ_DIR_UTILITIES = ./Utilities/obj/
+
+UTILITIES_SRC = ./Utilities/
+UTILITIES_SRCS = $(wildcard $(UTILITIES_SRC)*.cpp)
+OBJ_UTILITIES = $(notdir $(UTILITIES_SRCS:.cpp=.o))
+OBJ_UTILITIES := $(addprefix $(OBJ_DIR_UTILITIES), $(OBJ_UTILITIES))
+###
+
 all:main
 
-main : main.o $(OBJ_OBJETS) $(OBJ_PERSONNAGES) $(OBJ_JEU) $(OBJ_MAP)
+print:
+	@echo $(UTILITIES_SRCS)
+	@echo $(OBJ_UTILITIES)
+
+main : main.o $(OBJ_UTILITIES) $(OBJ_OBJETS) $(OBJ_PERSONNAGES) $(OBJ_JEU) $(OBJ_MAP)
 	$(CPP) $(CFLAGS) -o $@ $^
 
 main.o : main.cpp
@@ -58,6 +71,9 @@ $(OBJ_DIR_MAP)%.o : $(MAP_SRC)%.cpp | $(OBJ_DIR_MAP)
 $(OBJ_DIR_OBJETS)%.o : $(OBJETS_SRC)%.cpp | $(OBJ_DIR_OBJETS)
 	$(CPP) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR_UTILITIES)%.o : $(UTILITIES_SRC)%.cpp | $(OBJ_DIR_UTILITIES)
+	$(CPP) $(CFLAGS) -c $< -o $@
+
 
 
 $(OBJ_DIR_OBJETS):
@@ -72,5 +88,8 @@ $(OBJ_DIR_JEU):
 $(OBJ_DIR_MAP):
 	@mkdir -p $(OBJ_DIR_MAP)
 
+$(OBJ_DIR_UTILITIES):
+	@mkdir -p $(OBJ_DIR_UTILITIES)
+
 clean:
-	rm Personnages/obj/*.o Jeu/obj/*.o Jeu/Map/obj/*.o Objets/obj/*.o main.o main rm Personnages/*.gch
+	rm Personnages/obj/*.o Jeu/obj/*.o Jeu/Map/obj/*.o Objets/obj/*.o main.o main Utilities/obj/*.o
