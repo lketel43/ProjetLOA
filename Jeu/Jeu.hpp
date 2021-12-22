@@ -20,7 +20,7 @@ private:
     //les joueurs non-automatisés sont placés d'abord dans le vecteur
     std::vector<Joueur *> joueurs;
     Chateau *chateau;
-    std::vector<std::pair<Personnage *, int>> personnagesDisponiblesEtFrequences;
+    std::vector<std::pair<Personnage *, int> > personnagesDisponiblesEtFrequences;
 
     //Input: index d'un type de personnage dans personnagesDisponiblesEtFrequences
     //Output: Nouveau personnage* à un personnage de ce type
