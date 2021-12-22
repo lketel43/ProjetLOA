@@ -8,7 +8,17 @@
 #include "Objet.hpp"
 
 class Armes: public Objet{
-
+    private:
+        const float dommagePhysique;
+        const float dommageMagique;
+        const float defensePhysique;
+        const float defenseMagique;
+    public:
+        Armes(std::string, int, float, float, float, float);
+        float getDommagePhysique() const;
+        float getDommageMagique() const;
+        float getDefensePhysique() const;
+        float getDefenseMagique() const;
 };
 
 

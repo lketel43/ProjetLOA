@@ -85,7 +85,7 @@ void Jeu::initJoueurs() {
             choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
             cout << "Bon choix. \n Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
             cin >> name;
-            personnagesDisponiblesEtFrequences[choice - 1].second += 1;
+        
         }
         cout << "Le joueur " << name << " a choisi un(e) "
              << personnagesDisponiblesEtFrequences[choice - 1].first->getName() << endl;
@@ -108,6 +108,7 @@ Jeu::~Jeu() {
 }
 
 Personnage *Jeu::forge(int choice) {
+    personnagesDisponiblesEtFrequences[choice].second += 1;
     string type = personnagesDisponiblesEtFrequences[choice].first->getName();
     //switching on first letter of the type chosen
     switch (type[0]) {
@@ -140,7 +141,6 @@ unsigned int Jeu::choosePersonnageAutom() {
         }
     }
 
-    personnagesDisponiblesEtFrequences[choice - 1].second += 1;
     return choice;
 }
 
