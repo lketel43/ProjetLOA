@@ -249,17 +249,28 @@ void Jeu::initVecteurObjets() {
     objetsPossibles.push_back(new Armes("Chevalière de sorcellerie légendaire", 20, 0, 5, 0, 20));
 
     //Armes de défense physique
-    objetsPossibles.push_back(new Armes("Bouclier ordinaire", 2, 1, 0, 5, 5));
+    objetsPossibles.push_back(new Armes("Bouclier ordinaire", 2, 1, 0, 5, 0));
     objetsPossibles.push_back(new Armes("Bouclier extraordinaire", 10, 3, 0, 10, 0));
     objetsPossibles.push_back(new Armes("Bouclier légendaire", 20, 5, 0, 20, 0));
 
     //Armes attaque physique et magique
+    objetsPossibles.push_back(new Armes("Épée enchantée ordinaire", 5, 5, 5, 1, 1));
+    objetsPossibles.push_back(new Armes("Épée enchantée extraordinaire", 15, 10, 10, 3, 3));
+    objetsPossibles.push_back(new Armes("Excalibur", 30, 20, 20, 10, 10));
 
     //Armes defense physique et magique
+    objetsPossibles.push_back(new Armes("Pavois enchanté", 5, 1, 0, 5, 5));
+    objetsPossibles.push_back(new Armes("Bouclier en bois d'Yggdrasil", 15, 3, 3, 10, 10));
+    objetsPossibles.push_back(new Armes("Bouclier en acier Valyrien", 30, 5, 5, 20, 20));
 
     //Armes melangée
+    objetsPossibles.push_back(new Armes("Épée défensive ordinaire", 5, 5, 0, 5, 2));
+    objetsPossibles.push_back(new Armes("Épée défensive extraordinaire", 15, 10, 0, 10, 5));
+    objetsPossibles.push_back(new Armes("Épée défensive légendaire", 30, 20, 0, 20, 10));
 
     //Armes ultimes
+    objetsPossibles.push_back(new Armes("Épée ultime", 50, 40, 20, 4, 4));
+    objetsPossibles.push_back(new Armes("Bouclier ultime", 50, 0, 40, 0, 40));
 
 
     //TODO: clef de teleportation
