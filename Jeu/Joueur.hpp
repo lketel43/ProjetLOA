@@ -6,7 +6,6 @@
 #define PROJETLOA_JOUEUR_HPP
 
 #include "../Personnages/Personnage.hpp"
-#include <utility>
 
 class Joueur {
 private:
@@ -20,10 +19,11 @@ public:
     Joueur(std::string, Personnage*, bool);
     void setPosition(const int&, const int&);
     //returns true if player is dead
-    std::string getName();
+    std::string getName() const;
     bool updateScore();
-    int getScore();
-    bool isPlaced();
+    int getScore() const;
+    std::pair<int, int> getPosition() const;
+    bool isPlaced() const;
     ~Joueur();
 
 

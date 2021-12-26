@@ -20,12 +20,15 @@ Joueur::~Joueur(){
   delete personnage;
 }
 
-std::string Joueur::getName() {
+std::string Joueur::getName() const{
     return nom;
 }
 
-bool Joueur::isPlaced() {
-
+bool Joueur::isPlaced() const {
 
     return (position.first != -1 && position.second != -1);
+}
+
+pair<int, int> Joueur::getPosition() const {
+    return position;
 }

@@ -20,7 +20,6 @@ public:
 
     int getRarete() const;
 
-
 };
 
 

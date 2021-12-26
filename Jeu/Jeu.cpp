@@ -8,7 +8,6 @@
 #include "../Personnages/Sorciere.hpp"
 
 #include "../Objets/Armes.hpp"
-#include "../Objets/Clef.hpp"
 #include "../Objets/Potion.hpp"
 #include "../Utilities/Utilities.cpp"
 
@@ -278,6 +277,15 @@ void Jeu::initVecteurObjets() {
     //TODO: clef de teleportation
 
 
+}
+
+void Jeu::moveJoueur(Joueur * joueur, int x, int y) {
+    pair<int, int> currPosition = joueur->getPosition();
+    //1. remove from current salle
+    chateau->map[currPosition.first][currPosition.second]->removePlayer(joueur);
+    //2. move to new salle
+    chateau->map[x][y]->addPlayer(joueur);
+    joueur->setPosition(x, y);
 }
 
 

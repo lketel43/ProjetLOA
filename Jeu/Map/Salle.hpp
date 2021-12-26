@@ -24,6 +24,7 @@ public:
     int numOfPlayers() const ;
     int numOfObjects() const;
     void addPlayer(Joueur*);
+    void removePlayer(Joueur*);
 
 };
 

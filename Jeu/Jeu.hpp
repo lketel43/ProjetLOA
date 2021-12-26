@@ -12,6 +12,7 @@
 #include "Map/Chateau.hpp"
 #include <utility>
 
+
 class Jeu {
 
 private:
@@ -46,7 +47,9 @@ private:
     // entre les personnages
     unsigned int choosePersonnageAutom();
 
-
+    ///CATEGORIE DEROULEMENT JEU
+    void moveJoueur(Joueur*, int x, int y);
+    friend class Clef;
 
 public:
     //default values are :
