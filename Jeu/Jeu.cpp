@@ -15,9 +15,9 @@
 using namespace std;
 
 
-vector<Objet*> initVecteurObjets() {
+vector<Objet *> initVecteurObjets() {
 
-    vector<Objet*> ret;
+    vector<Objet *> ret;
 
     ///Potions
     //Potions de santé
@@ -108,13 +108,15 @@ vector<Objet*> initVecteurObjets() {
 }
 
 
-vector<Objet*> Jeu::objetsPossibles{initVecteurObjets()};
+vector<Objet *> Jeu::objetsPossibles{initVecteurObjets()};
+
 
 //TODO: make it check that value of joueurs> joueurNonAuto
 Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned int chateauWidth)
         : nombreJoueurNonAutomatise(joueurNonAuto),
           nombreDeJoueurs(joueurs) {
     chateau = new Chateau(chateauWidth, chateauLength);
+    objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
     initVecteurPersonnages();
@@ -123,7 +125,8 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
 }
 
 Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
-    chateau = new Chateau(3, 3);
+    chateau = new Chateau(4, 4);
+    objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
 
@@ -227,7 +230,7 @@ unsigned int Jeu::choosePersonnageAutom() {
 void Jeu::lancePartie() {
     initJoueurs();
     placeJoueurs();
-//    placeObjets();
+    placeObjets();
 }
 
 
@@ -261,8 +264,9 @@ void Jeu::placeJoueurs() {
 
     for (int i = 0; i < chateau->getWidth(); i++) {
         for (int j = 0; j < chateau->getLength(); j++) {
-            cout << "Salle " << chateau->map[i][j]->getId() << " has " << chateau->map[i][j]->numOfPlayers()
-                 << " players." << endl;
+            if (chateau->map[i][j]->numOfPlayers() > 0)
+                cout << "Salle " << chateau->map[i][j]->getId() << " has " << chateau->map[i][j]->numOfPlayers()
+                     << " players." << endl;
         }
     }
 
@@ -283,7 +287,7 @@ void Jeu::initVecteurPersonnages() {
 
 }
 
-void Jeu::moveJoueur(Joueur * joueur, int x, int y) {
+void Jeu::moveJoueur(Joueur *joueur, int x, int y) {
     pair<int, int> currPosition = joueur->getPosition();
 
     chateau->map[currPosition.first][currPosition.second]->removePlayer(joueur);
@@ -291,4 +295,15 @@ void Jeu::moveJoueur(Joueur * joueur, int x, int y) {
     joueur->setPosition(x, y);
     chateau->map[x][y]->addPlayer(joueur);
 
+}
+
+void Jeu::placeObjets() {
+    for (long unsigned int i = 0; i < chateau->width; i++) {
+        for (long unsigned int j = 0; j < chateau->length; j++) {
+            Objet *objet1 = objectFactory->produce();
+            Objet *objet2 = objectFactory->produce();
+            chateau->map[i][j]->placeObject(objet1);
+            chateau->map[i][j]->placeObject(objet2);
+        }
+    }
 }

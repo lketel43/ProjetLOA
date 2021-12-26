@@ -54,3 +54,8 @@ ostream &operator<<(ostream &out, Salle *salle) {
    return out;
 
 }
+
+void Salle::placeObject(Objet * object) {
+objets.push_back(object);
+
+}
