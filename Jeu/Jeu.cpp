@@ -283,5 +283,12 @@ void Jeu::initVecteurPersonnages() {
 
 }
 
+void Jeu::moveJoueur(Joueur * joueur, int x, int y) {
+    pair<int, int> currPosition = joueur->getPosition();
 
+    chateau->map[currPosition.first][currPosition.second]->removePlayer(joueur);
 
+    joueur->setPosition(x, y);
+    chateau->map[x][y]->addPlayer(joueur);
+
+}
