@@ -22,6 +22,7 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
     initVecteurPersonnages();
+    initVecteurObjets();
 
 
 }
@@ -32,6 +33,7 @@ Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
     // et effectuer un changement dans la fonction forge
 
     initVecteurPersonnages();
+    initVecteurObjets();
 
 }
 

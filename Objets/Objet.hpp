@@ -8,13 +8,17 @@
 #include <iostream>
 
 class Objet {
-    private:
-        const std::string nom; 
-        const int rarete;
-    public:
-        Objet(std::string, int);
-        std::string getNom() const;
-        int getRarete() const;
+private:
+    const std::string nom;
+    const int rarete;
+
+protected:
+    Objet(std::string, int);
+
+public:
+    std::string getNom() const;
+
+    int getRarete() const;
 
 
 };
