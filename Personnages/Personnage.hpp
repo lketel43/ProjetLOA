@@ -14,10 +14,9 @@ class Personnage {
 
 protected:
     Personnage(std::string, int, int, int, int);
-    Personnage(Personnage*);
 
 private:
-
+    friend std::ostream& operator<<(std::ostream&, Personnage*);
     const std::string nom;
     int sante = 100;
     int habilite = 10;

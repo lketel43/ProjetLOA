@@ -14,6 +14,7 @@ private:
     const std::string nom;
     std::pair<int, int> position;
     int score;
+    friend std::ostream& operator<<(std::ostream&, Joueur*);
 
 public:
     Joueur(std::string, Personnage*, bool);

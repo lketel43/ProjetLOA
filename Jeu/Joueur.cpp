@@ -32,3 +32,9 @@ bool Joueur::isPlaced() const {
 pair<int, int> Joueur::getPosition() const {
     return position;
 }
+
+ostream& operator<<(ostream& out, Joueur* joueur){
+    out<<"Joueur "<<joueur->getName()<<endl;
+    out<<joueur->personnage;
+    return out;
+}

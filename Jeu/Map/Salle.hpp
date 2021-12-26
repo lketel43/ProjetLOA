@@ -17,6 +17,8 @@ private:
     std::vector<Joueur*> joueurs;
     std::vector<Objet*> objets;
     Salle* neighbors[4];
+    friend std::ostream& operator<<(std::ostream&, Salle*);
+
 
 public:
     Salle(int);
