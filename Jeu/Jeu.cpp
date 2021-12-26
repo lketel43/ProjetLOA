@@ -14,6 +14,102 @@
 
 using namespace std;
 
+
+vector<Objet*> initVecteurObjets() {
+
+    vector<Objet*> ret;
+
+    ///Potions
+    //Potions de santé
+    ret.push_back(new Potion("Potion de santé ordinaire", 5, 10, "sante"));
+    ret.push_back(new Potion("Potion de santé extraordinaire", 10, 20, "sante"));
+    ret.push_back(new Potion("Potion de santé légendaire", 30, 50, "sante"));
+
+    //Potions d'habileté
+    //TODO: a quoi sert l'habilete??
+    ret.push_back(new Potion("Potion d'habileté  ordinaire", 1, 10, "habilete"));
+    ret.push_back(new Potion("Potion d'habileté extraordinaire", 5, 20, "habilete"));
+    ret.push_back(new Potion("Potion d'habileté  légendaire", 10, 50, "habilete"));
+
+    //Potions de force Physique
+    ret.push_back(new Potion("Potion de force physique ordinaire", 1, 10, "attaquePhysique"));
+    ret.push_back(new Potion("Potion de force physique extraordinaire", 5, 20, "attaquePhysique"));
+    ret.push_back(new Potion("Potion de force physique légendaire", 10, 50, "attaquePhysique"));
+
+
+    //Potions de force Magique
+    ret.push_back(new Potion("Potion de force magique ordinaire", 1, 10, "attaqueMagique"));
+    ret.push_back(new Potion("Potion de force magique extraordinaire", 5, 20, "attaqueMagique"));
+    ret.push_back(new Potion("Potion de force magique légendaire", 10, 50, "attaqueMagique"));
+
+
+    //Potions de défense Physique
+    ret.push_back(new Potion("Potion de résistance physique ordinaire", 1, 10, "resistancePhysique"));
+    ret.push_back(new Potion("Potion de résistance physique extraordinaire", 5, 20, "resistancePhysique"));
+    ret.push_back(new Potion("Potion de résistance physique légendaire", 10, 50, "resistancePhysique"));
+
+
+    //Potions de défense Magique
+    ret.push_back(new Potion("Potion de résistance magique ordinaire", 10, 1, "resistanceMagique"));
+    ret.push_back(new Potion("Potion de résistance magique extraordinaire", 20, 5, "resistanceMagique"));
+    ret.push_back(new Potion("Potion de résistance magique légendaire", 50, 10, "resistanceMagique"));
+
+    //Poisons
+    ret.push_back(new Potion("Poison ordinaire", 10, -5, "sante"));
+    ret.push_back(new Potion("Poison extraordinaire", 20, -15, "sante"));
+    ret.push_back(new Potion("Poison légendaire", 50, -30, "sante"));
+
+    ///Armes et boucliers
+
+    //Armes d'attaque magiques
+
+    ret.push_back(new Armes("Baguette Magique ordinaire", 2, 0, 5, 0, 1));
+    ret.push_back(new Armes("Baguette Magique extraordinaire", 10, 0, 10, 0, 3));
+    ret.push_back(new Armes("Baguette Magique légendaire", 20, 0, 20, 0, 10));
+
+    //Armes d'attaque physique
+    ret.push_back(new Armes("Épée ordinaire", 2, 5, 0, 1, 0));
+    ret.push_back(new Armes("Épée extraordinaire", 10, 10, 0, 3, 0));
+    ret.push_back(new Armes("Épée légendaire", 20, 20, 0, 10, 0));
+
+    //Armes de défense magiques
+    ret.push_back(new Armes("Chevalière de sorcellerie ordinaire", 2, 0, 1, 0, 5));
+    ret.push_back(new Armes("Chevalière de sorcellerie extraordinaire", 10, 0, 3, 0, 10));
+    ret.push_back(new Armes("Chevalière de sorcellerie légendaire", 20, 0, 5, 0, 20));
+
+    //Armes de défense physique
+    ret.push_back(new Armes("Bouclier ordinaire", 2, 1, 0, 5, 0));
+    ret.push_back(new Armes("Bouclier extraordinaire", 10, 3, 0, 10, 0));
+    ret.push_back(new Armes("Bouclier légendaire", 20, 5, 0, 20, 0));
+
+    //Armes attaque physique et magique
+    ret.push_back(new Armes("Épée enchantée ordinaire", 5, 5, 5, 1, 1));
+    ret.push_back(new Armes("Épée enchantée extraordinaire", 15, 10, 10, 3, 3));
+    ret.push_back(new Armes("Excalibur", 30, 20, 20, 10, 10));
+
+    //Armes defense physique et magique
+    ret.push_back(new Armes("Pavois enchanté", 5, 1, 0, 5, 5));
+    ret.push_back(new Armes("Bouclier en bois d'Yggdrasil", 15, 3, 3, 10, 10));
+    ret.push_back(new Armes("Bouclier en acier Valyrien", 30, 5, 5, 20, 20));
+
+    //Armes melangée
+    ret.push_back(new Armes("Épée défensive ordinaire", 5, 5, 0, 5, 2));
+    ret.push_back(new Armes("Épée défensive extraordinaire", 15, 10, 0, 10, 5));
+    ret.push_back(new Armes("Épée défensive légendaire", 30, 20, 0, 20, 10));
+
+    //Armes ultimes
+    ret.push_back(new Armes("Épée ultime", 50, 40, 20, 4, 4));
+    ret.push_back(new Armes("Bouclier ultime", 50, 0, 40, 0, 40));
+
+
+    //TODO: clef de teleportation
+
+    return ret;
+}
+
+
+vector<Objet*> Jeu::objetsPossibles{initVecteurObjets()};
+
 //TODO: make it check that value of joueurs> joueurNonAuto
 Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned int chateauWidth)
         : nombreJoueurNonAutomatise(joueurNonAuto),
@@ -22,7 +118,6 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
     initVecteurPersonnages();
-    initVecteurObjets();
 
 
 }
@@ -33,7 +128,6 @@ Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
     // et effectuer un changement dans la fonction forge
 
     initVecteurPersonnages();
-    initVecteurObjets();
 
 }
 
@@ -189,95 +283,5 @@ void Jeu::initVecteurPersonnages() {
 
 }
 
-
-void Jeu::initVecteurObjets() {
-
-    ///Potions
-    //Potions de santé
-    objetsPossibles.push_back(new Potion("Potion de santé ordinaire", 5, 10, "sante"));
-    objetsPossibles.push_back(new Potion("Potion de santé extraordinaire", 10, 20, "sante"));
-    objetsPossibles.push_back(new Potion("Potion de santé légendaire", 30, 50, "sante"));
-
-    //Potions d'habileté
-    //TODO: a quoi sert l'habilete??
-    objetsPossibles.push_back(new Potion("Potion d'habileté  ordinaire", 1, 10, "habilete"));
-    objetsPossibles.push_back(new Potion("Potion d'habileté extraordinaire", 5, 20, "habilete"));
-    objetsPossibles.push_back(new Potion("Potion d'habileté  légendaire", 10, 50, "habilete"));
-
-    //Potions de force Physique
-    objetsPossibles.push_back(new Potion("Potion de force physique ordinaire", 1, 10, "attaquePhysique"));
-    objetsPossibles.push_back(new Potion("Potion de force physique extraordinaire", 5, 20, "attaquePhysique"));
-    objetsPossibles.push_back(new Potion("Potion de force physique légendaire", 10, 50, "attaquePhysique"));
-
-
-    //Potions de force Magique
-    objetsPossibles.push_back(new Potion("Potion de force magique ordinaire", 1, 10, "attaqueMagique"));
-    objetsPossibles.push_back(new Potion("Potion de force magique extraordinaire", 5, 20, "attaqueMagique"));
-    objetsPossibles.push_back(new Potion("Potion de force magique légendaire", 10, 50, "attaqueMagique"));
-
-
-    //Potions de défense Physique
-    objetsPossibles.push_back(new Potion("Potion de résistance physique ordinaire", 1, 10, "resistancePhysique"));
-    objetsPossibles.push_back(new Potion("Potion de résistance physique extraordinaire", 5, 20, "resistancePhysique"));
-    objetsPossibles.push_back(new Potion("Potion de résistance physique légendaire", 10, 50, "resistancePhysique"));
-
-
-    //Potions de défense Magique
-    objetsPossibles.push_back(new Potion("Potion de résistance magique ordinaire", 1, 10, "resistanceMagique"));
-    objetsPossibles.push_back(new Potion("Potion de résistance magique extraordinaire", 5, 20, "resistanceMagique"));
-    objetsPossibles.push_back(new Potion("Potion de résistance magique légendaire", 10, 50, "resistanceMagique"));
-
-    //Poisons
-    objetsPossibles.push_back(new Potion("Poison ordinaire", -5, 10, "sante"));
-    objetsPossibles.push_back(new Potion("Poison extraordinaire", -15, 20, "sante"));
-    objetsPossibles.push_back(new Potion("Poison légendaire", -30, 50, "sante"));
-
-    ///Armes et boucliers
-
-    //Armes d'attaque magiques
-
-    objetsPossibles.push_back(new Armes("Baguette Magique ordinaire", 2, 0, 5, 0, 1));
-    objetsPossibles.push_back(new Armes("Baguette Magique extraordinaire", 10, 0, 10, 0, 3));
-    objetsPossibles.push_back(new Armes("Baguette Magique légendaire", 20, 0, 20, 0, 10));
-
-    //Armes d'attaque physique
-    objetsPossibles.push_back(new Armes("Épée ordinaire", 2, 5, 0, 1, 0));
-    objetsPossibles.push_back(new Armes("Épée extraordinaire", 10, 10, 0, 3, 0));
-    objetsPossibles.push_back(new Armes("Épée légendaire", 20, 20, 0, 10, 0));
-
-    //Armes de défense magiques
-    objetsPossibles.push_back(new Armes("Chevalière de sorcellerie ordinaire", 2, 0, 1, 0, 5));
-    objetsPossibles.push_back(new Armes("Chevalière de sorcellerie extraordinaire", 10, 0, 3, 0, 10));
-    objetsPossibles.push_back(new Armes("Chevalière de sorcellerie légendaire", 20, 0, 5, 0, 20));
-
-    //Armes de défense physique
-    objetsPossibles.push_back(new Armes("Bouclier ordinaire", 2, 1, 0, 5, 0));
-    objetsPossibles.push_back(new Armes("Bouclier extraordinaire", 10, 3, 0, 10, 0));
-    objetsPossibles.push_back(new Armes("Bouclier légendaire", 20, 5, 0, 20, 0));
-
-    //Armes attaque physique et magique
-    objetsPossibles.push_back(new Armes("Épée enchantée ordinaire", 5, 5, 5, 1, 1));
-    objetsPossibles.push_back(new Armes("Épée enchantée extraordinaire", 15, 10, 10, 3, 3));
-    objetsPossibles.push_back(new Armes("Excalibur", 30, 20, 20, 10, 10));
-
-    //Armes defense physique et magique
-    objetsPossibles.push_back(new Armes("Pavois enchanté", 5, 1, 0, 5, 5));
-    objetsPossibles.push_back(new Armes("Bouclier en bois d'Yggdrasil", 15, 3, 3, 10, 10));
-    objetsPossibles.push_back(new Armes("Bouclier en acier Valyrien", 30, 5, 5, 20, 20));
-
-    //Armes melangée
-    objetsPossibles.push_back(new Armes("Épée défensive ordinaire", 5, 5, 0, 5, 2));
-    objetsPossibles.push_back(new Armes("Épée défensive extraordinaire", 15, 10, 0, 10, 5));
-    objetsPossibles.push_back(new Armes("Épée défensive légendaire", 30, 20, 0, 20, 10));
-
-    //Armes ultimes
-    objetsPossibles.push_back(new Armes("Épée ultime", 50, 40, 20, 4, 4));
-    objetsPossibles.push_back(new Armes("Bouclier ultime", 50, 0, 40, 0, 40));
-
-
-    //TODO: clef de teleportation
-
-
-}
 
 

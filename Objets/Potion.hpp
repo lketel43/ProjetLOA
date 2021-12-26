@@ -6,15 +6,18 @@
 #define PROJETLOA_POTION_HPP
 
 #include "Objet.hpp"
+#include "ObjectFactory.hpp"
 #include <vector>
 
 class Potion: public Objet{
     public:
-        Potion(std::string, int, float, std::string);
         float getBoost() const;
     private:
+        Potion(std::string, int, float, std::string);
+        friend std::vector<Objet*> initVecteurObjets();
         const float boost;
         const std::string type;
+        friend class ObjectFactory;
 };
 
 

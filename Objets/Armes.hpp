@@ -6,6 +6,9 @@
 #define PROJETLOA_ARMES_HPP
 
 #include "Objet.hpp"
+#include "ObjectFactory.hpp"
+
+class Jeu;
 
 class Armes: public Objet{
     private:
@@ -13,8 +16,10 @@ class Armes: public Objet{
         const float dommageMagique;
         const float defensePhysique;
         const float defenseMagique;
-    public:
         Armes(std::string _nom, int _rarete, float _dommagePhysique, float _dommageMagique, float _defensePhysique, float _defenseMagique);
+        friend std::vector<Objet*> initVecteurObjets();
+        friend class ObjectFactory;
+    public:
         float getDommagePhysique() const;
         float getDommageMagique() const;
         float getDefensePhysique() const;

@@ -15,3 +15,7 @@ std::string Objet::getNom() const{
 int Objet::getRarete() const{
     return this->rarete;
 }
+
+Objet* Objet::copy(){
+    return new Objet(this->nom, this->rarete);
+}
