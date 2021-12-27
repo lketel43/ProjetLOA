@@ -20,7 +20,7 @@ private:
 
 public:
     float getBoost() const;
-    std::string toString() const override;
+    void display() const override;
 
 };
 

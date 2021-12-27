@@ -19,7 +19,7 @@ protected:
 public:
     std::string getNom() const;
     int getRarete() const;
-    virtual std::string toString() const =0;
+    virtual void display() const =0;
 };
 
 

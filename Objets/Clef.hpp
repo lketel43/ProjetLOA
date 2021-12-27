@@ -19,7 +19,7 @@ private:
 
 public:
     void utiliser(Jeu *, Joueur *, int x, int y);
-    std::string toString() const override;
+    void display() const override;
 
 
 };

@@ -142,20 +142,20 @@ void Jeu::initJoueurs() {
     int choice;
     string name;
     //TODO: ecrire text du début
-    cout << "Introductory text: needs completion" << endl;
+    utilities::display("Introductory text: needs completion \n");
 
     //TODO: need to figure out name situation
-
-    cout << "Il est temps pour chaque joueur de choisir son personnage." << endl
-         << "Voici les personnages possibles, et leur stats." << endl;
+    utilities::display("Il est temps pour chaque joueur de choisir son personnage.\n");
+    utilities::display("Voici les personnages possibles, et leur stats.\n");
 
     for (long unsigned int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
-        cout << "Personnage " << i + 1 << ": " << endl;
-        cout << "Nom: " << personnagesDisponiblesEtFrequences[i].first->getName() << endl;
-        cout << personnagesDisponiblesEtFrequences[i].first->getStats() << endl;
+        utilities::display("Personnage " + to_string(i + 1) +": \n"
+        + "Nom: " + personnagesDisponiblesEtFrequences[i].first->getName() + "\n" +
+                personnagesDisponiblesEtFrequences[i].first->getStats()+ "\n");
+
     }
 
-    cout << "Maintenant que vous connaissez les personnages, à vous de choisir lequel sera le vôtre." << endl;
+    utilities::display("Maintenant que vous connaissez les personnages, à vous de choisir lequel sera le vôtre.\n");
 
     for (int i = 0; i < nombreDeJoueurs; i++) {
 
@@ -165,17 +165,18 @@ void Jeu::initJoueurs() {
             name = std::to_string(i + 1);
 
         } else {
-            cout << "À vous Joueur " << i + 1 << " de choisir votre personnage." << endl
-                 << "Choisissez un nombre entre 1 et " << personnagesDisponiblesEtFrequences.size() << "." << endl
-                 << "Attention! Ce choix est définitif." << endl;
+           utilities::display( "À vous Joueur " + to_string( i + 1) + " de choisir votre personnage." +"\n" +
+                 "Choisissez un nombre entre 1 et " + to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
+                 + "Attention! Ce choix est définitif." + "\n");
             cin >> choice;
             choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
-            cout << "Bon choix. \n Vous êtes digne d'un prénom également. Quel est votre prénom?" << endl;
+            utilities::display( "Bon choix. \n");
+            utilities::display("Vous êtes digne d'un prénom également. Quel est votre prénom?\n");
             cin >> name;
 
         }
-        cout << "Le joueur " << name << " a choisi un(e) "
-             << personnagesDisponiblesEtFrequences[choice - 1].first->getName() << endl;
+        utilities::display("Le joueur " + name + " a choisi un(e) "
+             + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
         joueurs.push_back(new Joueur(name, forge(choice - 1), (i + 1 > nombreJoueurNonAutomatise)));
 
@@ -256,8 +257,9 @@ void Jeu::placeJoueurs() {
 
                 joueurs[i]->setPosition(x, y);
                 chateau->map[x][y]->addPlayer(joueurs[i]);
-                cout << "Joueur " << joueurs[i]->getName() << " est placé dans la salle " << chateau->map[x][y]->getId()
-                     << "." << endl;
+                utilities::display("Joueur " + joueurs[i]->getName() + " est placé dans la salle " + to_string(chateau->map[x][y]->getId())
+                                             + ".\n");
+
             }
         } while (!joueurs[i]->isPlaced());
     }
@@ -266,7 +268,6 @@ void Jeu::placeJoueurs() {
         pair<int, int> minCoords = chateau->getEmptiestRoom();
         joueurs[i]->setPosition(minCoords.first, minCoords.second);
         chateau->map[minCoords.first][minCoords.second]->addPlayer(joueurs[i]);
-        // cout<<"Joueur "<<joueurs[i]->getName()<<" est placé dans la salle "<<chateau->map[minCoords.first][minCoords.second]->getId()<<"."<<endl;
 
     }
 
@@ -315,9 +316,9 @@ void Jeu::tour(Joueur *joueur) {
 
     if (!joueur->isAutomatise()) {
         if (nombreJoueurNonAutomatise > 1) {
-            cout << "Tour du Joueur " << joueur->getName() << endl;
+            utilities::display("Tour du Joueur " + joueur->getName()+"\n");
         }
-        cout << salle;
+        salle->display();
     }
 
 

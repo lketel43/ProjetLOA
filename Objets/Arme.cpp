@@ -3,6 +3,7 @@
 //
 
 #include "Arme.hpp"
+#include "../Utilities/Utilities.cpp"
 
 using namespace std;
 
@@ -31,11 +32,11 @@ float Arme::getDefenseMagique() const {
 }
 
 
-string Arme::toString() const {
-    return "Nom: " + nom + "\nRareté: " + to_string(rarete) + "\nDommage Physique: " + to_string(dommagePhysique) +
-           "\nDommage Magique: " + to_string(dommageMagique) + "\nDéfense Physique:" + to_string(defensePhysique) +
-           "\nDéfense Magique: "
-           + to_string(defenseMagique) + "\n";
+void Arme::display() const {
+    utilities::display("Nom: " + nom + "\nRareté: " + to_string(rarete) + "\nDommage Physique: " + to_string(dommagePhysique) +
+                       "\nDommage Magique: " + to_string(dommageMagique) + "\nDéfense Physique:" + to_string(defensePhysique) +
+                       "\nDéfense Magique: "
+                       + to_string(defenseMagique) + "\n");
 
 }
 

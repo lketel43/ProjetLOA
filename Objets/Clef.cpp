@@ -3,6 +3,7 @@
 //
 
 #include "Clef.hpp"
+#include "../Utilities/Utilities.cpp"
 
 using namespace std;
 
@@ -12,8 +13,9 @@ void Clef::utiliser(Jeu *jeu, Joueur *joueur, int x, int y) {
     jeu->moveJoueur(joueur, x, y);
 }
 
-string Clef::toString() const{
-    return "Nom: " + nom + "\nRareté: " + to_string(rarete) + "\nDescription: " + description + "\n";
+void Clef::display() const{
+
+    utilities::display( "Nom: " + nom + "\nRareté: " + to_string(rarete) + "\nDescription: " + description + "\n");
 }
 
 Clef *Clef::copy() {

@@ -3,6 +3,7 @@
 //
 
 #include "Salle.hpp"
+#include "../../Utilities/Utilities.cpp"
 
 using namespace std;
 
@@ -39,18 +40,21 @@ void Salle::removePlayer(Joueur *joueur) {
 
 }
 
-ostream &operator<<(ostream &out, Salle *salle) {
-    out << "Vous êtes actuellement dans la salle " << salle->id << "." << endl;
-    out << "Elle contient les objets suivants:" << endl;
-    for (unsigned int i = 0; i < salle->objets.size(); i++)
-        out << "Objet " << i << ":" << endl << salle->objets[i]->toString() << endl;
+void Salle::display() const {
+    utilities::display("Vous êtes actuellement dans la salle " + to_string(id) +
+                       ".\n");
+    utilities::display("Elle contient les objets suivants:\n");
 
-    out << "Elle contient les joueurs suivants:" << endl;
+    for (unsigned int i = 0; i < objets.size(); i++) {
+        utilities::display("Objet " + to_string(i) + ":\n");
+        objets[i]->display();
+    }
 
-    for (unsigned int i = 0; i < salle->joueurs.size(); i++)
-        out << "Joueur " << salle->joueurs.size();
+    utilities::display("Elle contient les joueurs suivants:\n");
 
-    return out;
+    for (unsigned int i = 0; i < joueurs.size(); i++)
+        utilities::display("Joueur " + joueurs[i]->getName());
+
 
 }
 
