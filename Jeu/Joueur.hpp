@@ -25,6 +25,9 @@ public:
     int getScore() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
+    void equiper(Objet*);
+    void utiliser(Objet*);
+    void jeter(int index);
     ~Joueur();
 
 

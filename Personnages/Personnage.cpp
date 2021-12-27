@@ -8,7 +8,14 @@ using namespace std;
 
 
 Personnage::Personnage(string n, int aP, int aM, int rP, int rM) : nom(n), attaquePhysique(aP), attaqueMagique(aM),
-                                                                   resistanceMagique(rM), resistancePhysique(rP) {}
+resistanceMagique(rM), resistancePhysique(rP) {
+    for(int i = 0; i < 4; i++){
+        sac[i] = nullptr;
+    }
+    for(int i = 0; i < 2; i++){
+        equipement[i] = nullptr;
+    }
+}
 
 //TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
 pair<int, int> Personnage::attaque() {
@@ -36,6 +43,14 @@ string Personnage::getStats() {
     stat += "Résistance Magique: " + std::to_string(resistanceMagique) + "\n";
 
     return stat;
+}
+
+Objet** Personnage::getEquipement(){
+    return this->equipement;
+}
+
+void Personnage::setEquipement(int index, Objet *o){
+    this->equipement[index] = o;
 }
 
 ostream &operator<<(ostream &out, Personnage *personnage) {

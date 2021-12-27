@@ -38,3 +38,8 @@ ostream& operator<<(ostream& out, Joueur* joueur){
     out<<joueur->personnage;
     return out;
 }
+
+void Joueur::jeter(int index){
+    
+    this->personnage->setEquipement(index, nullptr);
+}
