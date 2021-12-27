@@ -39,6 +39,7 @@ ostream& operator<<(ostream& out, Joueur* joueur){
     return out;
 }
 
-bool Joueur::isAutomatise() const{
-    return automatise;
+void Joueur::jeter(int index){
+    
+    this->personnage->setEquipement(index, nullptr);
 }

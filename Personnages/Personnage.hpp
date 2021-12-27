@@ -21,6 +21,7 @@ private:
     int sante = 100;
     int habilite = 10;
     Objet *sac[4];
+    Objet *equipement[2];
     int attaquePhysique;
     int attaqueMagique;
     int resistancePhysique;
@@ -35,6 +36,8 @@ public:
 
     std::string getStats();
     std::string getName();
+    Objet** getEquipement();
+    void setEquipement(int, Objet*);
 
 
 };
