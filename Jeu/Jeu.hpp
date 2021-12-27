@@ -10,7 +10,7 @@
 #include "Joueur.hpp"
 #include "vector"
 #include "Map/Chateau.hpp"
-#include <utility>
+#include "../Objets/ObjectFactory.hpp"
 
 
 
@@ -19,6 +19,8 @@ class Jeu {
 private:
     const int nombreDeJoueurs;
     const int nombreJoueurNonAutomatise;
+    ObjectFactory* objectFactory;
+    static std::vector<Objet*> objetsPossibles;
     //les joueurs non-automatisés sont placés d'abord dans le vecteur
     std::vector<Joueur *> joueurs;
     Chateau *chateau;
@@ -54,8 +56,7 @@ public:
     //default values are :
     //nombreJoueurNonAutomatise = 1
     //nombreDeJoueurs = 5
-    //Chateau (3,3)
-    static std::vector<Objet*> objetsPossibles;
+    //Chateau (4,4)
     Jeu();
     void lancePartie();
     ~Jeu();
