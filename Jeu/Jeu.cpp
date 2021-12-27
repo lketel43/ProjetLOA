@@ -7,7 +7,7 @@
 #include "../Personnages/Moine.hpp"
 #include "../Personnages/Sorciere.hpp"
 
-#include "../Objets/Armes.hpp"
+#include "../Objets/Arme.hpp"
 #include "../Objets/Clef.hpp"
 #include "../Objets/Potion.hpp"
 #include "../Utilities/Utilities.cpp"
@@ -59,52 +59,56 @@ vector<Objet *> initVecteurObjets() {
     ret.push_back(new Potion("Poison extraordinaire", 20, -15, "sante"));
     ret.push_back(new Potion("Poison légendaire", 50, -30, "sante"));
 
-    ///Armes et boucliers
+    ///Arme et boucliers
 
-    //Armes d'attaque magiques
+    //Arme d'attaque magiques
 
-    ret.push_back(new Armes("Baguette Magique ordinaire", 2, 0, 5, 0, 1));
-    ret.push_back(new Armes("Baguette Magique extraordinaire", 10, 0, 10, 0, 3));
-    ret.push_back(new Armes("Baguette Magique légendaire", 20, 0, 20, 0, 10));
+    ret.push_back(new Arme("Baguette Magique ordinaire", 2, 0, 5, 0, 1));
+    ret.push_back(new Arme("Baguette Magique extraordinaire", 10, 0, 10, 0, 3));
+    ret.push_back(new Arme("Baguette Magique légendaire", 20, 0, 20, 0, 10));
 
-    //Armes d'attaque physique
-    ret.push_back(new Armes("Épée ordinaire", 2, 5, 0, 1, 0));
-    ret.push_back(new Armes("Épée extraordinaire", 10, 10, 0, 3, 0));
-    ret.push_back(new Armes("Épée légendaire", 20, 20, 0, 10, 0));
+    //Arme d'attaque physique
+    ret.push_back(new Arme("Épée ordinaire", 2, 5, 0, 1, 0));
+    ret.push_back(new Arme("Épée extraordinaire", 10, 10, 0, 3, 0));
+    ret.push_back(new Arme("Épée légendaire", 20, 20, 0, 10, 0));
 
-    //Armes de défense magiques
-    ret.push_back(new Armes("Chevalière de sorcellerie ordinaire", 2, 0, 1, 0, 5));
-    ret.push_back(new Armes("Chevalière de sorcellerie extraordinaire", 10, 0, 3, 0, 10));
-    ret.push_back(new Armes("Chevalière de sorcellerie légendaire", 20, 0, 5, 0, 20));
+    //Arme de défense magiques
+    ret.push_back(new Arme("Chevalière de sorcellerie ordinaire", 2, 0, 1, 0, 5));
+    ret.push_back(new Arme("Chevalière de sorcellerie extraordinaire", 10, 0, 3, 0, 10));
+    ret.push_back(new Arme("Chevalière de sorcellerie légendaire", 20, 0, 5, 0, 20));
 
-    //Armes de défense physique
-    ret.push_back(new Armes("Bouclier ordinaire", 2, 1, 0, 5, 0));
-    ret.push_back(new Armes("Bouclier extraordinaire", 10, 3, 0, 10, 0));
-    ret.push_back(new Armes("Bouclier légendaire", 20, 5, 0, 20, 0));
+    //Arme de défense physique
+    ret.push_back(new Arme("Bouclier ordinaire", 2, 1, 0, 5, 0));
+    ret.push_back(new Arme("Bouclier extraordinaire", 10, 3, 0, 10, 0));
+    ret.push_back(new Arme("Bouclier légendaire", 20, 5, 0, 20, 0));
 
-    //Armes attaque physique et magique
-    ret.push_back(new Armes("Épée enchantée ordinaire", 5, 5, 5, 1, 1));
-    ret.push_back(new Armes("Épée enchantée extraordinaire", 15, 10, 10, 3, 3));
-    ret.push_back(new Armes("Excalibur", 30, 20, 20, 10, 10));
+    //Arme attaque physique et magique
+    ret.push_back(new Arme("Épée enchantée ordinaire", 5, 5, 5, 1, 1));
+    ret.push_back(new Arme("Épée enchantée extraordinaire", 15, 10, 10, 3, 3));
+    ret.push_back(new Arme("Excalibur", 30, 20, 20, 10, 10));
 
-    //Armes defense physique et magique
-    ret.push_back(new Armes("Pavois enchanté", 5, 1, 0, 5, 5));
-    ret.push_back(new Armes("Bouclier en bois d'Yggdrasil", 15, 3, 3, 10, 10));
-    ret.push_back(new Armes("Bouclier en acier Valyrien", 30, 5, 5, 20, 20));
+    //Arme defense physique et magique
+    ret.push_back(new Arme("Pavois enchanté", 5, 1, 0, 5, 5));
+    ret.push_back(new Arme("Bouclier en bois d'Yggdrasil", 15, 3, 3, 10, 10));
+    ret.push_back(new Arme("Bouclier en acier Valyrien", 30, 5, 5, 20, 20));
 
-    //Armes melangée
-    ret.push_back(new Armes("Épée défensive ordinaire", 5, 5, 0, 5, 2));
-    ret.push_back(new Armes("Épée défensive extraordinaire", 15, 10, 0, 10, 5));
-    ret.push_back(new Armes("Épée défensive légendaire", 30, 20, 0, 20, 10));
+    //Arme melangée
+    ret.push_back(new Arme("Épée défensive ordinaire", 5, 5, 0, 5, 2));
+    ret.push_back(new Arme("Épée défensive extraordinaire", 15, 10, 0, 10, 5));
+    ret.push_back(new Arme("Épée défensive légendaire", 30, 20, 0, 20, 10));
 
-    //Armes ultimes
-    ret.push_back(new Armes("Épée ultime", 50, 40, 20, 4, 4));
-    ret.push_back(new Armes("Bouclier ultime", 50, 0, 40, 0, 40));
+    //Arme ultimes
+    ret.push_back(new Arme("Épée ultime", 50, 40, 20, 4, 4));
+    ret.push_back(new Arme("Bouclier ultime", 50, 0, 40, 0, 40));
 
 
     //TODO: clef de teleportation
 
     return ret;
+}
+
+Potion *Potion::copy() {
+    return new Potion(nom, rarete, boost, type);
 }
 
 
@@ -231,6 +235,10 @@ void Jeu::lancePartie() {
     initJoueurs();
     placeJoueurs();
     placeObjets();
+
+    for (int i = 0; i < joueurs.size(); i++) {
+        tour(joueurs[i]);
+    }
 }
 
 
@@ -262,13 +270,6 @@ void Jeu::placeJoueurs() {
 
     }
 
-    for (int i = 0; i < chateau->getWidth(); i++) {
-        for (int j = 0; j < chateau->getLength(); j++) {
-            if (chateau->map[i][j]->numOfPlayers() > 0)
-                cout << "Salle " << chateau->map[i][j]->getId() << " has " << chateau->map[i][j]->numOfPlayers()
-                     << " players." << endl;
-        }
-    }
 
 }
 
@@ -306,4 +307,18 @@ void Jeu::placeObjets() {
             chateau->map[i][j]->placeObject(objet2);
         }
     }
+}
+
+void Jeu::tour(Joueur *joueur) {
+    pair<int, int> position = joueur->getPosition();
+    Salle *salle = chateau->map[position.first][position.second];
+
+    if (!joueur->isAutomatise()) {
+        if (nombreJoueurNonAutomatise > 1) {
+            cout << "Tour du Joueur " << joueur->getName() << endl;
+        }
+        cout << salle;
+    }
+
+
 }

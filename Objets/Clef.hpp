@@ -12,10 +12,15 @@
 class Clef : public Objet {
 
 private:
-    Clef(std::string, int);
+    const std::string description;
+    Clef(std::string , int, std::string );
+    Clef* copy() override;
+
 
 public:
     void utiliser(Jeu *, Joueur *, int x, int y);
+    std::string toString() const override;
+
 
 };
 

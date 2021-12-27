@@ -9,17 +9,17 @@
 
 class Objet {
 private:
-    const std::string nom;
-    const int rarete;
     friend class ObjectFactory;
 protected:
     Objet(std::string, int);
+    const std::string nom;
+    const int rarete;
     //Factory method
-    Objet* copy();
+    virtual Objet* copy()=0;
 public:
     std::string getNom() const;
     int getRarete() const;
-
+    virtual std::string toString() const =0;
 };
 
 

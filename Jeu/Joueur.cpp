@@ -38,3 +38,7 @@ ostream& operator<<(ostream& out, Joueur* joueur){
     out<<joueur->personnage;
     return out;
 }
+
+bool Joueur::isAutomatise() const{
+    return automatise;
+}

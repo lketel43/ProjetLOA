@@ -25,6 +25,7 @@ public:
     int getScore() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
+    bool isAutomatise() const;
     ~Joueur();
 
 

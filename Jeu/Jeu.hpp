@@ -52,6 +52,8 @@ private:
     void moveJoueur(Joueur*, int x, int y);
     friend class Clef;
 
+    void tour(Joueur *);
+
 public:
     //default values are :
     //nombreJoueurNonAutomatise = 1

@@ -4,18 +4,18 @@
 
 #include "Objet.hpp"
 
-Objet::Objet(std::string _nom, int _rarete): nom(_nom), rarete(_rarete){
+using namespace std;
+
+Objet::Objet(string _nom, int _rarete) : nom(_nom), rarete(_rarete) {
 
 }
 
-std::string Objet::getNom() const{
+std::string Objet::getNom() const {
     return this->nom;
 }
 
-int Objet::getRarete() const{
+int Objet::getRarete() const {
     return this->rarete;
 }
 
-Objet* Objet::copy(){
-    return new Objet(this->nom, this->rarete);
-}
+

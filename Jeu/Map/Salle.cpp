@@ -39,23 +39,22 @@ void Salle::removePlayer(Joueur *joueur) {
 
 }
 
-//TODO: add overload of << in objet
 ostream &operator<<(ostream &out, Salle *salle) {
-    out<<"Vous êtes actuellement dans la salle "<<salle->id<<"."<<endl;
-    out<<"Elle contient les objets suivants:"<<endl;
-    for(unsigned int i = 0; i<salle->objets.size(); i++)
-        out<<"Objet "<<i<<":"<<endl<<salle->objets[i]<<endl;
+    out << "Vous êtes actuellement dans la salle " << salle->id << "." << endl;
+    out << "Elle contient les objets suivants:" << endl;
+    for (unsigned int i = 0; i < salle->objets.size(); i++)
+        out << "Objet " << i << ":" << endl << salle->objets[i]->toString() << endl;
 
-    out<<"Elle contient les joueurs suivants:"<<endl;
+    out << "Elle contient les joueurs suivants:" << endl;
 
-    for(unsigned int i = 0; i<salle->joueurs.size(); i++)
-        out<<salle->joueurs.size();
+    for (unsigned int i = 0; i < salle->joueurs.size(); i++)
+        out << "Joueur " << salle->joueurs.size();
 
-   return out;
+    return out;
 
 }
 
-void Salle::placeObject(Objet * object) {
-objets.push_back(object);
+void Salle::placeObject(Objet *object) {
+    objets.push_back(object);
 
 }
