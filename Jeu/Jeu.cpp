@@ -149,9 +149,9 @@ void Jeu::initJoueurs() {
     utilities::display("Voici les personnages possibles, et leur stats.\n");
 
     for (long unsigned int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
-        utilities::display("Personnage " + to_string(i + 1) +": \n"
-        + "Nom: " + personnagesDisponiblesEtFrequences[i].first->getName() + "\n" +
-                personnagesDisponiblesEtFrequences[i].first->getStats()+ "\n");
+        utilities::display("Personnage " + to_string(i + 1) + ": \n"
+                           + "Nom: " + personnagesDisponiblesEtFrequences[i].first->getName() + "\n" +
+                           personnagesDisponiblesEtFrequences[i].first->getStats() + "\n");
 
     }
 
@@ -165,18 +165,19 @@ void Jeu::initJoueurs() {
             name = std::to_string(i + 1);
 
         } else {
-           utilities::display( "À vous Joueur " + to_string( i + 1) + " de choisir votre personnage." +"\n" +
-                 "Choisissez un nombre entre 1 et " + to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
-                 + "Attention! Ce choix est définitif." + "\n");
+            utilities::display("À vous Joueur " + to_string(i + 1) + " de choisir votre personnage." + "\n" +
+                               "Choisissez un nombre entre 1 et " +
+                               to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
+                               + "Attention! Ce choix est définitif." + "\n");
             cin >> choice;
             choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
-            utilities::display( "Bon choix. \n");
+            utilities::display("Bon choix. \n");
             utilities::display("Vous êtes digne d'un prénom également. Quel est votre prénom?\n");
             cin >> name;
 
         }
         utilities::display("Le joueur " + name + " a choisi un(e) "
-             + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
+                           + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
         joueurs.push_back(new Joueur(name, forge(choice - 1), (i + 1 > nombreJoueurNonAutomatise)));
 
@@ -257,8 +258,9 @@ void Jeu::placeJoueurs() {
 
                 joueurs[i]->setPosition(x, y);
                 chateau->map[x][y]->addPlayer(joueurs[i]);
-                utilities::display("Joueur " + joueurs[i]->getName() + " est placé dans la salle " + to_string(chateau->map[x][y]->getId())
-                                             + ".\n");
+                utilities::display("Joueur " + joueurs[i]->getName() + " est placé dans la salle " +
+                                   to_string(chateau->map[x][y]->getId())
+                                   + ".\n");
 
             }
         } while (!joueurs[i]->isPlaced());
@@ -316,10 +318,74 @@ void Jeu::tour(Joueur *joueur) {
 
     if (!joueur->isAutomatise()) {
         if (nombreJoueurNonAutomatise > 1) {
-            utilities::display("Tour du Joueur " + joueur->getName()+"\n");
+            utilities::display("Tour du Joueur " + joueur->getName() + "\n");
         }
         salle->display();
+        //TODO: make joueur display its stats
+        int choice;
+        do {
+            utilities::display("Que voulez-vous faire?\n");
+            utilities::display("1. Consulter votre sac et votre équipement.\n");
+            utilities::display("2. Ramasser des objets.\n");
+            utilities::display("3. Commencer un combat. \n");
+            utilities::display("4. Finir votre tour. \n");
+            cin >> choice;
+            choice = utilities::validateRange(choice, 1, 4);
+            //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
+            switch (choice) {
+                case 1:
+//                    checkBag(joueur);
+                    break;
+                case 2:
+//                    pickUpObjects(joueur);
+                    break;
+                case 3:
+//                    startBattle(joueur);
+                    break;
+                case 4:
+                    endTurn(joueur);
+                    break;
+                default:
+                    utilities::display("Error! choice of action is not a valid one.");
+            }
+
+        } while (choice != 4);
+
     }
 
 
+}
+
+void Jeu::endTurn(Joueur *joueur) {
+    pair<int, int> position = joueur->getPosition();
+    Salle * salle = chateau->map[position.first][position.second];
+    int choice;
+    string directions = "";
+    utilities::display("Vous avez decidé de finir votre tour.\n");
+    utilities::display("Avant de faire ceci, voulez-vous changer de salle?\n");
+    utilities::display("1. Oui \n2. Non\n");
+
+    cin >> choice;
+    choice = utilities::validateRange(choice, 1, 2);
+    if (choice == 1) {
+        utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
+        utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
+        chateau->display(joueur);
+
+        if (salle->nord() != nullptr)
+            directions += to_string(salle->nord()->getId() )+ ",";
+        if(salle->sud() != nullptr)
+            directions += " " +to_string(salle->sud()->getId() )+ ",";
+        if(salle->est() != nullptr)
+            directions += " " +to_string(salle->est()->getId() )+ ",";
+        if(salle->ouest() != nullptr)
+            directions += " " + to_string(salle->ouest()->getId() )+ ",";
+
+        directions[directions.length() - 1] = '.';
+
+        utilities::display("Vous avez donc le choix d'aller dans les salles suivantes: " + directions + "\n");
+
+// TODO; FINISH
+    }
+    utilities::display("Fin de tour pour le Joueur " + joueur->getName() + "\n");
 }

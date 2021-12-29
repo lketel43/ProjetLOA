@@ -1,6 +1,7 @@
 
 #include "Chateau.hpp"
 #include "../../Utilities/Utilities.cpp"
+#include <iomanip>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ void Chateau::initializeDirections() {
             if (j == length - 1)
                 map[i][j]->neighbors[east] = nullptr;
             else
-                map[i][j]->neighbors[west] = map[i][j + 1];
+                map[i][j]->neighbors[east] = map[i][j + 1];
         }
     }
 }
@@ -80,4 +81,84 @@ pair<int, int> Chateau::getEmptiestRoom() {
     }
 
     return coords;
+}
+
+void Chateau::display() {
+    int currSalleId;
+    cout << "----------------------------------" << endl;
+    for (int i = 0; i < length; i++) {
+        if (i > 0)
+            cout << "----  ------  ------  ------  ----" << endl;
+        for (int k = 0; k < 3; k++) {
+            for (int j = 0; j < width; j++) {
+                currSalleId = map[i][j]->getId();
+                if (k == 1)
+                    if (j == 0)
+                        if (currSalleId < 10)
+                            cout << "|   " << currSalleId << "   ";
+                        else
+                            cout << "|   " << currSalleId << "  ";
+                    else if (currSalleId < 10)
+                        cout << "    " << currSalleId << "   ";
+                    else
+                        cout << "    " << currSalleId << "  ";
+
+                else
+                    cout << "|       ";
+
+                if (j == width - 1)
+                    if (currSalleId < 10)
+                        cout << "  |";
+                    else cout << " |";
+            }
+            cout << endl;
+        }
+//        cout << endl;
+
+    }
+    cout << "----------------------------------" << endl;
+}
+
+void Chateau::display(Joueur *joueur) {
+    pair<int, int> position = joueur->getPosition();
+    int salleId = map[position.first][position.second]->getId();
+    int currSalleId;
+
+    cout << "----------------------------------" << endl;
+    for (int i = 0; i < length; i++) {
+        if (i > 0)
+            cout << "----  ------  ------  ------  ----" << endl;
+        for (int k = 0; k < 3; k++) {
+            for (int j = 0; j < width; j++) {
+                currSalleId = map[i][j]->getId();
+                if (k == 1)
+                    if (j == 0)
+                        if (currSalleId < 10 || salleId == currSalleId)
+                            if (currSalleId == salleId)
+                                cout << "|   " << "x" << "   ";
+                            else
+                                cout << "|   " << currSalleId << "   ";
+                        else
+                            cout << "|   " << currSalleId << "  ";
+                    else if (currSalleId < 10 || salleId == currSalleId)
+                        if (currSalleId == salleId)
+                            cout << "    " << "x" << "   ";
+                        else
+                            cout << "    " << currSalleId << "   ";
+                    else
+                        cout << "    " << currSalleId << "  ";
+
+                else
+                    cout << "|       ";
+
+                if (j == width - 1)
+                    if (currSalleId < 10)
+                        cout << "  |";
+                    else cout << " |";
+            }
+            cout << endl;
+        }
+
+    }
+    cout << "----------------------------------" << endl;
 }

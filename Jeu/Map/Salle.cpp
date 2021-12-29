@@ -11,7 +11,6 @@ Salle::Salle(int num) : id(num) {
 
 }
 
-
 int Salle::numOfPlayers() const {
     return joueurs.size();
 }
@@ -53,7 +52,7 @@ void Salle::display() const {
     utilities::display("Elle contient les joueurs suivants:\n");
 
     for (unsigned int i = 0; i < joueurs.size(); i++)
-        utilities::display("Joueur " + joueurs[i]->getName());
+        utilities::display("Joueur " + joueurs[i]->getName() +"\n");
 
 
 }
@@ -61,4 +60,20 @@ void Salle::display() const {
 void Salle::placeObject(Objet *object) {
     objets.push_back(object);
 
+}
+
+Salle *Salle::nord() const {
+    return neighbors[north];
+}
+
+Salle *Salle::sud() const {
+    return neighbors[south];
+}
+
+Salle *Salle::est() const {
+    return neighbors[east];
+}
+
+Salle * Salle::ouest() const {
+    return neighbors[west];
 }

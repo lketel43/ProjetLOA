@@ -26,14 +26,13 @@ public:
     unsigned int getLength();
     unsigned int getWidth();
     std::pair<int, int> getEmptiestRoom();
+    void display(Joueur*);
+    void display();
 
     //TODO: make destructor that deletes all the salles
 
 };
 
-enum directions {
-    north, west, east, south
-};
 
 
 #endif //PROJETLOA_CHATEAU_HPP

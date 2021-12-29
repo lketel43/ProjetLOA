@@ -28,7 +28,15 @@ public:
     void removePlayer(Joueur*);
     void placeObject(Objet*);
     void display() const;
+    Salle* nord() const;
+    Salle* sud() const;
+    Salle* est() const;
+    Salle * ouest() const;
 
+};
+
+enum directions {
+    north, west, east, south
 };
 
 
