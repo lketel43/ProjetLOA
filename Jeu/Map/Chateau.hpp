@@ -16,7 +16,7 @@ private:
     friend class Jeu;
     unsigned int width;
     unsigned int length;
-    std::vector < std::vector<Salle *>> map;
+    std::vector < std::vector<Salle *> > map;
 
     //initializes the direction pointers of the salles inside the map
     void initializeDirections();

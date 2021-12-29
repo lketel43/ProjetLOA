@@ -4,7 +4,8 @@
 
 #include "Objet.hpp"
 
-Objet::Objet(std::string _nom, int _rarete): nom(_nom), rarete(_rarete){
+Objet::Objet(std::string _nom, int _rarete, bool _equipable, bool _utilisable, int _idType): nom(_nom), rarete(_rarete), 
+equipable(_equipable), utilisable(_utilisable), idType(_idType){
 
 }
 
@@ -17,5 +18,17 @@ int Objet::getRarete() const{
 }
 
 Objet* Objet::copy(){
-    return new Objet(this->nom, this->rarete);
+    return new Objet(this->nom, this->rarete, this->equipable, this->utilisable, this->idType);
+}
+
+bool Objet::isEquipable(){
+    return this->equipable;
+}
+
+bool Objet::isUtilisable(){
+    return this->utilisable;
+}
+
+int Objet::getIdType() const{
+    return this->idType;
 }

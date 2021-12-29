@@ -12,6 +12,7 @@
 class Potion: public Objet{
     public:
         float getBoost() const;
+        std::string getType() const;
     private:
         Potion(std::string, int, float, std::string);
         friend std::vector<Objet*> initVecteurObjets();

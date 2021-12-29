@@ -9,6 +9,10 @@
 #include <utility>
 #include <iostream>
 
+#define MAX_SANTE 100
+#define TAILLE_SAC 4
+#define TAILLE_EQ 2
+
 
 class Personnage {
 
@@ -20,8 +24,8 @@ private:
     const std::string nom;
     int sante = 100;
     int habilite = 10;
-    Objet *sac[4];
-    Objet *equipement[2];
+    Objet *sac[TAILLE_SAC];
+    Objet *equipement[TAILLE_EQ];
     int attaquePhysique;
     int attaqueMagique;
     int resistancePhysique;
@@ -36,8 +40,19 @@ public:
 
     std::string getStats();
     std::string getName();
+    Objet** getSac();
+    void setSac(int, Objet*);
+    bool isSacFull();
+    bool isEquipementFull();
     Objet** getEquipement();
     void setEquipement(int, Objet*);
+
+    void setSante(int);
+    void setHabilete(int);
+    void setAttatquePhysique(int);
+    void setAttaqueMagique(int);
+    void setResistancePhysique(int);
+    void setResistanceMagique(int);
 
 
 };
