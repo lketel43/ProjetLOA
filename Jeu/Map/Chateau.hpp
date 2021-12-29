@@ -26,6 +26,8 @@ public:
     unsigned int getLength();
     unsigned int getWidth();
     std::pair<int, int> getEmptiestRoom();
+    void display();
+    void display(Joueur*);
 
     //TODO: make destructor that deletes all the salles
 

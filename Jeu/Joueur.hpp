@@ -27,6 +27,7 @@ public:
     std::string getName() const;
     bool updateScore();
     int getScore() const;
+    bool isAutomatise() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
 
@@ -37,6 +38,7 @@ public:
     void utiliserClef(Clef*, Jeu*);
     void utiliserPotion(Potion*);
     Objet* jeterDeSac(int index);
+
     
     ~Joueur();
 

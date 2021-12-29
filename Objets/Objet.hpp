@@ -18,7 +18,7 @@ protected:
     const int idType;
     Objet(std::string, int, bool, bool, int);
     //Factory method
-    Objet* copy();
+    virtual Objet* copy()=0;
 public:
     std::string getNom() const;
     int getRarete() const;
