@@ -8,7 +8,14 @@ using namespace std;
 
 
 Personnage::Personnage(string n, int aP, int aM, int rP, int rM) : nom(n), attaquePhysique(aP), attaqueMagique(aM),
-                                                                   resistanceMagique(rM), resistancePhysique(rP) {}
+resistanceMagique(rM), resistancePhysique(rP) {
+    for(int i = 0; i < TAILLE_SAC; i++){
+        sac[i] = nullptr;
+    }
+    for(int i = 0; i < 2; i++){
+        equipement[i] = nullptr;
+    }
+}
 
 //TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
 pair<int, int> Personnage::attaque() {
@@ -38,6 +45,14 @@ string Personnage::getStats() {
     return stat;
 }
 
+Objet** Personnage::getSac(){
+    return this->sac;
+}
+
+void Personnage::setSac(int index, Objet *o){
+    this->sac[index] = o;
+}
+
 ostream &operator<<(ostream &out, Personnage *personnage) {
 
     out<<"Personnage "<<personnage->nom<<endl;
@@ -49,4 +64,52 @@ ostream &operator<<(ostream &out, Personnage *personnage) {
       <<"Résistance Magique:"<<personnage->resistanceMagique<<endl;
 
     return out;
+}
+
+bool Personnage::isSacFull(){
+    for(int i = 0; i < TAILLE_SAC; i++){
+        if(this->sac[i] == nullptr) return false;
+    }
+    return true;
+}
+
+bool Personnage::isEquipementFull(){
+    for(int i = 0; i < TAILLE_SAC; i++){
+        if(this->equipement[i] == nullptr) return false;
+    }
+    return true;
+}
+
+Objet** Personnage::getEquipement(){
+    return this->equipement;
+}
+
+void Personnage::setEquipement(int index, Objet* o){
+    this->equipement[index] = o;
+}
+
+void Personnage::setSante(int n){
+    int diff = MAX_SANTE - this->sante;
+    if(diff < n) this->sante = MAX_SANTE;
+    else this->sante += n;
+}
+
+void Personnage::setHabilete(int n){
+    this->habilite += n;
+}
+
+void Personnage::setAttatquePhysique(int n){
+    this->attaquePhysique += n;
+}
+
+void Personnage::setAttaqueMagique(int n){
+    this->attaqueMagique += n;
+}
+
+void Personnage::setResistancePhysique(int n){
+    this->resistancePhysique += n;
+}
+
+void Personnage::setResistanceMagique(int n){
+    this->resistanceMagique += n;
 }

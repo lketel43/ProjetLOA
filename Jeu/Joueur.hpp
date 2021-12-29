@@ -7,6 +7,11 @@
 
 #include "../Personnages/Personnage.hpp"
 
+class Salle;
+class Jeu;
+class Clef;
+class Potion;
+
 class Joueur {
 private:
     Personnage * personnage;
@@ -26,6 +31,15 @@ public:
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
     bool isAutomatise() const;
+
+    void ramasser(Objet*);
+    void equiper(Objet*);
+    void desequipper(int index);
+    Objet* jeterDeEquipement(int index);
+    void utiliserClef(Clef*, Jeu*);
+    void utiliserPotion(Potion*);
+    Objet* jeterDeSac(int index);
+
     ~Joueur();
 
 

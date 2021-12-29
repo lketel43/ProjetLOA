@@ -3,6 +3,10 @@
 //
 
 #include "Joueur.hpp"
+#include "Map/Salle.hpp"
+#include "Jeu.hpp"
+#include "../Objets/Clef.hpp"
+#include "../Objets/Potion.hpp"
 using namespace std;
 
 Joueur::Joueur(const string name, Personnage * personnage1, const bool autom): nom(name), personnage(personnage1), automatise(autom) {
@@ -41,4 +45,91 @@ ostream& operator<<(ostream& out, Joueur* joueur){
 
 bool Joueur::isAutomatise() const{
     return automatise;
+}
+
+void Joueur::ramasser(Objet* o){
+    if (this->personnage->isSacFull()){
+        cout << "Sac plein, veuillez jeter un objet.\n";
+        return;
+    }
+    for(int i = 0; i < 4; i++){
+        if ((*this->personnage->getSac()) + i == nullptr) this->personnage->setSac(i, o);
+    }
+}
+
+void Joueur::equiper(Objet *o){
+    if(!o->isEquipable()){
+        cout << "Cet objet n'est pas équipable.\n";
+        return;
+    }
+    if(this->personnage->isEquipementFull()){
+        cout << "Équipement plein veuillez déséquiper un objet.\n";
+        return;
+    }
+    for(int i = 0; i < 2; i++){
+        if((*this->personnage->getEquipement()) + i == nullptr) this->personnage->setEquipement(i, o);
+    }
+}
+
+void Joueur::desequipper(int index){
+    if(this->personnage->isSacFull()){
+        cout << "Sac plein veuillez vider votre sac, ou jeter l'objet.\n";
+        return;
+    }
+    Objet *o = (*this->personnage->getEquipement()) + index;
+    this->personnage->setEquipement(index, nullptr);
+    for(int i = 0; i < 4; i++){
+        if((*this->personnage->getSac()) + i == nullptr) this->personnage->setSac(i, o);
+    }
+}
+
+Objet* Joueur::jeterDeEquipement(int index){
+    Objet *ret = (*this->personnage->getEquipement()) + index;
+    this->personnage->setEquipement(index, nullptr);
+    return ret;
+}
+
+void Joueur::utiliserClef(Clef *c, Jeu *jeu){
+    if(!c->isUtilisable()){
+        cout << "Cet objet n'est pas utilisable.\n";
+        return;
+    }
+    if(c->getIdType() == 2){
+        c->utiliser(jeu, this, this->position.first, this->position.second);
+    }
+}
+
+void Joueur::utiliserPotion(Potion *p){
+    if(!p->isUtilisable()){
+        cout << "Cet objet n'est pas utilisable.\n";
+        return;
+    }
+    if(p->getIdType() == 1){
+        if(p->getType() == "sante"){
+            this->personnage->setSante(p->getBoost());
+        }
+        if(p->getType() == "habilete"){
+            this->personnage->setHabilete(p->getBoost());
+        }
+        if(p->getType() == "attaquePhysique"){
+            this->personnage->setAttatquePhysique(p->getBoost());
+        }
+        if(p->getType() == "attaqueMagique"){
+            this->personnage->setAttaqueMagique(p->getBoost());
+        }
+        if(p->getType() == "resistancePhysique"){
+            this->personnage->setResistancePhysique(p->getBoost());
+        }
+        if(p->getType() == "resistanceMagique"){
+            this->personnage->setResistanceMagique(p->getBoost());
+        }
+    }
+}
+
+
+
+Objet* Joueur::jeterDeSac(int index){
+    Objet *ret = (*this->personnage->getSac()) + index;
+    this->personnage->setSac(index, nullptr);
+    return ret;
 }
