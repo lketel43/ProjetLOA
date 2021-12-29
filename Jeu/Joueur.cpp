@@ -43,6 +43,10 @@ ostream& operator<<(ostream& out, Joueur* joueur){
     return out;
 }
 
+bool Joueur::isAutomatise() const{
+    return automatise;
+}
+
 void Joueur::ramasser(Objet* o){
     if (this->personnage->isSacFull()){
         cout << "Sac plein, veuillez jeter un objet.\n";
