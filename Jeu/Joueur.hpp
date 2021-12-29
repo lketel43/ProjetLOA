@@ -4,6 +4,7 @@
 
 #ifndef PROJETLOA_JOUEUR_HPP
 #define PROJETLOA_JOUEUR_HPP
+
 #include "../Personnages/Personnage.hpp"
 
 class Salle;
@@ -31,6 +32,8 @@ public:
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
 
+
+
     void ramasser(Objet*);
     void equiper(Objet*);
     void desequipper(int index);
@@ -39,7 +42,7 @@ public:
     void utiliserPotion(Potion*);
     Objet* jeterDeSac(int index);
 
-    
+
     ~Joueur();
 
 
