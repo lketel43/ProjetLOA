@@ -4,8 +4,12 @@
 
 #ifndef PROJETLOA_JOUEUR_HPP
 #define PROJETLOA_JOUEUR_HPP
-
 #include "../Personnages/Personnage.hpp"
+
+class Salle;
+class Jeu;
+class Clef;
+class Potion;
 
 class Joueur {
 private:
@@ -25,9 +29,14 @@ public:
     int getScore() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
+
+    void ramasser(Objet*);
     void equiper(Objet*);
-    void utiliser(Objet*);
-    void jeter(int index);
+    void desequipper(int index);
+    Objet* jeterDeEquipement(int index);
+    void utiliserClef(Clef*, Jeu*);
+    void utiliserPotion(Potion*);
+    Objet* jeterDeSac(int index);
     ~Joueur();
 
 
