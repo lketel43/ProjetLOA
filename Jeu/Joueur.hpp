@@ -37,6 +37,7 @@ public:
     void utiliserClef(Clef*, Jeu*);
     void utiliserPotion(Potion*);
     Objet* jeterDeSac(int index);
+    
     ~Joueur();
 
 
