@@ -23,6 +23,7 @@ private:
 
 public:
     Joueur(std::string, Personnage*, bool);
+    ~Joueur();
     void setPosition(const int&, const int&);
     //returns true if player is dead
     std::string getName() const;
@@ -32,8 +33,6 @@ public:
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
 
-
-
     void ramasser(Objet*);
     void equiper(Objet*);
     void desequipper(int index);
@@ -42,8 +41,6 @@ public:
     void utiliserPotion(Potion*);
     Objet* jeterDeSac(int index);
 
-
-    ~Joueur();
 
 
 

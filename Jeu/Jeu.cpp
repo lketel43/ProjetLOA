@@ -187,13 +187,20 @@ void Jeu::initJoueurs() {
 
 
 Jeu::~Jeu() {
-    for (long int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
-        delete personnagesDisponiblesEtFrequences[i].first;
-    }
+//    for (long int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
+//        delete personnagesDisponiblesEtFrequences[i].first;
+//    }
 
     for (long int i = 0; i < joueurs.size(); i++) {
-        delete joueurs[i];
+        if (joueurs[i] != nullptr)
+            delete joueurs[i];
     }
+
+//    for(long unsigned int i = 0; i< objetsPossibles.size(); i++)
+//        delete objetsPossibles[i];
+
+    delete chateau;
+    delete objectFactory;
 }
 
 Personnage *Jeu::forge(int choice) {
@@ -358,7 +365,7 @@ void Jeu::tour(Joueur *joueur) {
 
 void Jeu::endTurn(Joueur *joueur) {
     pair<int, int> position = joueur->getPosition();
-    Salle * salle = chateau->map[position.first][position.second];
+    Salle *salle = chateau->map[position.first][position.second];
     int choice;
     string directions = "";
     utilities::display("Vous avez decidé de finir votre tour.\n");
@@ -373,13 +380,13 @@ void Jeu::endTurn(Joueur *joueur) {
         chateau->display(joueur);
 
         if (salle->nord() != nullptr)
-            directions += to_string(salle->nord()->getId() )+ ",";
-        if(salle->sud() != nullptr)
-            directions += " " +to_string(salle->sud()->getId() )+ ",";
-        if(salle->est() != nullptr)
-            directions += " " +to_string(salle->est()->getId() )+ ",";
-        if(salle->ouest() != nullptr)
-            directions += " " + to_string(salle->ouest()->getId() )+ ",";
+            directions += to_string(salle->nord()->getId()) + ",";
+        if (salle->sud() != nullptr)
+            directions += " " + to_string(salle->sud()->getId()) + ",";
+        if (salle->est() != nullptr)
+            directions += " " + to_string(salle->est()->getId()) + ",";
+        if (salle->ouest() != nullptr)
+            directions += " " + to_string(salle->ouest()->getId()) + ",";
 
         directions[directions.length() - 1] = '.';
 

@@ -32,6 +32,7 @@ private:
     int resistanceMagique;
 
 public:
+    ~Personnage();
     //Retourne les dégats commits <Physique, Magique>
     std::pair<int, int> attaque();
 

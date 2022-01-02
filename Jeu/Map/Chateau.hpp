@@ -23,6 +23,7 @@ private:
 
 public:
     Chateau(unsigned int, unsigned int);
+    ~Chateau();
     unsigned int getLength();
     unsigned int getWidth();
     std::pair<int, int> getEmptiestRoom();

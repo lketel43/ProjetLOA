@@ -14,6 +14,7 @@ class ObjectFactory{
     protected:
     public:
         ObjectFactory(std::vector<Objet*>);
+        ~ObjectFactory();
         Objet* produce();
 
 };

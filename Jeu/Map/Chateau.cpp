@@ -162,3 +162,12 @@ void Chateau::display(Joueur *joueur) {
     }
     cout << "----------------------------------" << endl;
 }
+
+
+Chateau::~Chateau() {
+    for (int i = 0; i < map.size(); i++) {
+        for (int j = 0; j < map[i].size(); j++) {
+            delete map[i][j];
+        }
+    }
+}

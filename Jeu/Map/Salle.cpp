@@ -77,3 +77,14 @@ Salle *Salle::est() const {
 Salle * Salle::ouest() const {
     return neighbors[west];
 }
+
+Salle::~Salle(){
+    for( long unsigned int i = 0; i < objets.size(); i++){
+        delete objets[i];
+    }
+
+    for(long unsigned int i = 0; i< joueurs.size(); i++){
+        if(joueurs[i] != nullptr)
+            delete joueurs[i];
+    }
+}

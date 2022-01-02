@@ -21,6 +21,7 @@ private:
 
 public:
     Salle(int);
+    ~Salle();
     int getId() const ;
     int numOfPlayers() const ;
     int numOfObjects() const;

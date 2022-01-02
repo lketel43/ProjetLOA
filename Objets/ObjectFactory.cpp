@@ -26,3 +26,10 @@ Objet* ObjectFactory::pick(){
 Objet* ObjectFactory::produce(){
     return this->pick()->copy();
 }
+
+ObjectFactory::~ObjectFactory(){
+    for(long unsigned int i = 0; i<disponibles.size(); i++)
+        delete disponibles[i];
+
+    //Pas besoin de supprimer les autre poiteurs
+}
