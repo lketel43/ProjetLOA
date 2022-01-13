@@ -50,10 +50,9 @@ bool Joueur::isAutomatise() const{
 void Joueur::ramasser(Objet* o){
     if (this->personnage->isSacFull()){
         cout << "Sac plein, veuillez jeter un objet.\n";
-        return;
     }
-    for(int i = 0; i < 4; i++){
-        if ((*this->personnage->getSac()) + i == nullptr) this->personnage->setSac(i, o);
+    else{
+        this->personnage->addToEquipement(o);
     }
 }
 
@@ -64,10 +63,9 @@ void Joueur::equiper(Objet *o){
     }
     if(this->personnage->isEquipementFull()){
         cout << "Équipement plein veuillez déséquiper un objet.\n";
-        return;
     }
-    for(int i = 0; i < 2; i++){
-        if((*this->personnage->getEquipement()) + i == nullptr) this->personnage->setEquipement(i, o);
+    else{
+        this->personnage->addToSac(o);
     }
 }
 
@@ -76,16 +74,14 @@ void Joueur::desequipper(int index){
         cout << "Sac plein veuillez vider votre sac, ou jeter l'objet.\n";
         return;
     }
-    Objet *o = (*this->personnage->getEquipement()) + index;
-    this->personnage->setEquipement(index, nullptr);
-    for(int i = 0; i < 4; i++){
-        if((*this->personnage->getSac()) + i == nullptr) this->personnage->setSac(i, o);
-    }
+    Objet *o = this->personnage->getEquipement()[index];
+    this->personnage->removeFromEquipement(index);
+    this->personnage->addToSac(o);
 }
 
 Objet* Joueur::jeterDeEquipement(int index){
-    Objet *ret = (*this->personnage->getEquipement()) + index;
-    this->personnage->setEquipement(index, nullptr);
+    Objet *ret = this->personnage->getEquipement()[index];
+    this->personnage->removeFromEquipement(index);
     return ret;
 }
 
@@ -129,7 +125,7 @@ void Joueur::utiliserPotion(Potion *p){
 
 
 Objet* Joueur::jeterDeSac(int index){
-    Objet *ret = (*this->personnage->getSac()) + index;
-    this->personnage->setSac(index, nullptr);
+    Objet *ret = this->personnage->getSac()[index];
+    this->personnage->removeFromSac(index);
     return ret;
 }
