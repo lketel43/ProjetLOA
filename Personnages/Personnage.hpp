@@ -8,6 +8,7 @@
 #include "../Objets/Objet.hpp"
 #include <utility>
 #include <iostream>
+#include <vector>
 
 #define MAX_SANTE 100
 #define TAILLE_SAC 4
@@ -24,8 +25,8 @@ private:
     const std::string nom;
     int sante = 100;
     int habilite = 10;
-    Objet *sac[TAILLE_SAC];
-    Objet *equipement[TAILLE_EQ];
+    std::vector<Objet*> sac;
+    std::vector<Objet*> equipement;
     int attaquePhysique;
     int attaqueMagique;
     int resistancePhysique;
@@ -41,12 +42,16 @@ public:
 
     std::string getStats();
     std::string getName();
-    Objet** getSac();
-    void setSac(int, Objet*);
+
+    std::vector<Objet*> getSac();
+    void addToSac(Objet*);
+    void removeFromSac(int);
     bool isSacFull();
+
     bool isEquipementFull();
-    Objet** getEquipement();
-    void setEquipement(int, Objet*);
+    std::vector<Objet*> getEquipement();
+    void addToEquipement(Objet*);
+    void removeFromEquipement(int);
 
     void setSante(int);
     void setHabilete(int);

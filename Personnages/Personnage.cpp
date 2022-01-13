@@ -9,12 +9,6 @@ using namespace std;
 
 Personnage::Personnage(string n, int aP, int aM, int rP, int rM) : nom(n), attaquePhysique(aP), attaqueMagique(aM),
                                                                    resistanceMagique(rM), resistancePhysique(rP) {
-    for (int i = 0; i < TAILLE_SAC; i++) {
-        sac[i] = nullptr;
-    }
-    for (int i = 0; i < 2; i++) {
-        equipement[i] = nullptr;
-    }
 }
 
 //TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
@@ -45,12 +39,16 @@ string Personnage::getStats() {
     return stat;
 }
 
-Objet **Personnage::getSac() {
+vector<Objet*> Personnage::getSac() {
     return this->sac;
 }
 
-void Personnage::setSac(int index, Objet *o) {
-    this->sac[index] = o;
+void Personnage::addToSac(Objet *o) {
+    this->sac.push_back(o);
+}
+
+void Personnage::removeFromSac(int i){
+    sac.erase(sac.begin() + i);
 }
 
 ostream &operator<<(ostream &out, Personnage *personnage) {
@@ -67,25 +65,25 @@ ostream &operator<<(ostream &out, Personnage *personnage) {
 }
 
 bool Personnage::isSacFull() {
-    for (int i = 0; i < TAILLE_SAC; i++) {
-        if (this->sac[i] == nullptr) return false;
-    }
-    return true;
+    if(this->sac.size() == TAILLE_SAC) return true;
+    return false;
 }
 
 bool Personnage::isEquipementFull() {
-    for (int i = 0; i < TAILLE_SAC; i++) {
-        if (this->equipement[i] == nullptr) return false;
-    }
-    return true;
+    if(this->sac.size() == TAILLE_EQ) return true;
+    return false;
 }
 
-Objet **Personnage::getEquipement() {
+vector<Objet*> Personnage::getEquipement() {
     return this->equipement;
 }
 
-void Personnage::setEquipement(int index, Objet *o) {
-    this->equipement[index] = o;
+void Personnage::addToEquipement(Objet *o) {
+    this->equipement.push_back(o);
+}
+
+void Personnage::removeFromEquipement(int i){
+    equipement.erase(equipement.begin() + i);
 }
 
 void Personnage::setSante(int n) {
