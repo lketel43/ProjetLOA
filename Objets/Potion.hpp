@@ -21,6 +21,7 @@ class Potion: public Objet{
         float getBoost() const;
         std::string getType() const;
         void display() const override;
+        std::string toString() const override;
 
 };
 

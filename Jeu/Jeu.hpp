@@ -53,9 +53,9 @@ private:
     friend class Clef;
 
     void tour(Joueur *);
-//    void checkBag(Joueur*);
-//    void pickUpObjects(Joueur*);
-//    void startBattle(Joueur*);
+    void checkBag(Joueur*);
+    void pickUpObjects(Joueur*);
+    void startBattle(Joueur*);
     void endTurn(Joueur*);
 
 public:

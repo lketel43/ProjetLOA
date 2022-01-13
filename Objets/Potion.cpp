@@ -21,3 +21,8 @@ void Potion::display() const {
                        "\nBoost: " + type + " " + ((boost > 0) ? "+" : "") + to_string(boost) + "\n");
 
 }
+
+string Potion::toString() const{
+    return "Nom: " + nom + "\nRareté:" + to_string(rarete) +
+           "\nBoost: " + type + " " + ((boost > 0) ? "+" : "") + to_string(boost) + "\n";
+}

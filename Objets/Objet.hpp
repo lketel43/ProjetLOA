@@ -26,6 +26,7 @@ public:
     bool isEquipable();
     bool isUtilisable();
     virtual void display() const =0;
+    virtual std::string toString() const =0;
 };
 
 

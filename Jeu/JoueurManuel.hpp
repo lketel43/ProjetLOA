@@ -5,6 +5,9 @@
 
 class JoueurManuel : public Joueur {
 
+public:
+    JoueurManuel(std::string, Personnage*);
+
 };
 
 #endif 

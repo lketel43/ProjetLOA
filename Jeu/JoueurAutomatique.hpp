@@ -4,7 +4,8 @@
 #include "Joueur.hpp"
 
 class JoueurAutomatique : public Joueur{
-    
+public:
+    JoueurAutomatique(std::string, Personnage*);
 };
 
 #endif 

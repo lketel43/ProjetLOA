@@ -11,6 +11,8 @@
 #include "../Objets/Clef.hpp"
 #include "../Objets/Potion.hpp"
 #include "../Utilities/Utilities.cpp"
+#include "JoueurAutomatique.hpp"
+#include "JoueurManuel.hpp"
 
 using namespace std;
 
@@ -179,8 +181,12 @@ void Jeu::initJoueurs() {
         utilities::display("Le joueur " + name + " a choisi un(e) "
                            + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
-        joueurs.push_back(new Joueur(name, forge(choice - 1), (i + 1 > nombreJoueurNonAutomatise)));
-
+        if (i + 1 > nombreJoueurNonAutomatise) {
+            joueurs.push_back(new JoueurAutomatique(name, forge(choice - 1)));
+        }
+        else{
+            joueurs.push_back(new JoueurManuel(name, forge(choice-1)));
+        }
     }
 
 }
@@ -332,7 +338,7 @@ void Jeu::tour(Joueur *joueur) {
         int choice;
         do {
             utilities::display("Que voulez-vous faire?\n");
-            utilities::display("1. Consulter votre sac et votre équipement.\n");
+            utilities::display("1. Consulter/modifier votre sac et votre équipement.\n");
             utilities::display("2. Ramasser des objets.\n");
             utilities::display("3. Commencer un combat. \n");
             utilities::display("4. Finir votre tour. \n");
@@ -362,6 +368,7 @@ void Jeu::tour(Joueur *joueur) {
 
 
 }
+
 
 void Jeu::endTurn(Joueur *joueur) {
     pair<int, int> position = joueur->getPosition();

@@ -16,9 +16,15 @@ void Clef::utiliser(Jeu* jeu, Joueur * joueur, int x, int y) {
 
 void Clef::display() const {
 
-    utilities::display("Nom: " + nom + "\nRareté: " + to_string(rarete) + "\nDescription: " + description + "\n");
+    utilities::display("Nom: " + nom + "\nRareté: " + to_string(rarete)
+    + "\nDescription: " + description + "\n");
 }
 
 Clef *Clef::copy() {
     return new Clef(nom, rarete, description);
+}
+
+string Clef::toString() const {
+    return "Nom: " + nom + "\nRareté: " + to_string(rarete)
+           + "\nDescription: " + description + "\n";
 }

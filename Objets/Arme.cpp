@@ -43,3 +43,10 @@ void Arme::display() const {
 Arme *Arme::copy() {
     return new Arme(nom, rarete, dommagePhysique, dommageMagique, defensePhysique, defenseMagique);
 }
+
+string Arme::toString() const {
+    return "Nom: " + nom + "\nRareté: " + to_string(rarete) + "\nDommage Physique: " + to_string(dommagePhysique) +
+           "\nDommage Magique: " + to_string(dommageMagique) + "\nDéfense Physique:" + to_string(defensePhysique) +
+           "\nDéfense Magique: "
+           + to_string(defenseMagique) + "\n";
+}
