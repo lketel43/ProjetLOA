@@ -11,8 +11,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
     bool continueLooping = false;
     vector<Objet *> sac;
     int choice;
-    vector<pair<Objet *, long unsigned int>> objetsEquippables;
-    vector<pair<Objet *, long unsigned int>> objetsUtilisables;
+    vector<pair<Objet *, long unsigned int> > objetsEquippables;
+    vector<pair<Objet *, long unsigned int> > objetsUtilisables;
     do {
         sac = personnage->getSac();
         if (sac.empty()) {
