@@ -6,7 +6,10 @@
 class JoueurAutomatique : public Joueur{
 public:
     JoueurAutomatique(std::string, Personnage*);
+    //TODO: IMPLEMENT BELOW FUNCTION
     void consulterSacEtEquipement(Jeu*) override;
+    //TODO: IMPLEMENT BELOW FUNCTION
+    void pickUpObjects(Jeu*) override;
 
 };
 

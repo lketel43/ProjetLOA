@@ -37,23 +37,22 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             switch (choice) {
                 case 1:
                     utilities::display("Choisissez l'arme que vous souhaitez mettre dans votre sac.\n");
-                    cin>>choice;
+                    cin >> choice;
                     choice = utilities::validateRange(choice, 1, equipement.size());
                     desequiper(choice - 1);
                     break;
                 case 2:
                     utilities::display("Choisissez l'arme que vous souhaitez jeter.\n");
-                    cin>>choice;
+                    cin >> choice;
                     choice = utilities::validateRange(choice, 1, equipement.size());
                     jeu->placerDansSalle(this->position, equipement[choice - 1]);
                     equipement.erase(equipement.begin() + choice - 1);
                     break;
                 default:
-                    cout<<"ERROR IN CHOICE VALIDATION AND/OR PROCESSING \n";
-
+                    cout << "ERROR IN CHOICE VALIDATION AND/OR PROCESSING \n";
             }
-
-            utilities::display("Voulez-vous:\n1.Continuer à consulter votre équipement\n2.Consulter votresac\n3.Retour\n");
+            utilities::display(
+                    "Voulez-vous:\n1.Continuer à consulter votre équipement\n2.Consulter votresac\n3.Retour\n");
             cin >> choice;
             choice = utilities::validateRange(choice, 1, 3);
             if (choice == 3)
@@ -61,7 +60,7 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             continueLooping = (choice == 1);
         }
 
-    } while ( continueLooping);
+    } while (continueLooping);
 
 }
 
@@ -166,6 +165,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                                 utiliserPotion(dynamic_cast<Potion *>(objetsUtilisables[choice - 1].first));
                                 break;
                         }
+                        //remove item from sac
+                        personnage->removeFromSac(objetsUtilisables[choice - 1].second);
                     }
                     break;
                 case 3:
@@ -177,7 +178,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         utilities::display(to_string(i + 1) + "." + sac[i]->getNom() + "\n");
                     }
                     utilities::display(
-                            to_string(sac.size() + 1) + "Je ne veux plus me débarrasser d'un de mes objets.\n");
+                            to_string(sac.size() + 1) + ".Je ne veux plus me débarrasser d'un de mes objets.\n");
                     cin >> choice;
                     choice = utilities::validateRange(choice, 1, sac.size() + 1);
                     if (choice == sac.size() + 1)
@@ -192,7 +193,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                 default:
                     cout << "ERROR IN CHOICE VALIDATION\n";
             }
-            utilities::display("Voulez-vous:\n1.Continuer à consulter votre sac\n2.Consulter votre équipement\n3.Retour\n");
+            utilities::display(
+                    "Voulez-vous:\n1.Continuer à consulter votre sac\n2.Consulter votre équipement\n3.Retour\n");
             cin >> choice;
             choice = utilities::validateRange(choice, 1, 3);
             if (choice == 3)
@@ -212,6 +214,35 @@ void JoueurManuel::consulterSacEtEquipement(Jeu *jeu) {
         if (consulterSac(jeu))
             return;
     } while (!consulterEquipement(jeu));
+
+
+}
+
+void JoueurManuel::pickUpObjects(Jeu *jeu) {
+    Salle *salle = jeu->getSalle(position);
+    int choice;
+    bool continueLooping = false;
+    do {
+        if (personnage->isSacFull()) {
+            utilities::display("Votre sac est rempli. Veuillez le vider avant de ramasser des objets.\n");
+            return;
+        } else {
+            if (salle->hasNoObjects()) {
+                utilities::display("La salle ne contient pas d'objets.\n");
+                return;
+            }
+            utilities::display("Voici les objets dans la salle:\n");
+            salle->displayObjects();
+            utilities::display("Lequel parmi ceux-ci voulez-vous ramasser?\n");
+            cin >> choice;
+            choice = utilities::validateRange(choice, 1, salle->numOfObjects());
+            ramasser(salle->removeObject(choice - 1));
+        }
+        utilities::display("Maintenant, voulez-vous: \n1.Ramasser un autre objet\n2.Retour\n");
+        cin >> choice;
+        choice = utilities::validateRange(choice, 1, 2);
+        continueLooping = (choice == 1);
+    } while (continueLooping);
 
 
 }

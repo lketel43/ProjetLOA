@@ -37,7 +37,29 @@ void Salle::removePlayer(Joueur *joueur) {
             return;
         }
     }
+}
 
+Objet* Salle::removeObject(int index) {
+    Objet * object = objets[index];
+    objets.erase(objets.begin() + index);
+    return object;
+}
+
+void Salle::displayObjects() const {
+    for (unsigned int i = 0; i < objets.size(); i++) {
+        utilities::display( to_string(i+1) + ".");
+        objets[i]->display();
+        utilities::display("\n");
+    }
+
+}
+
+bool Salle::hasNoObjects() const {
+    return objets.empty();
+}
+
+bool Salle::hasNoOtherPlayers() const {
+    return (joueurs.size() > 1);
 }
 
 void Salle::display() const {
@@ -46,7 +68,7 @@ void Salle::display() const {
     utilities::display("Elle contient les objets suivants:\n");
 
     for (unsigned int i = 0; i < objets.size(); i++) {
-        utilities::display("Objet " + to_string(i) + ":\n");
+        utilities::display("Objet " + to_string(i+1) + ":\n");
         objets[i]->display();
     }
 

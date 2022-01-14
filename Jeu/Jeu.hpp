@@ -10,6 +10,7 @@
 #include "../Objets/ObjectFactory.hpp"
 #include "../Personnages/Personnage.hpp"
 
+
 class Jeu {
 
 private:
@@ -49,8 +50,6 @@ private:
     friend class Clef;
 
     void tour(Joueur *);
-    void checkBag(Joueur*);
-    void pickUpObjects(Joueur*);
     void startBattle(Joueur*);
     void endTurn(Joueur*);
 
@@ -65,6 +64,7 @@ public:
     unsigned int getNumberOfSalles() const;
     void lancePartie();
     void placerDansSalle(std::pair<int,int>, Objet*);
+    Salle* getSalle(std::pair<int, int>) const;
     ~Jeu();
 
     //Makes number of players, number of automatised players and chateau dimensions customizable
@@ -72,6 +72,8 @@ public:
 
 
 };
+
+
 
 
 #endif //PROJETLOA_JEU_HPP

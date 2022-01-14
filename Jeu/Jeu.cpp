@@ -349,7 +349,7 @@ void Jeu::tour(Joueur *joueur) {
                     joueur->consulterSacEtEquipement(this);
                     break;
                 case 2:
-//                    pickUpObjects(joueur);
+                    joueur->pickUpObjects(this);
                     break;
                 case 3:
 //                    startBattle(joueur);
@@ -368,15 +368,6 @@ void Jeu::tour(Joueur *joueur) {
 
 }
 
-
-//TODO: NOT DONE!!!!!
-void Jeu::checkBag(Joueur *joueur) {
-    //TODO: add things to organize bag
-
-
-
-
-}
 
 void Jeu::endTurn(Joueur *joueur) {
     pair<int, int> position = joueur->getPosition();
@@ -427,4 +418,13 @@ pair<int, int> Jeu::getSallePosition(int &num) const {
 
 void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
     chateau->placeDansSalle(position, objet);
+}
+
+Salle *Jeu::getSalle(std::pair<int, int> position) const {
+    if (position.first > chateau->width || position.second > chateau->length) {
+        cout << "ERROR WITH SALLE COORDINATES\n";
+        return nullptr;
+    }
+    return chateau->map[position.first][position.second];
+
 }

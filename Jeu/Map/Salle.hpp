@@ -29,6 +29,10 @@ public:
     void addPlayer(Joueur*);
     void removePlayer(Joueur*);
     void placeObject(Objet*);
+    Objet* removeObject(int);
+    void displayObjects() const;
+    bool hasNoObjects() const;
+    bool hasNoOtherPlayers() const;
     void display() const;
     Salle* nord() const;
     Salle* sud() const;

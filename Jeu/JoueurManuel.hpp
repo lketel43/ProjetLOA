@@ -13,6 +13,7 @@ private:
 public:
     JoueurManuel(std::string, Personnage*);
     void consulterSacEtEquipement(Jeu*) override;
+    void pickUpObjects(Jeu*) override;
 
 
 };

@@ -42,6 +42,7 @@ public:
     void utiliserPotion(Potion*);
     Objet* jeterDeSac(int index);
     virtual void consulterSacEtEquipement(Jeu*)=0;
+    virtual void pickUpObjects(Jeu*)=0;
 
 };
 

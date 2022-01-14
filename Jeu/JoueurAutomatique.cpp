@@ -5,3 +5,7 @@ JoueurAutomatique::JoueurAutomatique(std::string _name, Personnage * _personnage
 void JoueurAutomatique::consulterSacEtEquipement(Jeu *) {
 
 }
+
+void JoueurAutomatique::pickUpObjects(Jeu *) {
+
+}

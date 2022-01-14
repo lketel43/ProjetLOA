@@ -53,9 +53,9 @@ bool Joueur::isAutomatise() const {
 
 void Joueur::ramasser(Objet *o) {
     if (this->personnage->isSacFull()) {
-        cout << "Sac plein, veuillez jeter un objet.\n";
+        utilities::display("Sac plein, veuillez jeter un objet.\n");
     } else {
-        this->personnage->addToEquipement(o);
+        this->personnage->addToSac(o);
     }
 }
 
