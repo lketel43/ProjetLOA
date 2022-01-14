@@ -6,8 +6,10 @@
 #define PROJETLOA_CLEF_HPP
 
 #include "Objet.hpp"
-#include "../Jeu/Joueur.hpp"
 #include "../Jeu/Jeu.hpp"
+
+
+class Joueur;
 
 class Clef : public Objet {
 

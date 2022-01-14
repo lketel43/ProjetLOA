@@ -9,7 +9,7 @@ using namespace std;
 
 Arme::Arme(std::string _nom, int _rarete, float _dommagePhysique, float _dommageMagique, float _defensePhysique,
            float _defenseMagique) :
-        Objet::Objet(_nom, _rarete, true, false, 0),
+        Objet::Objet(_nom, _rarete, true, false, IDTYPE_ARME),
         dommagePhysique(_dommagePhysique), dommageMagique(_dommageMagique),
         defensePhysique(_defensePhysique), defenseMagique(_defenseMagique) {
 

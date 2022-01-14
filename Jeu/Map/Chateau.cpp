@@ -22,6 +22,21 @@ Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
     initializeDirections();
 }
 
+
+pair<int, int> Chateau::getSalleCoordinates(int & num) const {
+    pair<int, int> pair1;
+    if(map[num/length][num%length]->getId()!= num){
+        cout<<"ERROR IN FETCHING PROPER SALLE COORDINATES\n";
+        pair1.first = -1;
+        pair1.second = -1;
+    }
+    else {
+        pair1.first = num/length;
+        pair1.second = num%length;
+    }
+    return pair1;
+}
+
 void Chateau::initializeDirections() {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < length; j++) {

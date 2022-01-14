@@ -29,6 +29,7 @@ public:
     std::pair<int, int> getEmptiestRoom();
     void display();
     void display(Joueur*);
+    std::pair<int,int> getSalleCoordinates(int&) const;
 
     //TODO: make destructor that deletes all the salles
 

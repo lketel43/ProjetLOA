@@ -347,7 +347,7 @@ void Jeu::tour(Joueur *joueur) {
             //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
-//                    checkBag(joueur);
+                    checkBag(joueur);
                     break;
                 case 2:
 //                    pickUpObjects(joueur);
@@ -369,6 +369,13 @@ void Jeu::tour(Joueur *joueur) {
 
 }
 
+
+//TODO: NOT DONE!!!!!
+void Jeu::checkBag(Joueur *joueur) {
+    //TODO: add things to organize bag
+
+
+}
 
 void Jeu::endTurn(Joueur *joueur) {
     pair<int, int> position = joueur->getPosition();
@@ -402,4 +409,17 @@ void Jeu::endTurn(Joueur *joueur) {
 // TODO; FINISH
     }
     utilities::display("Fin de tour pour le Joueur " + joueur->getName() + "\n");
+}
+
+void Jeu::displayMap(Joueur * joueur) const{
+    chateau->display(joueur);
+
+}
+
+unsigned int Jeu::getNumberOfSalles() const {
+    return chateau->width * chateau->length;
+}
+
+pair<int, int>  Jeu::getSallePosition(int & num) const {
+    return chateau->getSalleCoordinates(num);
 }

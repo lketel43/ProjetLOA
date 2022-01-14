@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Clef::Clef(std::string _nom, int _rarete, string _description) : Objet(_nom, _rarete, false, true, 2),
+Clef::Clef(std::string _nom, int _rarete, string _description) : Objet(_nom, _rarete, false, true, IDTYPE_CLEF),
                                                                  description(_description) {}
 
 void Clef::utiliser(Jeu* jeu, Joueur * joueur, int x, int y) {

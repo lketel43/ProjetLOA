@@ -96,7 +96,7 @@ void Personnage::setHabilete(int n) {
     this->habilite += n;
 }
 
-void Personnage::setAttatquePhysique(int n) {
+void Personnage::setAttaquePhysique(int n) {
     this->attaquePhysique += n;
 }
 

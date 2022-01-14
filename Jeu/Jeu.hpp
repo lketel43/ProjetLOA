@@ -64,6 +64,9 @@ public:
     //nombreDeJoueurs = 5
     //Chateau (4,4)
     Jeu();
+    std::pair<int, int> getSallePosition(int&) const;
+    void displayMap(Joueur*) const;
+    unsigned int getNumberOfSalles() const;
     void lancePartie();
     ~Jeu();
 

@@ -4,9 +4,16 @@
 #include "Joueur.hpp"
 
 class JoueurManuel : public Joueur {
+    friend class Jeu;
+private:
+    void consulterEquipement();
+    bool consulterSac(Jeu *);
+
 
 public:
     JoueurManuel(std::string, Personnage*);
+    void consulterSacEtEquipement(Jeu*) override;
+
 
 };
 

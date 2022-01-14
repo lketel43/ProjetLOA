@@ -6,6 +6,8 @@
 class JoueurAutomatique : public Joueur{
 public:
     JoueurAutomatique(std::string, Personnage*);
+    void consulterSacEtEquipement(Jeu*) override;
+
 };
 
 #endif 
