@@ -7,7 +7,8 @@
 
 #include <vector>
 #include "../../Objets/Objet.hpp"
-#include "../Joueur.hpp"
+
+class Joueur;
 
 class Salle {
 

@@ -375,6 +375,7 @@ void Jeu::checkBag(Joueur *joueur) {
     //TODO: add things to organize bag
 
 
+
 }
 
 void Jeu::endTurn(Joueur *joueur) {
@@ -391,7 +392,7 @@ void Jeu::endTurn(Joueur *joueur) {
     if (choice == 1) {
         utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
         utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
-        chateau->display(joueur);
+        chateau->display(joueur->getPosition());
 
         if (salle->nord() != nullptr)
             directions += to_string(salle->nord()->getId()) + ",";
@@ -412,7 +413,7 @@ void Jeu::endTurn(Joueur *joueur) {
 }
 
 void Jeu::displayMap(Joueur * joueur) const{
-    chateau->display(joueur);
+    chateau->display(joueur->getPosition());
 
 }
 

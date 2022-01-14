@@ -5,14 +5,10 @@
 #ifndef PROJETLOA_JEU_HPP
 #define PROJETLOA_JEU_HPP
 
-#include "../Personnages/Personnage.hpp"
-#include "../Objets/Objet.hpp"
-#include "Joueur.hpp"
 #include "vector"
 #include "Map/Chateau.hpp"
 #include "../Objets/ObjectFactory.hpp"
-
-
+#include "../Personnages/Personnage.hpp"
 
 class Jeu {
 

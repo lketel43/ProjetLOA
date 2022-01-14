@@ -132,6 +132,6 @@ void JoueurManuel::consulterSacEtEquipement(Jeu *jeu) {
     //Si le joueur a choisi de retourner au menu completement
     if (consulterSac(jeu))
         return;
-    else consulterEquipement();
+//    else consulterEquipement();
 }
 

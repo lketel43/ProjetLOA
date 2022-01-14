@@ -134,8 +134,7 @@ void Chateau::display() {
     cout << "----------------------------------" << endl;
 }
 
-void Chateau::display(Joueur *joueur) {
-    pair<int, int> position = joueur->getPosition();
+void Chateau::display( pair<int, int> position) {
     int salleId = map[position.first][position.second]->getId();
     int currSalleId;
 

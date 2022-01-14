@@ -4,6 +4,7 @@
 
 #include "Salle.hpp"
 #include "../../Utilities/Utilities.cpp"
+#include "../Joueur.hpp"
 
 using namespace std;
 
