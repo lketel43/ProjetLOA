@@ -1,5 +1,6 @@
 #include "JoueurManuel.hpp"
 #include "../Utilities/Utilities.cpp"
+#include "../Objets/Potion.hpp"
 
 
 JoueurManuel::JoueurManuel(std::string _name, Personnage* _personnage): Joueur(_name, _personnage, false){
@@ -38,7 +39,13 @@ void JoueurManuel::tourCombat(Joueur* j){
             }
             while(this->personnage->getSac()[choice]->getIdType() != 1);
             utilities::display("Vous avez choisi d'utiliser l'objet " + this->personnage->getSac()[choice]->getNom());
-            this->utiliserPotion(this->personnage->getSac()[choice]); // GERER POTION DE POISON
+            if(!(dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getPoison()){ //Si ce n'est pas une potion de poison
+                this->utiliserPotion(dynamic_cast<Potion*>(this->personnage->getSac()[choice]));
+            }
+            else{
+                j->getPersonnage()->subitAttaque((dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getBoost());
+            }
         }
     }
+    utilities::display("C'est la fin de votre tour\n");
 }

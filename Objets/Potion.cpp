@@ -6,7 +6,9 @@
 #include "../Utilities/Utilities.cpp"
 using namespace std;
 
-Potion::Potion(std::string _nom, int _rarete, float _boost, std::string _type): Objet::Objet(_nom, _rarete, false, true, 1), boost(_boost), type(_type){}
+Potion::Potion(std::string _nom, int _rarete, float _boost, std::string _type): Objet::Objet(_nom, _rarete, false, true, 1), boost(_boost), 
+                                                                                type(_type), poison(_boost < 0){
+}
 
 std::string Potion::getType() const{
     return this->type;
@@ -25,4 +27,8 @@ void Potion::display() const {
 string Potion::toString() const{
     return "Nom: " + nom + "\nRareté:" + to_string(rarete) +
            "\nBoost: " + type + " " + ((boost > 0) ? "+" : "") + to_string(boost) + "\n";
+}
+
+bool Potion::getPoison() const{
+    return this->poison;
 }
