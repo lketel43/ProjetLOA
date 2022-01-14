@@ -42,6 +42,7 @@ public:
 
     std::string getStats();
     std::string getName();
+    int getSante() const;
 
     std::vector<Objet*> getSac();
     void addToSac(Objet*);

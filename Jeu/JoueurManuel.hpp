@@ -8,7 +8,7 @@ class JoueurManuel : public Joueur {
 
 public:
     JoueurManuel(std::string, Personnage*);
-    void tourCombat(Joueur*);
+    void tourCombat(const Joueur*) const override;
 
 };
 

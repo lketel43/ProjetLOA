@@ -26,6 +26,10 @@ string Personnage::getName() {
     return nom;
 }
 
+int Personnage::getSante() const{
+    return this->sante;
+}
+
 string Personnage::getStats() {
     string stat;
     stat = "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";

@@ -11,6 +11,7 @@
 #include "vector"
 #include "Map/Chateau.hpp"
 #include "../Objets/ObjectFactory.hpp"
+#include "Combat.hpp"
 
 
 

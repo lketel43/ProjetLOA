@@ -28,7 +28,7 @@ std::string Joueur::getName() const{
     return nom;
 }
 
-Personnage* Joueur::getPersonnage(){
+Personnage* Joueur::getPersonnage() const{
     return this->personnage;
 }
 
@@ -99,7 +99,7 @@ void Joueur::utiliserClef(Clef *c, Jeu *jeu){
     }
 }
 
-void Joueur::utiliserPotion(Potion *p){
+void Joueur::utiliserPotion(Potion *p) const{
     if(!p->isUtilisable()){
         cout << "Cet objet n'est pas utilisable.\n";
         return;

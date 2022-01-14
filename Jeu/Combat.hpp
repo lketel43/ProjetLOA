@@ -12,8 +12,8 @@ class Combat{
         Combat(Joueur*, Joueur*);
         void tour();
         void commencerCombat();
-        static int calculDegatsPhysique();
-        int calculDegatsMagique();
+        static int calculDegatsPhysique(const Joueur*, const Joueur*);
+        static int calculDegatsMagique(const Joueur*, const Joueur*);
 };
 
 #endif

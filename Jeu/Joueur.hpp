@@ -29,7 +29,7 @@ public:
     std::string getName() const;
     //bool updateScore();
     //int getScore() const;
-    Personnage* getPersonnage();
+    Personnage* getPersonnage() const;
     bool isAutomatise() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
@@ -39,10 +39,10 @@ public:
     void desequipper(int index);
     Objet* jeterDeEquipement(int index);
     void utiliserClef(Clef*, Jeu*);
-    void utiliserPotion(Potion*);
+    void utiliserPotion(Potion*) const;
     Objet* jeterDeSac(int index);
 
-    virtual void tourCombat(Joueur*) = 0;
+    virtual void tourCombat(const Joueur*) const = 0;
 
 
 

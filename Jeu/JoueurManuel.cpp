@@ -7,7 +7,7 @@ JoueurManuel::JoueurManuel(std::string _name, Personnage* _personnage): Joueur(_
 
 }
 
-void JoueurManuel::tourCombat(Joueur* j){
+void JoueurManuel::tourCombat(const Joueur* j) const{
     utilities::display("C'est votre tour de jouer.\n");
     utilities::display("Voulez-vous :\n");
     utilities::display("1. attaquer\n");
@@ -16,14 +16,16 @@ void JoueurManuel::tourCombat(Joueur* j){
     std::cin >> choice;
     choice = utilities::validateRange(choice, 1,2);
     if(choice == 1){
-        int degats = Combat::calculDegatsPhysique();
-        j->getPersonnage()->subitAttaque(degats);
+        int degatsP = Combat::calculDegatsPhysique(this, j);
+        int degatsM = Combat::calculDegatsMagique(this, j);
+        j->getPersonnage()->subitAttaque(degatsP + degatsM);
     }
     if(choice == 2){
         if(this->personnage->getSac().empty()){
             utilities::display("Votre sac est vide, vous attaquez donc votre adversaire\n");
-            int degats = Combat::calculDegatsPhysique();
-            j->getPersonnage()->subitAttaque(degats);
+            int degatsP = Combat::calculDegatsPhysique(this, j);
+            int degatsM = Combat::calculDegatsMagique(this, j);
+            j->getPersonnage()->subitAttaque(degatsP + degatsM);
         }
         else{
             utilities::display("Votre sac contient les objets suivants, lequel voulez-vous utiliser ?\n");
