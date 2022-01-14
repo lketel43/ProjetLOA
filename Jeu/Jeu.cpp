@@ -251,8 +251,9 @@ void Jeu::lancePartie() {
     placeJoueurs();
     placeObjets();
 
-    Combat* c = new Combat(joueurs[0], joueurs[1]);
-    c->commencerCombat();
+    //Combat* c = new Combat(joueurs[0], joueurs[1]);
+    //c->commencerCombat();
+    // TEST COMBAT
 
     for (int i = 0; i < joueurs.size(); i++) {
         tour(joueurs[i]);
