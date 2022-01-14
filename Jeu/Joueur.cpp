@@ -71,14 +71,15 @@ void Joueur::equiper(Objet *o) {
     }
 }
 
-void Joueur::desequipper(int index) {
+void Joueur::desequiper(int index) {
     if (this->personnage->isSacFull()) {
-        cout << "Sac plein veuillez vider votre sac, ou jeter l'objet.\n";
+        utilities::display("Votre sac est plein. Veuillez vider votre sac, ou jeter l'objet.\n");
         return;
     }
     Objet *o = this->personnage->getEquipement()[index];
     this->personnage->removeFromEquipement(index);
     this->personnage->addToSac(o);
+    utilities::display("Cette arme est maintenant dans votre sac\n");
 }
 
 Objet *Joueur::jeterDeEquipement(int index) {

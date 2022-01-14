@@ -7,6 +7,66 @@ JoueurManuel::JoueurManuel(std::string _name, Personnage *_personnage) : Joueur(
 }
 
 //return true if we need to exit the bigger function
+bool JoueurManuel::consulterEquipement(Jeu *jeu) {
+    vector<Objet *> equipement;
+    int choice;
+    bool continueLooping = false;
+
+    do {
+        equipement = personnage->getEquipement();
+        if (equipement.empty()) {
+            utilities::display("Vous n'avez aucun équipement.\n");
+            utilities::display("Essayez de vous équiper d'une des armes dans votre sac.\n");
+            utilities::display("Voulez-vous revenir au menu des choix possible, ou consulter votre sac?\n");
+            utilities::display("1.Consulter sac\n2.Retour au menu\n");
+            cin >> choice;
+            choice = utilities::validateRange(choice, 1, 2);
+            return (choice == 2);
+        } else {
+            utilities::display("Vous êtes équipé de:\n");
+            for (long unsigned int i = 0; i < equipement.size(); i++) {
+                utilities::display(to_string(i + 1) + "." + equipement[i]->toString());
+            }
+            utilities::display("Que voulez-vous faire?\n");
+            utilities::display(
+                    "1.Vous déséquiper d'une de vos armes et la mettre dans votre sac\n2.Jeter une de vos armes\n3.Consulter sac\n4.Retour\n");
+            cin >> choice;
+            choice = utilities::validateRange(choice, 1, 4);
+            if (choice > 2)
+                return (choice == 4);
+            switch (choice) {
+                case 1:
+                    utilities::display("Choisissez l'arme que vous souhaitez mettre dans votre sac.\n");
+                    cin>>choice;
+                    choice = utilities::validateRange(choice, 1, equipement.size());
+                    desequiper(choice - 1);
+                    break;
+                case 2:
+                    utilities::display("Choisissez l'arme que vous souhaitez jeter.\n");
+                    cin>>choice;
+                    choice = utilities::validateRange(choice, 1, equipement.size());
+                    jeu->placerDansSalle(this->position, equipement[choice - 1]);
+                    equipement.erase(equipement.begin() + choice - 1);
+                    break;
+                default:
+                    cout<<"ERROR IN CHOICE VALIDATION AND/OR PROCESSING \n";
+
+            }
+
+            utilities::display("Voulez-vous:\n1.Continuer à consulter votre équipement\n2.Consulter votresac\n3.Retour\n");
+            cin >> choice;
+            choice = utilities::validateRange(choice, 1, 3);
+            if (choice == 3)
+                return true;
+            continueLooping = (choice == 1);
+        }
+
+    } while ( continueLooping);
+
+}
+
+
+//return true if we need to exit the bigger function
 bool JoueurManuel::consulterSac(Jeu *jeu) {
     bool continueLooping = false;
     vector<Objet *> sac;
@@ -35,9 +95,9 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             utilities::display(
                     "Voulez-vous: \n");
             utilities::display(
-                    "1.Vous équiper d'une nouvelle arme\n2.Utiliser un objet\n3.Consulter équipement\n4.Retour\n");
+                    "1.Vous équiper d'une nouvelle arme\n2.Utiliser un objet\n3.Consulter équipement\n4.Vous débarasser d'un objet dans votre sac\n5.Retour\n");
             cin >> choice;
-            choice = utilities::validateRange(choice, 1, 4);
+            choice = utilities::validateRange(choice, 1, 5);
             switch (choice) {
                 case 1:
                     objetsEquippables.clear();
@@ -111,11 +171,28 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                 case 3:
                     return false;
                 case 4:
+                    utilities::display("Vous avez choisi de vous débarrasser d'un de vos objets.\n");
+                    utilities::display("Lequel des objets choisissez-vous?\n");
+                    for (long unsigned int i = 0; i < sac.size(); i++) {
+                        utilities::display(to_string(i + 1) + "." + sac[i]->getNom() + "\n");
+                    }
+                    utilities::display(
+                            to_string(sac.size() + 1) + "Je ne veux plus me débarrasser d'un de mes objets.\n");
+                    cin >> choice;
+                    choice = utilities::validateRange(choice, 1, sac.size() + 1);
+                    if (choice == sac.size() + 1)
+                        break;
+                    else {
+                        jeu->placerDansSalle(this->position, sac[choice - 1]);
+                        sac.erase(sac.begin() + choice - 1);
+                    }
+
+                case 5:
                     return true;
                 default:
                     cout << "ERROR IN CHOICE VALIDATION\n";
             }
-            utilities::display("Voulez-vous:\n1.Reconsulter sac\n2.Consulter équipement\n3.Retour\n");
+            utilities::display("Voulez-vous:\n1.Continuer à consulter votre sac\n2.Consulter votre équipement\n3.Retour\n");
             cin >> choice;
             choice = utilities::validateRange(choice, 1, 3);
             if (choice == 3)
@@ -127,11 +204,15 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
 
 }
 
+
 void JoueurManuel::consulterSacEtEquipement(Jeu *jeu) {
     utilities::display("Vous avez choisi de consulter votre sac et votre équipement.\n");
     //Si le joueur a choisi de retourner au menu completement
-    if (consulterSac(jeu))
-        return;
-//    else consulterEquipement();
+    do {
+        if (consulterSac(jeu))
+            return;
+    } while (!consulterEquipement(jeu));
+
+
 }
 

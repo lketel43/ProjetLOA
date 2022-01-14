@@ -6,7 +6,7 @@
 class JoueurManuel : public Joueur {
     friend class Jeu;
 private:
-    void consulterEquipement();
+    bool consulterEquipement(Jeu*);
     bool consulterSac(Jeu *);
 
 

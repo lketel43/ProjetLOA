@@ -183,9 +183,8 @@ void Jeu::initJoueurs() {
 
         if (i + 1 > nombreJoueurNonAutomatise) {
             joueurs.push_back(new JoueurAutomatique(name, forge(choice - 1)));
-        }
-        else{
-            joueurs.push_back(new JoueurManuel(name, forge(choice-1)));
+        } else {
+            joueurs.push_back(new JoueurManuel(name, forge(choice - 1)));
         }
     }
 
@@ -347,7 +346,7 @@ void Jeu::tour(Joueur *joueur) {
             //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
-                    checkBag(joueur);
+                    joueur->consulterSacEtEquipement(this);
                     break;
                 case 2:
 //                    pickUpObjects(joueur);
@@ -373,6 +372,7 @@ void Jeu::tour(Joueur *joueur) {
 //TODO: NOT DONE!!!!!
 void Jeu::checkBag(Joueur *joueur) {
     //TODO: add things to organize bag
+
 
 
 
@@ -412,7 +412,7 @@ void Jeu::endTurn(Joueur *joueur) {
     utilities::display("Fin de tour pour le Joueur " + joueur->getName() + "\n");
 }
 
-void Jeu::displayMap(Joueur * joueur) const{
+void Jeu::displayMap(Joueur *joueur) const {
     chateau->display(joueur->getPosition());
 
 }
@@ -421,6 +421,10 @@ unsigned int Jeu::getNumberOfSalles() const {
     return chateau->width * chateau->length;
 }
 
-pair<int, int>  Jeu::getSallePosition(int & num) const {
+pair<int, int> Jeu::getSallePosition(int &num) const {
     return chateau->getSalleCoordinates(num);
+}
+
+void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
+    chateau->placeDansSalle(position, objet);
 }

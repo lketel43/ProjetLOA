@@ -64,6 +64,7 @@ public:
     void displayMap(Joueur*) const;
     unsigned int getNumberOfSalles() const;
     void lancePartie();
+    void placerDansSalle(std::pair<int,int>, Objet*);
     ~Jeu();
 
     //Makes number of players, number of automatised players and chateau dimensions customizable

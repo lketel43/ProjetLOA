@@ -36,7 +36,7 @@ public:
 
     void ramasser(Objet*);
     void equiper(Objet*);
-    void desequipper(int index);
+    void desequiper(int index);
     Objet* jeterDeEquipement(int index);
     void utiliserClef(Clef*, Jeu*);
     void utiliserPotion(Potion*);
