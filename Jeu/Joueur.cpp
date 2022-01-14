@@ -28,6 +28,10 @@ std::string Joueur::getName() const{
     return nom;
 }
 
+Personnage* Joueur::getPersonnage(){
+    return this->personnage;
+}
+
 bool Joueur::isPlaced() const {
 
     return (position.first != -1 && position.second != -1);

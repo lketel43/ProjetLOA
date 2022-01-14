@@ -3,6 +3,7 @@
 //
 
 #include "Personnage.hpp"
+#include "../Utilities/Utilities.cpp"
 
 using namespace std;
 
@@ -17,12 +18,8 @@ pair<int, int> Personnage::attaque() {
     return pair;
 }
 
-void Personnage::subitAttaque(pair<int, int> &pair) {
-
-    //Prevoie si la resistance  est superieure à l'attaque
-    sante -= ((pair.first - resistancePhysique) > 0) ? pair.first - resistancePhysique : 0;
-    sante -= ((pair.second - resistanceMagique) > 0) ? pair.second - resistanceMagique : 0;
-
+void Personnage::subitAttaque(int d) {
+    this->sante -= d;
 }
 
 string Personnage::getName() {
@@ -67,6 +64,18 @@ ostream &operator<<(ostream &out, Personnage *personnage) {
 bool Personnage::isSacFull() {
     if(this->sac.size() == TAILLE_SAC) return true;
     return false;
+}
+
+void Personnage::displaySac(){
+    if(this->sac.empty()){
+        utilities::display("Votre sac est vide\n");
+    }
+    else{
+        utilities::display("Votre sac contient:\n");
+        for(unsigned int i = 0; i < this->sac.size(); i++){
+            utilities::display(this->sac[i]->getNom() + "\n");
+        }
+    }
 }
 
 bool Personnage::isEquipementFull() {

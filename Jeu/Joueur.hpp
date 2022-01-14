@@ -13,7 +13,7 @@ class Clef;
 class Potion;
 
 class Joueur {
-private:
+protected:
     Personnage * personnage;
     const bool automatise;
     const std::string nom;
@@ -27,8 +27,9 @@ public:
     void setPosition(const int&, const int&);
     //returns true if player is dead
     std::string getName() const;
-    bool updateScore();
-    int getScore() const;
+    //bool updateScore();
+    //int getScore() const;
+    Personnage* getPersonnage();
     bool isAutomatise() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
@@ -40,6 +41,8 @@ public:
     void utiliserClef(Clef*, Jeu*);
     void utiliserPotion(Potion*);
     Objet* jeterDeSac(int index);
+
+    virtual void tourCombat(Joueur*) = 0;
 
 
 

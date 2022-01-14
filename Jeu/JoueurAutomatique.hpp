@@ -6,6 +6,7 @@
 class JoueurAutomatique : public Joueur{
 public:
     JoueurAutomatique(std::string, Personnage*);
+    void tourCombat(Joueur*);
 };
 
 #endif 

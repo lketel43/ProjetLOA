@@ -38,7 +38,7 @@ public:
     std::pair<int, int> attaque();
 
     //Subit l'attaque <Physique, Magique> indiquée en tenant en compte la resistance du personnage
-    void subitAttaque(std::pair<int, int> &);
+    void subitAttaque(int);
 
     std::string getStats();
     std::string getName();
@@ -47,6 +47,7 @@ public:
     void addToSac(Objet*);
     void removeFromSac(int);
     bool isSacFull();
+    void displaySac();
 
     bool isEquipementFull();
     std::vector<Objet*> getEquipement();
