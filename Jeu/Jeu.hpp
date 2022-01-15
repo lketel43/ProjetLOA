@@ -5,14 +5,12 @@
 #ifndef PROJETLOA_JEU_HPP
 #define PROJETLOA_JEU_HPP
 
-#include "../Personnages/Personnage.hpp"
-#include "../Objets/Objet.hpp"
-#include "Joueur.hpp"
 #include "vector"
 #include "Map/Chateau.hpp"
 #include "../Objets/ObjectFactory.hpp"
 #include "Combat.hpp"
 
+#include "../Personnages/Personnage.hpp"
 
 
 class Jeu {
@@ -54,8 +52,6 @@ private:
     friend class Clef;
 
     void tour(Joueur *);
-    void checkBag(Joueur*);
-    void pickUpObjects(Joueur*);
     void startBattle(Joueur*);
     void endTurn(Joueur*);
 
@@ -65,7 +61,12 @@ public:
     //nombreDeJoueurs = 5
     //Chateau (4,4)
     Jeu();
+    std::pair<int, int> getSallePosition(int&) const;
+    void displayMap(Joueur*) const;
+    unsigned int getNumberOfSalles() const;
     void lancePartie();
+    void placerDansSalle(std::pair<int,int>, Objet*);
+    Salle* getSalle(std::pair<int, int>) const;
     ~Jeu();
 
     //Makes number of players, number of automatised players and chateau dimensions customizable
@@ -73,6 +74,8 @@ public:
 
 
 };
+
+
 
 
 #endif //PROJETLOA_JEU_HPP

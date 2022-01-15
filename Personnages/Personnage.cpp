@@ -99,7 +99,7 @@ void Personnage::displaySac(){
 }
 
 bool Personnage::isEquipementFull() {
-    if(this->sac.size() == TAILLE_EQ) return true;
+    if(this->equipement.size() == TAILLE_EQ) return true;
     return false;
 }
 
@@ -125,7 +125,7 @@ void Personnage::setHabilete(int n) {
     this->habilite += n;
 }
 
-void Personnage::setAttatquePhysique(int n) {
+void Personnage::setAttaquePhysique(int n) {
     this->attaquePhysique += n;
 }
 

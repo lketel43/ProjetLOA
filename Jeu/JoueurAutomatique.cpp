@@ -11,3 +11,10 @@ void JoueurAutomatique::tourCombat(const Joueur* j) const{
     utilities::display(this->nom + " vous inflige " + std::to_string(degatsP + degatsM) + " point de dégâts\n");
     utilities::display("Il vous reste " + to_string(j->getPersonnage()->getSante()) + " points de vie\n");
 }
+void JoueurAutomatique::consulterSacEtEquipement(Jeu *) {
+
+}
+
+void JoueurAutomatique::pickUpObjects(Jeu *) {
+
+}

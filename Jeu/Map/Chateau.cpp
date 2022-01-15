@@ -8,7 +8,7 @@ using namespace std;
 Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 
     int count = 0;
-    vector<vector<Salle *>> mapInit;
+    vector<vector<Salle *> > mapInit;
     for (int i = 0; i < w; i++) {
         vector<Salle *> ligne;
         for (int j = 0; j < l; j++) {
@@ -20,6 +20,20 @@ Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
     }
     map = mapInit;
     initializeDirections();
+}
+
+
+pair<int, int> Chateau::getSalleCoordinates(int &num) const {
+    pair<int, int> pair1;
+    if (map[num / length][num % length]->getId() != num) {
+        cout << "ERROR IN FETCHING PROPER SALLE COORDINATES\n";
+        pair1.first = -1;
+        pair1.second = -1;
+    } else {
+        pair1.first = num / length;
+        pair1.second = num % length;
+    }
+    return pair1;
 }
 
 void Chateau::initializeDirections() {
@@ -119,8 +133,7 @@ void Chateau::display() {
     cout << "----------------------------------" << endl;
 }
 
-void Chateau::display(Joueur *joueur) {
-    pair<int, int> position = joueur->getPosition();
+void Chateau::display(pair<int, int> position) {
     int salleId = map[position.first][position.second]->getId();
     int currSalleId;
 
@@ -170,4 +183,12 @@ Chateau::~Chateau() {
             delete map[i][j];
         }
     }
+}
+
+void Chateau::placeDansSalle(std::pair<int, int> salleCoords, Objet *object) {
+    if (salleCoords.first > width || salleCoords.second > length) {
+        cout << "ERROR WITH SALLE COORDINATES\n";
+        return;
+    }
+    map[salleCoords.first][salleCoords.second]->placeObject(object);
 }

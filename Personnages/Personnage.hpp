@@ -61,7 +61,7 @@ public:
 
     void setSante(int);
     void setHabilete(int);
-    void setAttatquePhysique(int);
+    void setAttaquePhysique(int);
     void setAttaqueMagique(int);
     void setResistancePhysique(int);
     void setResistanceMagique(int);

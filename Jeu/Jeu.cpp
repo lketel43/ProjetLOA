@@ -183,9 +183,8 @@ void Jeu::initJoueurs() {
 
         if (i + 1 > nombreJoueurNonAutomatise) {
             joueurs.push_back(new JoueurAutomatique(name, forge(choice - 1)));
-        }
-        else{
-            joueurs.push_back(new JoueurManuel(name, forge(choice-1)));
+        } else {
+            joueurs.push_back(new JoueurManuel(name, forge(choice - 1)));
         }
     }
 
@@ -351,10 +350,10 @@ void Jeu::tour(Joueur *joueur) {
             //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
-//                    checkBag(joueur);
+                    joueur->consulterSacEtEquipement(this);
                     break;
                 case 2:
-//                    pickUpObjects(joueur);
+                    joueur->pickUpObjects(this);
                     break;
                 case 3: {
                     if(salle->emptyEnnemi()){
@@ -401,7 +400,7 @@ void Jeu::endTurn(Joueur *joueur) {
     if (choice == 1) {
         utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
         utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
-        chateau->display(joueur);
+        chateau->display(joueur->getPosition());
 
         if (salle->nord() != nullptr)
             directions += to_string(salle->nord()->getId()) + ",";
@@ -419,4 +418,30 @@ void Jeu::endTurn(Joueur *joueur) {
 // TODO; FINISH
     }
     utilities::display("Fin de tour pour le Joueur " + joueur->getName() + "\n");
+}
+
+void Jeu::displayMap(Joueur *joueur) const {
+    chateau->display(joueur->getPosition());
+
+}
+
+unsigned int Jeu::getNumberOfSalles() const {
+    return chateau->width * chateau->length;
+}
+
+pair<int, int> Jeu::getSallePosition(int &num) const {
+    return chateau->getSalleCoordinates(num);
+}
+
+void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
+    chateau->placeDansSalle(position, objet);
+}
+
+Salle *Jeu::getSalle(std::pair<int, int> position) const {
+    if (position.first > chateau->width || position.second > chateau->length) {
+        cout << "ERROR WITH SALLE COORDINATES\n";
+        return nullptr;
+    }
+    return chateau->map[position.first][position.second];
+
 }

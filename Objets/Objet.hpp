@@ -7,6 +7,10 @@
 
 #include <iostream>
 
+#define IDTYPE_ARME 0
+#define IDTYPE_POTION 1
+#define IDTYPE_CLEF 2
+
 class Objet {
 private:
     friend class ObjectFactory;
@@ -27,6 +31,7 @@ public:
     bool isUtilisable();
     virtual void display() const =0;
     virtual std::string toString() const =0;
+
 };
 
 

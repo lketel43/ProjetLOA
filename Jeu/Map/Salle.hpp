@@ -7,7 +7,8 @@
 
 #include <vector>
 #include "../../Objets/Objet.hpp"
-#include "../Joueur.hpp"
+
+class Joueur;
 
 class Salle {
 
@@ -29,6 +30,10 @@ public:
     void addPlayer(Joueur*);
     void removePlayer(Joueur*);
     void placeObject(Objet*);
+    Objet* removeObject(int);
+    void displayObjects() const;
+    bool hasNoObjects() const;
+    bool hasNoOtherPlayers() const;
     void display() const;
     void displayEnnemi() const;
     int nbEnnemi();

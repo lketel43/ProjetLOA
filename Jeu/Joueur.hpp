@@ -6,21 +6,22 @@
 #define PROJETLOA_JOUEUR_HPP
 
 #include "../Personnages/Personnage.hpp"
+#include "../Objets/Clef.hpp"
+#include "../Objets/Potion.hpp"
 
 class Salle;
 class Jeu;
-class Clef;
-class Potion;
 
 class Joueur {
+private:
+    friend std::ostream& operator<<(std::ostream&, Joueur*);
+
 protected:
     Personnage * personnage;
     const bool automatise;
     const std::string nom;
     std::pair<int, int> position;
     int score;
-    friend std::ostream& operator<<(std::ostream&, Joueur*);
-
 public:
     Joueur(std::string, Personnage*, bool);
     ~Joueur();
@@ -36,7 +37,7 @@ public:
 
     void ramasser(Objet*);
     void equiper(Objet*);
-    void desequipper(int index);
+    void desequiper(int index);
     Objet* jeterDeEquipement(int index);
     void utiliserClef(Clef*, Jeu*);
     void utiliserPotion(Potion*) const;
@@ -46,6 +47,8 @@ public:
 
 
 
+    virtual void consulterSacEtEquipement(Jeu*)=0;
+    virtual void pickUpObjects(Jeu*)=0;
 
 };
 
