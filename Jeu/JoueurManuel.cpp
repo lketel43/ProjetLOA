@@ -185,7 +185,9 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         break;
                     else {
                         jeu->placerDansSalle(this->position, sac[choice - 1]);
-                        sac.erase(sac.begin() + choice - 1);
+                        //TODO: error avec erase
+                        //TODO: error avec equipement; always full
+                        sac.erase(sac.begin() + (choice - 1));
                     }
 
                 case 5:
