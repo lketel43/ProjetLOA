@@ -70,7 +70,7 @@ bool Personnage::isSacFull() {
 }
 
 bool Personnage::isEquipementFull() {
-    if(this->sac.size() == TAILLE_EQ) return true;
+    if(this->equipement.size() == TAILLE_EQ) return true;
     return false;
 }
 
