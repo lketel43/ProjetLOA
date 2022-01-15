@@ -19,6 +19,8 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
         int degatsP = Combat::calculDegatsPhysique(this, j);
         int degatsM = Combat::calculDegatsMagique(this, j);
         j->getPersonnage()->subitAttaque(degatsP + degatsM);
+        utilities::display("Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
+        utilities::display("Il lui reste " + std::to_string(j->getPersonnage()->getSante()) + " points de sante\n");
     }
     if(choice == 2){
         if(this->personnage->getSac().empty()){
@@ -26,6 +28,8 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
             int degatsP = Combat::calculDegatsPhysique(this, j);
             int degatsM = Combat::calculDegatsMagique(this, j);
             j->getPersonnage()->subitAttaque(degatsP + degatsM);
+            utilities::display("Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
+            utilities::display("Il lui reste " + std::to_string(j->getPersonnage()->getSante()) + " points de sante\n");
         }
         else{
             utilities::display("Votre sac contient les objets suivants, lequel voulez-vous utiliser ?\n");

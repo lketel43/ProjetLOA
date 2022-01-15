@@ -23,12 +23,16 @@ public:
     Salle(int);
     ~Salle();
     int getId() const ;
+    std::vector<Joueur*> getJoueur() const;
     int numOfPlayers() const ;
     int numOfObjects() const;
     void addPlayer(Joueur*);
     void removePlayer(Joueur*);
     void placeObject(Objet*);
     void display() const;
+    void displayEnnemi() const;
+    int nbEnnemi();
+    bool emptyEnnemi();
     Salle* nord() const;
     Salle* sud() const;
     Salle* est() const;

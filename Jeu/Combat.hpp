@@ -2,6 +2,7 @@
 #define PROJETLOA_COMBAT_HPP
 
 #include "Joueur.hpp"
+#include "../Objets/Arme.hpp"
 #include <iostream>
 
 class Combat{
@@ -10,7 +11,6 @@ class Combat{
         const Joueur* j2;
     public:
         Combat(Joueur*, Joueur*);
-        void tour();
         void commencerCombat();
         static int calculDegatsPhysique(const Joueur*, const Joueur*);
         static int calculDegatsMagique(const Joueur*, const Joueur*);

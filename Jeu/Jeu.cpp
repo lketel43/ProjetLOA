@@ -356,9 +356,22 @@ void Jeu::tour(Joueur *joueur) {
                 case 2:
 //                    pickUpObjects(joueur);
                     break;
-                case 3:
-//                    startBattle(joueur);
+                case 3: {
+                    if(salle->emptyEnnemi()){
+                        utilities::display("Il n'y a pas d'ennemi ici.\n");
+                        break;
+                    }
+                    // Afficher les perso de la salle
+                    salle->displayEnnemi();  
+                    // Faire le le choix
+                    int choiceEnnemi;
+                    cin >> choiceEnnemi;
+                    choice = utilities::validateRange(choiceEnnemi, 1, salle->nbEnnemi());
+                    // Créer le combat et le lancer
+                    Combat c{joueur, salle->getJoueur()[choiceEnnemi]};
+                    c.commencerCombat();
                     break;
+                }
                 case 4:
                     endTurn(joueur);
                     break;

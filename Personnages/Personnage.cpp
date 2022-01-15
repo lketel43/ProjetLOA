@@ -30,6 +30,22 @@ int Personnage::getSante() const{
     return this->sante;
 }
 
+int Personnage::getAttaquePhysique() const{
+    return this->attaquePhysique;
+}
+
+int Personnage::getAttaqueMagique() const{
+    return this->attaqueMagique;
+}
+
+int Personnage::getResistancePhysique() const{
+    return this->resistancePhysique;
+}
+
+int Personnage::getResistanceMagique() const{
+    return this->resistanceMagique;
+}
+
 string Personnage::getStats() {
     string stat;
     stat = "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";

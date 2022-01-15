@@ -13,14 +13,26 @@ void Combat::commencerCombat(){
     else utilities::display("Le combat est terminé. " + this->j2->getName() + " a perdu.");
 }
 
-void Combat::tour(){
-    
-}
-
 int Combat::calculDegatsPhysique(const Joueur* attaquant, const Joueur* defenseur){
-    return 0;
+    int deg = attaquant->getPersonnage()->getAttaquePhysique();
+    for(unsigned int i = 0; i < attaquant->getPersonnage()->getEquipement().size(); i++){
+        deg += ((dynamic_cast<Arme*>(attaquant->getPersonnage()->getEquipement()[i]))->getDommagePhysique() / 100) * attaquant->getPersonnage()->getAttaquePhysique();
+    }
+    int res = defenseur->getPersonnage()->getResistancePhysique();
+    for(unsigned int i = 0; i < defenseur->getPersonnage()->getEquipement().size(); i++){
+        res += ((dynamic_cast<Arme*>(defenseur->getPersonnage()->getEquipement()[i]))->getDefensePhysique() / 100) * attaquant->getPersonnage()->getResistancePhysique();
+    }
+    return deg / res;
 }
 
 int Combat::calculDegatsMagique(const Joueur* attaquant, const Joueur* defenseur){
-    return 0;
+    int deg = attaquant->getPersonnage()->getAttaqueMagique();
+    for(unsigned int i = 0; i < attaquant->getPersonnage()->getEquipement().size(); i++){
+        deg += ((dynamic_cast<Arme*>(attaquant->getPersonnage()->getEquipement()[i]))->getDommageMagique() / 100) * attaquant->getPersonnage()->getAttaqueMagique();
+    }
+    int res = defenseur->getPersonnage()->getResistanceMagique();
+    for(unsigned int i = 0; i < defenseur->getPersonnage()->getEquipement().size(); i++){
+        res += ((dynamic_cast<Arme*>(defenseur->getPersonnage()->getEquipement()[i]))->getDefenseMagique() / 100) * attaquant->getPersonnage()->getResistanceMagique();
+    }
+    return deg / res;
 }

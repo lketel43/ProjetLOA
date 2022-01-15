@@ -23,6 +23,10 @@ int Salle::getId() const {
     return id;
 }
 
+vector<Joueur*> Salle::getJoueur() const{
+    return this->joueurs;
+}
+
 void Salle::addPlayer(Joueur *j) {
     joueurs.push_back(j);
 
@@ -55,6 +59,23 @@ void Salle::display() const {
         utilities::display("Joueur " + joueurs[i]->getName() +"\n");
 
 
+}
+
+void Salle::displayEnnemi() const{
+    if(joueurs.size() <= 1) return;
+    utilities::display("Les ennemis suivants sont présents\n");
+    for(unsigned int i = 1; i < joueurs.size(); i++){
+        utilities::display(to_string(i) + ". " + joueurs[i]->getPersonnage()->getName() + "\n" + joueurs[i]->getPersonnage()->getStats());
+    }
+}
+
+int Salle::nbEnnemi(){
+    return this->joueurs.size() - 1;
+}
+
+bool Salle::emptyEnnemi(){
+    if(this->joueurs.size() == 1) return true;
+    return false;
 }
 
 void Salle::placeObject(Objet *object) {
