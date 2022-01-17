@@ -40,5 +40,14 @@ namespace utilities {
         sleep_for(seconds(1));
     }
 
+    static int bernouilli(float param){
+        int borne = 1000000;
+        float tirage = (rand() % borne) / borne;
+        if(tirage < param){
+            return 1;
+        }
+        return 0;
+    }
+
 
 }

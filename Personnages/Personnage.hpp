@@ -43,6 +43,7 @@ public:
     std::string getStats();
     std::string getName();
     int getSante() const;
+    int getHabilete() const;
     int getAttaquePhysique() const;
     int getAttaqueMagique() const;
     int getResistancePhysique() const;

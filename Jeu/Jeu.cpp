@@ -13,6 +13,7 @@
 #include "../Utilities/Utilities.cpp"
 #include "JoueurAutomatique.hpp"
 #include "JoueurManuel.hpp"
+#include "Combat.hpp"
 
 using namespace std;
 
@@ -250,8 +251,9 @@ void Jeu::lancePartie() {
     placeJoueurs();
     placeObjets();
 
-    //Combat* c = new Combat(joueurs[0], joueurs[1]);
-    //c->commencerCombat();
+    joueurs[0]->getPersonnage()->setHabilete(90);
+    Combat* c = new Combat(joueurs[0], joueurs[1]);
+    c->commencerCombat();
     // TEST COMBAT
 
     for (int i = 0; i < joueurs.size(); i++) {

@@ -19,7 +19,8 @@ pair<int, int> Personnage::attaque() {
 }
 
 void Personnage::subitAttaque(int d) {
-    this->sante -= d;
+    if(this->sante - d < 0) this->sante = 0;
+    else this->sante -= d;
 }
 
 string Personnage::getName() {
@@ -28,6 +29,10 @@ string Personnage::getName() {
 
 int Personnage::getSante() const{
     return this->sante;
+}
+
+int Personnage::getHabilete() const{
+    return this->habilite;
 }
 
 int Personnage::getAttaquePhysique() const{
@@ -122,7 +127,8 @@ void Personnage::setSante(int n) {
 }
 
 void Personnage::setHabilete(int n) {
-    this->habilite += n;
+    if(this->habilite + n > 100) this->habilite = 100;
+    else this->habilite += n;
 }
 
 void Personnage::setAttaquePhysique(int n) {
@@ -134,11 +140,13 @@ void Personnage::setAttaqueMagique(int n) {
 }
 
 void Personnage::setResistancePhysique(int n) {
-    this->resistancePhysique += n;
+    if(this->resistancePhysique + n > 100) this->resistancePhysique = 100;
+    else this->resistancePhysique += n;
 }
 
 void Personnage::setResistanceMagique(int n) {
-    this->resistanceMagique += n;
+    if(this->resistanceMagique + n > 100) this->resistanceMagique = 100;
+    else this->resistanceMagique += n;
 }
 
 Personnage::~Personnage() {
