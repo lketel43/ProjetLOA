@@ -251,9 +251,9 @@ void Jeu::lancePartie() {
     placeJoueurs();
     placeObjets();
 
-    joueurs[0]->getPersonnage()->setHabilete(90);
-    Combat* c = new Combat(joueurs[0], joueurs[1]);
-    c->commencerCombat();
+    //joueurs[0]->getPersonnage()->setHabilete(90);
+    //Combat* c = new Combat(joueurs[0], joueurs[1]);
+    //c->commencerCombat();
     // TEST COMBAT
 
     for (int i = 0; i < joueurs.size(); i++) {
