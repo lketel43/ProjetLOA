@@ -40,7 +40,7 @@ public:
     void desequiper(int index);
     Objet* jeterDeEquipement(int index);
     void utiliserClef(Clef*, Jeu*);
-    void utiliserPotion(Potion*) const;
+    virtual void utiliserPotion(Potion*) const = 0;
     Objet* jeterDeSac(int index);
 
     virtual void tourCombat(const Joueur*) const = 0;

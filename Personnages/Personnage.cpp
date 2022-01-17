@@ -159,3 +159,30 @@ Personnage::~Personnage() {
             delete equipement[i];
 
 }
+
+Potion* Personnage::hasPotionBoostSante() const{
+    for(unsigned int i = 0; i < this->sac.size(); i++){
+        if(this->sac[i]->getIdType() == IDTYPE_POTION){
+            if(dynamic_cast<Potion*>(this->sac[i])->getType() == "sante") return dynamic_cast<Potion*>(this->sac[i]);
+        }
+    }
+    return nullptr;
+}
+
+Potion* Personnage::hasPotionPoison() const{
+    for(unsigned int i = 0; i < this->sac.size(); i++){
+        if(this->sac[i]->getIdType() == IDTYPE_POTION){
+            if(dynamic_cast<Potion*>(this->sac[i])->getPoison()) return dynamic_cast<Potion*>(this->sac[i]);
+        }
+    }
+    return nullptr;
+}
+
+Potion* Personnage::hasPotionBoost() const{
+    for(unsigned int i = 0; i < this->sac.size(); i++){
+        if(this->sac[i]->getIdType() == IDTYPE_POTION){
+            if(!dynamic_cast<Potion*>(this->sac[i])->getPoison()) return dynamic_cast<Potion*>(this->sac[i]);
+        }
+    }
+    return nullptr;
+}

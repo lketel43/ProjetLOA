@@ -249,6 +249,37 @@ void JoueurManuel::pickUpObjects(Jeu *jeu) {
 
 }
 
+//TODO Gérer disparition des potions de l'inventaire
+void JoueurManuel::utiliserPotion(Potion *p) const{
+    if(!p->isUtilisable()){
+        utilities::display("Cet objet n'est pas utilisable.\n");
+        return;
+    }
+    if (p->getIdType() == IDTYPE_POTION) {
+        utilities::display("Vous avez choisi d'utiliser une potion de type" + p->getType() + ".\n");
+        if (p->getType() == "sante") {
+            this->personnage->setSante(p->getBoost());
+        }
+        if (p->getType() == "habilete") {
+            this->personnage->setHabilete(p->getBoost());
+        }
+        if (p->getType() == "attaquePhysique") {
+            this->personnage->setAttaquePhysique(p->getBoost());
+        }
+        if (p->getType() == "attaqueMagique") {
+            this->personnage->setAttaqueMagique(p->getBoost());
+        }
+        if (p->getType() == "resistancePhysique") {
+            this->personnage->setResistancePhysique(p->getBoost());
+        }
+        if (p->getType() == "resistanceMagique") {
+            this->personnage->setResistanceMagique(p->getBoost());
+        }
+        utilities::display("Voici vos statistiques après cette potion:\n");
+        utilities::display(this->personnage->getStats());
+    }
+}
+
 
 
 void JoueurManuel::tourCombat(const Joueur* j) const{
@@ -293,7 +324,7 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
                 this->utiliserPotion(dynamic_cast<Potion*>(this->personnage->getSac()[choice]));
             }
             else{
-                j->getPersonnage()->subitAttaque((dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getBoost());
+                j->getPersonnage()->subitAttaque((dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getBoost()); //TODO Gérer disparition des potions de l'inventaire
             }
         }
     }

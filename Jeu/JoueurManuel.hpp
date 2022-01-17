@@ -16,6 +16,7 @@ public:
     void tourCombat(const Joueur*) const override;
     void consulterSacEtEquipement(Jeu*) override;
     void pickUpObjects(Jeu*) override;
+    void utiliserPotion(Potion*) const override;
 
 
 };

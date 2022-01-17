@@ -9,6 +9,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
+#include "../Objets/Potion.hpp"
 
 #define MAX_SANTE 100
 #define TAILLE_SAC 4
@@ -66,6 +67,10 @@ public:
     void setAttaqueMagique(int);
     void setResistancePhysique(int);
     void setResistanceMagique(int);
+
+    Potion* hasPotionBoostSante() const;
+    Potion* hasPotionPoison() const;
+    Potion* hasPotionBoost() const;
 
 
 };
