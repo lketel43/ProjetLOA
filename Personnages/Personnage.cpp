@@ -99,8 +99,8 @@ void Personnage::displaySac(){
 }
 
 bool Personnage::isEquipementFull() {
-    if(this->equipement.size() == TAILLE_EQ) return true;
-    return false;
+    if(this->equipement.size() < TAILLE_EQ) return false;
+    return true;
 }
 
 vector<Objet*> Personnage::getEquipement() {

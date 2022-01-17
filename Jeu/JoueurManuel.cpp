@@ -1,6 +1,5 @@
 #include "JoueurManuel.hpp"
 #include "../Utilities/Utilities.cpp"
-#include "../Objets/Potion.hpp"
 
 
 JoueurManuel::JoueurManuel(std::string _name, Personnage *_personnage) : Joueur(_name, _personnage, false) {

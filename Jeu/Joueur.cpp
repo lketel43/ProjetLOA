@@ -115,7 +115,7 @@ void Joueur::utiliserClef(Clef *c, Jeu *jeu) {
 
 void Joueur::utiliserPotion(Potion *p) const{
     if(!p->isUtilisable()){
-        cout << "Cet objet n'est pas utilisable.\n";
+        utilities::display("Cet objet n'est pas utilisable.\n");
         return;
     }
     if (p->getIdType() == IDTYPE_POTION) {
