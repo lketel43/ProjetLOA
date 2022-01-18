@@ -12,12 +12,14 @@ private:
 
 
 public:
-    JoueurManuel(std::string, Personnage*);
+    JoueurManuel(std::string);
+    ~JoueurManuel() override;
     void tourCombat(const Joueur*) const override;
     void consulterSacEtEquipement(Jeu*) override;
     void pickUpObjects(Jeu*) override;
     void utiliserPotion(Potion*) const override;
     void utiliserPotionPosion(Potion*, const Joueur*) const override;
+    int choosePersonnage(std::vector<std::pair<Personnage *, int> >) override;
 
 };
 

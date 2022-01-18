@@ -1,7 +1,9 @@
 #include "JoueurAutomatique.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
-JoueurAutomatique::JoueurAutomatique(std::string _name, Personnage * _personnage): Joueur(_name, _personnage, true) {}
+using namespace std;
+JoueurAutomatique::JoueurAutomatique(std::string _name): Joueur(_name, true) {}
+JoueurAutomatique::~JoueurAutomatique() = default;
 
 void JoueurAutomatique::tourCombat(const Joueur* j) const{
     utilities::display("C'est le tour de " + this->nom + " de joueur\n");
@@ -106,3 +108,14 @@ void JoueurAutomatique::utiliserPotionPosion(Potion* p, const Joueur* j) const {
 }
 
 
+int JoueurAutomatique::choosePersonnage(std::vector<std::pair<Personnage *, int>> personnagesDisponiblesEtFrequences) {
+    int min = personnagesDisponiblesEtFrequences[0].second;
+    unsigned int choice = 1;
+    for (unsigned int i = 1; i < personnagesDisponiblesEtFrequences.size(); i++) {
+        if (min > personnagesDisponiblesEtFrequences[i].second) {
+            min = personnagesDisponiblesEtFrequences[i].second;
+            choice = i + 1;
+        }
+    }
+    return choice;
+}

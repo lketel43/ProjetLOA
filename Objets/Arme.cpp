@@ -3,7 +3,7 @@
 //
 
 #include "Arme.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 using namespace std;
 
@@ -50,3 +50,5 @@ string Arme::toString() const {
            "\nDéfense Magique: "
            + to_string(defenseMagique) + "\n";
 }
+
+Arme::~Arme() = default;

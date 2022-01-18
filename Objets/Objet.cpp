@@ -29,3 +29,5 @@ bool Objet::isUtilisable(){
 int Objet::getIdType() const{
     return this->idType;
 }
+
+Objet::~Objet() = default;

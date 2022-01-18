@@ -6,7 +6,8 @@
 
 class JoueurAutomatique : public Joueur{
 public:
-    JoueurAutomatique(std::string, Personnage*);
+    JoueurAutomatique(std::string);
+    ~JoueurAutomatique() override;
     void tourCombat(const Joueur*) const override;
     //TODO: IMPLEMENT BELOW FUNCTION
     void consulterSacEtEquipement(Jeu*) override;
@@ -14,6 +15,7 @@ public:
     void pickUpObjects(Jeu*) override;
     void utiliserPotion(Potion*) const;
     void utiliserPotionPosion(Potion*, const Joueur*) const override;
+    int choosePersonnage(std::vector<std::pair<Personnage *, int> >) override;
 
 };
 

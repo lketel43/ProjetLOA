@@ -19,17 +19,18 @@ private:
 protected:
     Personnage * personnage;
     const bool automatise;
-    const std::string nom;
+    std::string nom;
     std::pair<int, int> position;
     int score;
 public:
-    Joueur(std::string, Personnage*, bool);
-    ~Joueur();
+    Joueur(std::string, bool);
+    virtual ~Joueur()=0;
 
     void setPosition(const int&, const int&);
     std::string getName() const;
 
     Personnage* getPersonnage() const;
+    void setPersonnage(Personnage*);
     bool isAutomatise() const;
     std::pair<int, int> getPosition() const;
     bool isPlaced() const;
@@ -45,10 +46,9 @@ public:
 
     virtual void tourCombat(const Joueur*) const = 0;
 
-
-
     virtual void consulterSacEtEquipement(Jeu*)=0;
     virtual void pickUpObjects(Jeu*)=0;
+    virtual int choosePersonnage(std::vector<std::pair<Personnage *, int> >)=0;
 
 };
 

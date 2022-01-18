@@ -1,5 +1,5 @@
 #include "Combat.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 Combat::Combat(Joueur* _j1, Joueur* _j2): j1(_j1), j2(_j2) {}
 

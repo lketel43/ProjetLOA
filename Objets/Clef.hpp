@@ -23,6 +23,7 @@ public:
     void utiliser(Jeu *, Joueur *, int x, int y);
     void display() const override;
     std::string toString() const override;
+    ~Clef() override;
 
 
 };

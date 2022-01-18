@@ -8,12 +8,12 @@
 #include "Jeu.hpp"
 #include "../Objets/Clef.hpp"
 #include "../Objets/Potion.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 using namespace std;
 
-Joueur::Joueur(const string name, Personnage *personnage1, const bool autom) : nom(name), personnage(personnage1),
-                                                                               automatise(autom) {
+Joueur::Joueur(const string name, const bool autom) : personnage(nullptr),
+                                                      automatise(autom), nom(name) {
     //Le joueur n'est pas placé encore
     position.first = position.second = -1;
     score = 0;
@@ -32,7 +32,7 @@ std::string Joueur::getName() const {
     return nom;
 }
 
-Personnage* Joueur::getPersonnage() const{
+Personnage *Joueur::getPersonnage() const {
     return this->personnage;
 }
 
@@ -127,4 +127,8 @@ Objet *Joueur::jeterDeSac(int index) {
     Objet *ret = this->personnage->getSac()[index];
     this->personnage->removeFromSac(index);
     return ret;
+}
+
+void Joueur::setPersonnage(Personnage *_personnage) {
+    this->personnage = _personnage;
 }

@@ -3,7 +3,7 @@
 //
 
 #include "Salle.hpp"
-#include "../../Utilities/Utilities.cpp"
+#include "../../Utilities/utilities.hpp"
 #include "../Joueur.hpp"
 
 using namespace std;
@@ -51,7 +51,7 @@ Objet* Salle::removeObject(int index) {
 
 void Salle::displayObjects() const {
     for (unsigned int i = 0; i < objets.size(); i++) {
-        utilities::display( to_string(i+1) + ".");
+        utilities::display(to_string(i + 1) + ".");
         objets[i]->display();
         utilities::display("\n");
     }
@@ -72,14 +72,14 @@ void Salle::display() const {
     utilities::display("Elle contient les objets suivants:\n");
 
     for (unsigned int i = 0; i < objets.size(); i++) {
-        utilities::display("Objet " + to_string(i+1) + ":\n");
+        utilities::display("Objet " + to_string(i + 1) + ":\n");
         objets[i]->display();
     }
 
     utilities::display("Elle contient les joueurs suivants:\n");
 
     for (unsigned int i = 0; i < joueurs.size(); i++)
-        utilities::display("Joueur " + joueurs[i]->getName() +"\n");
+        utilities::display("Joueur " + joueurs[i]->getName() + "\n");
 
 
 }

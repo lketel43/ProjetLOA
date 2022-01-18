@@ -3,13 +3,13 @@
 //
 
 #include "Personnage.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 using namespace std;
 
 
 Personnage::Personnage(string n, int aP, int aM, int rP, int rM) : nom(n), attaquePhysique(aP), attaqueMagique(aM),
-                                                                   resistanceMagique(rM), resistancePhysique(rP) {
+                                                                    resistancePhysique(rP),resistanceMagique(rM) {
 }
 
 //TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
