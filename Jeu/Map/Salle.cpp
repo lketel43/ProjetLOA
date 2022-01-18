@@ -84,12 +84,20 @@ void Salle::display() const {
 
 }
 
-void Salle::displayEnnemi() const{
-    if(joueurs.size() <= 1) return;
-    utilities::display("Les ennemis suivants sont présents\n");
-    for(unsigned int i = 1; i < joueurs.size(); i++){
-        utilities::display(to_string(i) + ". " + joueurs[i]->getPersonnage()->getName() + "\n" + joueurs[i]->getPersonnage()->getStats());
+vector<pair<Joueur*, int> > Salle::displayEnnemi(Joueur* j) const{
+    vector<pair<Joueur*, int> > v;
+    if(joueurs.size() <= 1) return v;
+    for(unsigned int i = 0; i < joueurs.size(); i++){
+        if(joueurs[i] != j){
+            pair<Joueur*, int> p{joueurs[i], i};
+            v.push_back(p);
+        }
     }
+    utilities::display("Les ennemis suivants sont présents\n");
+    for(unsigned int i = 0; i < v.size(); i++){
+        utilities::display(to_string(i) + ". " + v[i].first->getPersonnage()->getName() + "\n" + v[i].first->getPersonnage()->getStats());
+    }
+    return v;
 }
 
 int Salle::nbEnnemi() const{

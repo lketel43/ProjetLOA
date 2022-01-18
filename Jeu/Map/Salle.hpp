@@ -34,7 +34,7 @@ public:
     bool hasNoObjects() const;
     bool hasNoOtherPlayers() const;
     void display() const;
-    void displayEnnemi() const;
+    std::vector<std::pair<Joueur*, int> > displayEnnemi(Joueur*) const;
     int nbEnnemi() const;
     std::vector<Salle*> getNeighbors() const;
 
