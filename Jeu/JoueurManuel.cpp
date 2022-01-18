@@ -37,6 +37,9 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             switch (choice) {
                 case 1:
                     utilities::display("Choisissez l'arme que vous souhaitez mettre dans votre sac.\n");
+                    for (long unsigned int i = 0; i < equipement.size(); i++) {
+                        utilities::display(to_string(i + 1) + "." + equipement[i]->getNom());
+                    }
                     cin >> choice;
                     choice = utilities::validateRange(choice, 1, equipement.size());
                     desequiper(choice - 1);
@@ -131,8 +134,6 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         personnage->removeFromSac(objetsEquippables[choice - 1].second);
                         // then equip arm
                         personnage->addToEquipement(objetsEquippables[choice - 1].first);
-
-
                     }
                     break;
                 case 2:
@@ -188,9 +189,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         break;
                     else {
                         jeu->placerDansSalle(this->position, sac[choice - 1]);
-                        //TODO: error avec erase
-                        //TODO: error avec equipement; always full
-                        sac.erase(sac.begin() + (choice - 1));
+                        personnage->removeFromSac((choice - 1));
                     }
 
                 case 5:
