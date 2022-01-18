@@ -17,13 +17,12 @@ private:
     const int id;
     std::vector<Joueur*> joueurs;
     std::vector<Objet*> objets;
-    Salle* neighbors[4];
-
+    std::vector<Salle*> neighbors;
 
 public:
     Salle(int);
     ~Salle();
-    int getId() const ;
+    const int getId() const ;
     std::vector<Joueur*> getJoueur() const;
     int numOfPlayers() const ;
     int numOfObjects() const;
@@ -36,12 +35,8 @@ public:
     bool hasNoOtherPlayers() const;
     void display() const;
     void displayEnnemi() const;
-    int nbEnnemi();
-    bool emptyEnnemi();
-    Salle* nord() const;
-    Salle* sud() const;
-    Salle* est() const;
-    Salle * ouest() const;
+    int nbEnnemi() const;
+    std::vector<Salle*> getNeighbors() const;
 
 };
 

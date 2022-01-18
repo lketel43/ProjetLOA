@@ -25,11 +25,10 @@ protected:
 public:
     Joueur(std::string, Personnage*, bool);
     ~Joueur();
+
     void setPosition(const int&, const int&);
-    //returns true if player is dead
     std::string getName() const;
-    //bool updateScore();
-    //int getScore() const;
+
     Personnage* getPersonnage() const;
     bool isAutomatise() const;
     std::pair<int, int> getPosition() const;

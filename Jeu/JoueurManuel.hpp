@@ -19,7 +19,6 @@ public:
     void utiliserPotion(Potion*) const override;
     void utiliserPotionPosion(Potion*, const Joueur*) const override;
 
-
 };
 
 #endif 

@@ -11,7 +11,7 @@ class ObjectFactory{
         const std::vector<Objet*> disponibles;
         const std::vector<Objet*> frequences;
         Objet* pick();
-    protected:
+
     public:
         ObjectFactory(std::vector<Objet*>);
         ~ObjectFactory();
