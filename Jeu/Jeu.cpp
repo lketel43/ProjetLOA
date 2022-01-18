@@ -359,7 +359,7 @@ void Jeu::tour(Joueur *joueur) {
                     joueur->pickUpObjects(this);
                     break;
                 case 3: {
-                    if (salle->hasNoOtherPlayers()) {
+                    if (!salle->hasNoOtherPlayers()) {
                         utilities::display("Il n'y a pas d'ennemi ici.\n");
                         break;
                     }
