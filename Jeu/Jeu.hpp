@@ -47,6 +47,7 @@ private:
     // entre les personnages
 
     ///CATEGORIE DEROULEMENT JEU
+
     void moveJoueur(Joueur*, int x, int y);
     friend class Clef;
 
@@ -59,13 +60,14 @@ public:
     //nombreDeJoueurs = 5
     //Chateau (4,4)
     Jeu();
-    std::pair<int, int> getSallePosition(int&) const;
+    std::pair<int, int> getSallePosition(int) const;
     void displayMap(Joueur*) const;
     unsigned int getNumberOfSalles() const;
     void lancePartie();
     void placerDansSalle(std::pair<int,int>, Objet*);
     Salle* getSalle(std::pair<int, int>) const;
     ~Jeu();
+    void moveJoueurtoSalle(Joueur*, Salle*);
 
     //Makes number of players, number of automatised players and chateau dimensions customizable
     Jeu(int, int, unsigned int, unsigned int);

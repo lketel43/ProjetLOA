@@ -322,3 +322,32 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
     this->nom = name;
     return choice;
 }
+
+void JoueurManuel::endTurn(Jeu * jeu){
+    Salle *salle = jeu->getSalle(position);
+    vector<Salle *> neighbors = salle->getNeighbors();
+    int choice;
+    utilities::display("Vous avez decidé de finir votre tour.\n");
+    utilities::display("Avant de faire ceci, voulez-vous changer de salle?\n");
+    utilities::display("1. Oui \n2. Non\n");
+
+    cin >> choice;
+    choice = utilities::validateRange(choice, 1, 2);
+    if (choice == 1) {
+        utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
+        utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
+        jeu->displayMap(this);
+
+        utilities::display("Vous avez donc le choix d'aller dans les salles suivantes: \n");
+        for (long unsigned int i = 0; i < neighbors.size(); i++) {
+            utilities::display(to_string(i + 1) + ". Salle " + to_string(neighbors[i]->getId()) + "\n");
+        }
+        utilities::display("Quelle salle choisissez-vous?\n");
+        cin >> choice;
+        choice = utilities::validateRange(choice, 1, neighbors.size());
+        jeu->moveJoueurtoSalle(this, neighbors[choice - 1]);
+        utilities::display("Vous êtes maintenant dans la salle " + to_string(neighbors[choice - 1]->getId()) + "\n");
+
+    }
+    utilities::display("Fin de tour pour le Joueur " + this->getName()+ "\n");
+}

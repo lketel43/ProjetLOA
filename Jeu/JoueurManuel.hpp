@@ -18,6 +18,7 @@ public:
     void consulterSacEtEquipement(Jeu*) override;
     void pickUpObjects(Jeu*) override;
     int choosePersonnage(std::vector<std::pair<Personnage *, int> >) override;
+    void endTurn(Jeu *) override;
 
 };
 
