@@ -10,6 +10,7 @@
 #include "../Objets/ObjectFactory.hpp"
 #include "../Personnages/Personnage.hpp"
 
+
 class Combat;
 class Jeu {
 
@@ -33,6 +34,7 @@ private:
     //Pour les joueurs automatisés, l'ordinateur choisit les personnages tel qu'il y aie le plus de variété possible
     void initJoueurs();
     void initVecteurPersonnages();
+    void initVecteursJoueurs();
     //Place les joueurs de manière uniforme aléatoire dans le chateau
     void placeJoueurs();
 
@@ -43,7 +45,6 @@ private:
     ///CATEGORIE AUTOMATISATION
     //Fait un choix automatique d'un personnage selon les frequences, pour permettre d'avoir une bonne répartition
     // entre les personnages
-    unsigned int choosePersonnageAutom();
 
     ///CATEGORIE DEROULEMENT JEU
     void moveJoueur(Joueur*, int x, int y);

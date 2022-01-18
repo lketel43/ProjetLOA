@@ -32,3 +32,7 @@ string Potion::toString() const{
 bool Potion::getPoison() const{
     return this->poison;
 }
+
+Potion *Potion::copy() {
+    return new Potion(nom, rarete, boost, type);
+}

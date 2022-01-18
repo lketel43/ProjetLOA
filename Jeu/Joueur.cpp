@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Joueur::Joueur(const string name, Personnage *personnage1, const bool autom) : nom(name), personnage(personnage1),
+Joueur::Joueur(const string name, const bool autom) : nom(name), personnage(nullptr),
                                                                                automatise(autom) {
     //Le joueur n'est pas placé encore
     position.first = position.second = -1;
@@ -148,4 +148,8 @@ Objet *Joueur::jeterDeSac(int index) {
     Objet *ret = this->personnage->getSac()[index];
     this->personnage->removeFromSac(index);
     return ret;
+}
+
+void Joueur::setPersonnage(Personnage *_personnage) {
+    this->personnage = _personnage;
 }

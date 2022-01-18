@@ -110,12 +110,17 @@ vector<Objet *> initVecteurObjets() {
     return ret;
 }
 
-Potion *Potion::copy() {
-    return new Potion(nom, rarete, boost, type);
-}
-
 
 vector<Objet *> Jeu::objetsPossibles{initVecteurObjets()};
+
+void Jeu::initVecteursJoueurs() {
+    for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
+        joueurs.push_back(new JoueurManuel(to_string(i+1)));
+    }
+    for(int i = nombreJoueurNonAutomatise; i<nombreDeJoueurs; i++){
+        joueurs.push_back(new JoueurAutomatique(to_string(i+1)));
+    }
+}
 
 
 //TODO: make it check that value of joueurs> joueurNonAuto
@@ -127,8 +132,7 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
     initVecteurPersonnages();
-
-
+    initVecteursJoueurs();
 }
 
 Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
@@ -136,14 +140,13 @@ Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
-
     initVecteurPersonnages();
+    initVecteursJoueurs();
 
 }
 
 void Jeu::initJoueurs() {
     int choice;
-    string name;
     //TODO: ecrire text du début
     utilities::display("Introductory text: needs completion \n");
 
@@ -155,38 +158,18 @@ void Jeu::initJoueurs() {
         utilities::display("Personnage " + to_string(i + 1) + ": \n"
                            + "Nom: " + personnagesDisponiblesEtFrequences[i].first->getName() + "\n" +
                            personnagesDisponiblesEtFrequences[i].first->getStats() + "\n");
-
     }
 
     utilities::display("Maintenant que vous connaissez les personnages, à vous de choisir lequel sera le vôtre.\n");
 
-    for (int i = 0; i < nombreDeJoueurs; i++) {
+    for (long unsigned int i = 0; i < joueurs.size(); i++) {
+        choice = joueurs[i]->choosePersonnage(personnagesDisponiblesEtFrequences);
 
-        //Si on a déjà demandé a tous les joueurs et il reste que les automatisés
-        if (i + 1 > nombreJoueurNonAutomatise) {
-            choice = choosePersonnageAutom();
-            name = std::to_string(i + 1);
-
-        } else {
-            utilities::display("À vous Joueur " + to_string(i + 1) + " de choisir votre personnage." + "\n" +
-                               "Choisissez un nombre entre 1 et " +
-                               to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
-                               + "Attention! Ce choix est définitif." + "\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
-            utilities::display("Bon choix. \n");
-            utilities::display("Vous êtes digne d'un prénom également. Quel est votre prénom?\n");
-            cin >> name;
-
-        }
-        utilities::display("Le joueur " + name + " a choisi un(e) "
+        if(!joueurs[i]->isAutomatise())
+            utilities::display("Le joueur " + joueurs[i]->getName() + " a choisi un(e) "
                            + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
-        if (i + 1 > nombreJoueurNonAutomatise) {
-            joueurs.push_back(new JoueurAutomatique(name, forge(choice - 1)));
-        } else {
-            joueurs.push_back(new JoueurManuel(name, forge(choice - 1)));
-        }
+        joueurs[i]->setPersonnage(forge(choice - 1));
     }
 
 }
@@ -233,17 +216,6 @@ Personnage *Jeu::forge(int choice) {
     }
 }
 
-unsigned int Jeu::choosePersonnageAutom() {
-    int min = personnagesDisponiblesEtFrequences[0].second;
-    unsigned int choice = 1;
-    for (unsigned int i = 1; i < personnagesDisponiblesEtFrequences.size(); i++) {
-        if (min > personnagesDisponiblesEtFrequences[i].second) {
-            min = personnagesDisponiblesEtFrequences[i].second;
-            choice = i + 1;
-        }
-    }
-    return choice;
-}
 
 
 void Jeu::lancePartie() {

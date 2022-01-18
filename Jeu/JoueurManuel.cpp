@@ -2,7 +2,7 @@
 #include "../Utilities/Utilities.cpp"
 
 
-JoueurManuel::JoueurManuel(std::string _name, Personnage *_personnage) : Joueur(_name, _personnage, false) {
+JoueurManuel::JoueurManuel(std::string _name) : Joueur(_name, false) {
 
 }
 
@@ -302,3 +302,18 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
     utilities::display("C'est la fin de votre tour\n");
 }
 
+int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>personnagesDisponiblesEtFrequences) {
+    int choice;
+    string name;
+    utilities::display("À vous Joueur " + nom + " de choisir votre personnage." + "\n" +
+                       "Choisissez un nombre entre 1 et " +
+                       to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
+                       + "Attention! Ce choix est définitif." + "\n");
+    cin >> choice;
+    choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
+    utilities::display("Bon choix. \n");
+    utilities::display("Vous êtes digne d'un vrai prénom également. Quel est votre prénom?\n");
+    cin >> name;
+    this->nom = name;
+    return choice;
+}
