@@ -92,13 +92,8 @@ void Salle::displayEnnemi() const{
     }
 }
 
-int Salle::nbEnnemi(){
+int Salle::nbEnnemi() const{
     return this->joueurs.size() - 1;
-}
-
-bool Salle::emptyEnnemi(){
-    if(this->joueurs.size() == 1) return true;
-    return false;
 }
 
 void Salle::placeObject(Objet *object) {

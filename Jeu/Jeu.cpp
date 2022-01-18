@@ -356,12 +356,12 @@ void Jeu::tour(Joueur *joueur) {
                     joueur->pickUpObjects(this);
                     break;
                 case 3: {
-                    if(salle->emptyEnnemi()){
+                    if (salle->hasNoOtherPlayers()) {
                         utilities::display("Il n'y a pas d'ennemi ici.\n");
                         break;
                     }
                     // Afficher les perso de la salle
-                    salle->displayEnnemi();  
+                    salle->displayEnnemi();
                     // Faire le le choix
                     int choiceEnnemi;
                     cin >> choiceEnnemi;
@@ -382,9 +382,7 @@ void Jeu::tour(Joueur *joueur) {
 
     }
 
-
 }
-
 
 void Jeu::endTurn(Joueur *joueur) {
     pair<int, int> position = joueur->getPosition();

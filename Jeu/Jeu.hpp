@@ -11,6 +11,7 @@
 #include "Combat.hpp"
 
 #include "../Personnages/Personnage.hpp"
+#include "JoueurManuel.hpp"
 
 
 class Jeu {
@@ -74,8 +75,6 @@ public:
 
 
 };
-
-
 
 
 #endif //PROJETLOA_JEU_HPP

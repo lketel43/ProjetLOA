@@ -16,7 +16,7 @@ private:
     friend class Jeu;
     unsigned int width;
     unsigned int length;
-    std::vector < std::vector<Salle *> > map;
+    std::vector < std::vector<Salle *>> map;
     void placeDansSalle(std::pair<int,int>, Objet*);
     //initializes the direction pointers of the salles inside the map
     void initializeDirections();
@@ -30,9 +30,6 @@ public:
     void display();
     void display(std::pair<int,int>);
     std::pair<int,int> getSalleCoordinates(int&) const;
-
-
-    //TODO: make destructor that deletes all the salles
 
 };
 

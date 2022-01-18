@@ -15,9 +15,9 @@ class Potion: public Objet{
         friend std::vector<Objet*> initVecteurObjets();
         const float boost;
         const std::string type;
-        friend class ObjectFactory;
-        Potion* copy() override;
         bool poison;
+        Potion* copy() override;
+        friend class ObjectFactory;
     public:
         float getBoost() const;
         std::string getType() const;

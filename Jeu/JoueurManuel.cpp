@@ -300,3 +300,4 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
     }
     utilities::display("C'est la fin de votre tour\n");
 }
+
