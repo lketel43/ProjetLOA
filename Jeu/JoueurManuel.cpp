@@ -402,5 +402,10 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
 }
 
 void JoueurManuel::mort(Jeu *jeu){
-    
+    if(this->personnage->getSante() <= 0){
+        utilities::display(nom + " est éliminé du jeu.\n");
+        jeu->removeJoueur(this->personnage);
+        jeu->getSalle(this->position)->removePlayer(this->personnage);
+        delete this;
+    }
 }

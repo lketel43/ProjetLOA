@@ -9,9 +9,15 @@ void Combat::commencerCombat(){
         this->j1->tourCombat(this->j2);
         this->j2->tourCombat(this->j1);
     }
-    if(this->j1->getPersonnage()->getSante() <= 0 && this->j2->getPersonnage()->getSante() <= 0) utilities::display("Le combat est terminé. Les deux joueurs sont morts");
-    if(this->j1->getPersonnage()->getSante() <= 0) utilities::display("Le combat est terminé. " + this->j1->getName() + " a perdu.");
-    else utilities::display("Le combat est terminé. " + this->j2->getName() + " a perdu.");
+    if(this->j1->getPersonnage()->getSante() <= 0 && this->j2->getPersonnage()->getSante() <= 0){
+        utilities::display("Le combat est terminé. Les deux joueurs sont morts");
+    }
+    if(this->j1->getPersonnage()->getSante() <= 0){
+        utilities::display("Le combat est terminé. " + this->j1->getName() + " a perdu.");
+    }
+    else{
+        utilities::display("Le combat est terminé. " + this->j2->getName() + " a perdu.");
+    }
 }
 
 int Combat::calculDegatsPhysique(const Joueur* attaquant, const Joueur* defenseur){

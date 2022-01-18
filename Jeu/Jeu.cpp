@@ -356,6 +356,8 @@ void Jeu::tour(Joueur *joueur) {
                     // Créer le combat et le lancer
                     int index = ennemies[choiceEnnemi].second;
                     Combat c{joueur, salle->getJoueur()[index]};
+                    joueur->mort(this);
+                    salle->getJoueur()[index]->mort(this);
                     c.commencerCombat();
                     break;
                 }
