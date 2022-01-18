@@ -51,7 +51,6 @@ private:
     friend class Clef;
 
     void tour(Joueur *);
-    void startBattle(Joueur*);
     void endTurn(Joueur*);
 
 public:

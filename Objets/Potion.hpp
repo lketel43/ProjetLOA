@@ -19,6 +19,7 @@ class Potion: public Objet{
         Potion* copy() override;
         friend class ObjectFactory;
     public:
+        ~Potion() override;
         float getBoost() const;
         std::string getType() const;
         void display() const override;

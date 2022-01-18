@@ -28,3 +28,5 @@ string Clef::toString() const {
     return "Nom: " + nom + "\nRareté: " + to_string(rarete)
            + "\nDescription: " + description + "\n";
 }
+
+Clef::~Clef() = default;

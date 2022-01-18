@@ -171,6 +171,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         }
                         //remove item from sac
                         personnage->removeFromSac(objetsUtilisables[choice - 1].second);
+                        delete objetsUtilisables[choice-1].first;
                     }
                     break;
                 case 3:

@@ -50,3 +50,5 @@ string Arme::toString() const {
            "\nDéfense Magique: "
            + to_string(defenseMagique) + "\n";
 }
+
+Arme::~Arme() = default;

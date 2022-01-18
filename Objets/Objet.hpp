@@ -21,9 +21,11 @@ protected:
     const bool utilisable;
     const int idType;
     Objet(std::string, int, bool, bool, int);
+
     //Factory method
     virtual Objet* copy()=0;
 public:
+    virtual ~Objet() =0;
     std::string getNom() const;
     int getRarete() const;
     int getIdType() const;
