@@ -36,8 +36,7 @@ public:
     bool hasNoOtherPlayers() const;
     void display() const;
     void displayEnnemi() const;
-    int nbEnnemi();
-    bool emptyEnnemi();
+    int nbEnnemi() const;
     Salle* nord() const;
     Salle* sud() const;
     Salle* est() const;

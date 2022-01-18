@@ -15,7 +15,7 @@ class Clef : public Objet {
 
 private:
     const std::string description;
-    Clef(std::string , int, std::string );
+    Clef(std::string , int, std::string);
     Clef* copy() override;
 
 

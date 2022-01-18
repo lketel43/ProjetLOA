@@ -10,7 +10,7 @@
 #include "../Objets/ObjectFactory.hpp"
 #include "../Personnages/Personnage.hpp"
 
-
+class Combat;
 class Jeu {
 
 private:
@@ -72,8 +72,6 @@ public:
 
 
 };
-
-
 
 
 #endif //PROJETLOA_JEU_HPP

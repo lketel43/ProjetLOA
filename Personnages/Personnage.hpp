@@ -40,8 +40,8 @@ public:
     //Subit l'attaque <Physique, Magique> indiquée en tenant en compte la resistance du personnage
     void subitAttaque(int);
 
-    std::string getStats();
-    std::string getName();
+    std::string getStats() const;
+    std::string getName() const;
     int getSante() const;
     int getHabilete() const;
     int getAttaquePhysique() const;
@@ -49,13 +49,13 @@ public:
     int getResistancePhysique() const;
     int getResistanceMagique() const;
 
-    std::vector<Objet*> getSac();
+    std::vector<Objet*> getSac() const;
     void addToSac(Objet*);
     void removeFromSac(int);
-    bool isSacFull();
-    void displaySac();
+    bool isSacFull() const;
+    void displaySac() const;
 
-    bool isEquipementFull();
+    bool isEquipementFull() const;
     std::vector<Objet*> getEquipement();
     void addToEquipement(Objet*);
     void removeFromEquipement(int);

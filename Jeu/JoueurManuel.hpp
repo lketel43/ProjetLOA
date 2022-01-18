@@ -17,7 +17,6 @@ public:
     void consulterSacEtEquipement(Jeu*) override;
     void pickUpObjects(Jeu*) override;
 
-
 };
 
 #endif 

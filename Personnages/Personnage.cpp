@@ -23,7 +23,7 @@ void Personnage::subitAttaque(int d) {
     else this->sante -= d;
 }
 
-string Personnage::getName() {
+string Personnage::getName() const{
     return nom;
 }
 
@@ -51,7 +51,7 @@ int Personnage::getResistanceMagique() const{
     return this->resistanceMagique;
 }
 
-string Personnage::getStats() {
+string Personnage::getStats() const{
     string stat;
     stat = "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";
     stat += "Attaque Magique: " + std::to_string(attaqueMagique) + "\n";
@@ -61,7 +61,7 @@ string Personnage::getStats() {
     return stat;
 }
 
-vector<Objet*> Personnage::getSac() {
+vector<Objet*> Personnage::getSac() const{
     return this->sac;
 }
 
@@ -86,12 +86,12 @@ ostream &operator<<(ostream &out, Personnage *personnage) {
     return out;
 }
 
-bool Personnage::isSacFull() {
+bool Personnage::isSacFull() const{
     if(this->sac.size() == TAILLE_SAC) return true;
     return false;
 }
 
-void Personnage::displaySac(){
+void Personnage::displaySac() const{
     if(this->sac.empty()){
         utilities::display("Votre sac est vide\n");
     }
@@ -103,7 +103,7 @@ void Personnage::displaySac(){
     }
 }
 
-bool Personnage::isEquipementFull() {
+bool Personnage::isEquipementFull() const{
     if(this->equipement.size() < TAILLE_EQ) return false;
     return true;
 }
