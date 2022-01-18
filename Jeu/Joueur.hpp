@@ -41,6 +41,7 @@ public:
     Objet* jeterDeEquipement(int index);
     void utiliserClef(Clef*, Jeu*);
     virtual void utiliserPotion(Potion*) const = 0;
+    virtual void utiliserPotionPosion(Potion*, const Joueur*) const = 0;
     Objet* jeterDeSac(int index);
 
     virtual void tourCombat(const Joueur*) const = 0;

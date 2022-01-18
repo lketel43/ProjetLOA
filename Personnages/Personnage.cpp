@@ -128,6 +128,7 @@ void Personnage::setSante(int n) {
 
 void Personnage::setHabilete(int n) {
     if(this->habilite + n > 100) this->habilite = 100;
+    if(this->habilite + n < 0) this->habilite = 0;
     else this->habilite += n;
 }
 
@@ -141,11 +142,13 @@ void Personnage::setAttaqueMagique(int n) {
 
 void Personnage::setResistancePhysique(int n) {
     if(this->resistancePhysique + n > 100) this->resistancePhysique = 100;
+    if(this->resistancePhysique + n < 0) this->resistancePhysique = 0;
     else this->resistancePhysique += n;
 }
 
 void Personnage::setResistanceMagique(int n) {
     if(this->resistanceMagique + n > 100) this->resistanceMagique = 100;
+    if(this->resistanceMagique + n < 0) this->resistanceMagique = 0;
     else this->resistanceMagique += n;
 }
 

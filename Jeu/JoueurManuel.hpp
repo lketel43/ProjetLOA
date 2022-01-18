@@ -17,6 +17,7 @@ public:
     void consulterSacEtEquipement(Jeu*) override;
     void pickUpObjects(Jeu*) override;
     void utiliserPotion(Potion*) const override;
+    void utiliserPotionPosion(Potion*, const Joueur*) const override;
 
 
 };

@@ -13,9 +13,7 @@ public:
     //TODO: IMPLEMENT BELOW FUNCTION
     void pickUpObjects(Jeu*) override;
     void utiliserPotion(Potion*) const;
-    Potion* hasPotionBoostSante() const;
-    Potion* hasPotionPoison() const;
-    Potion* hasPotionBoost() const;
+    void utiliserPotionPosion(Potion*, const Joueur*) const override;
 
 };
 
