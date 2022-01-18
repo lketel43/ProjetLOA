@@ -128,9 +128,12 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         cin >> choice;
                         choice = utilities::validateRange(choice, 1, objetsEquippables.size());
                         //then remove arm from bag
+                        utilities::display("Vous vous êtes équipé de: "+ objetsEquippables[choice - 1].first->getNom() + "\n");
                         personnage->removeFromSac(objetsEquippables[choice - 1].second);
                         // then equip arm
                         personnage->addToEquipement(objetsEquippables[choice - 1].first);
+
+
                     }
                     break;
                 case 2:

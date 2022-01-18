@@ -8,12 +8,10 @@
 #include "vector"
 #include "Map/Chateau.hpp"
 #include "../Objets/ObjectFactory.hpp"
-#include "Combat.hpp"
 
 #include "../Personnages/Personnage.hpp"
-#include "JoueurManuel.hpp"
 
-
+class Combat;
 class Jeu {
 
 private:
