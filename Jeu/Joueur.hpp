@@ -49,6 +49,7 @@ public:
     virtual void consulterSacEtEquipement(Jeu*)=0;
     virtual void pickUpObjects(Jeu*)=0;
     virtual int choosePersonnage(std::vector<std::pair<Personnage *, int> >)=0;
+    virtual void endTurn(Jeu *) = 0;
 
 };
 

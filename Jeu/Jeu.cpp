@@ -348,7 +348,7 @@ void Jeu::tour(Joueur *joueur) {
                 }
                 case 4:
                     if (salle->hasNoOtherPlayers())
-                        endTurn(joueur);
+                        joueur->endTurn(this);
                     else {
                         utilities::display(
                                 "Il vous reste encore des ennemis à combattre ici.\n Vous ne pouvez pas finir votre tour maintenant.\n");
@@ -365,37 +365,7 @@ void Jeu::tour(Joueur *joueur) {
 }
 
 void Jeu::endTurn(Joueur *joueur) {
-    pair<int, int> position = joueur->getPosition();
-    Salle *salle = chateau->map[position.first][position.second];
-    vector<Salle *> neighbors = salle->getNeighbors();
-    pair<int, int> newSalleCoordinates;
-    int choice;
-    utilities::display("Vous avez decidé de finir votre tour.\n");
-    utilities::display("Avant de faire ceci, voulez-vous changer de salle?\n");
-    utilities::display("1. Oui \n2. Non\n");
 
-    cin >> choice;
-    choice = utilities::validateRange(choice, 1, 2);
-    if (choice == 1) {
-        utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
-        utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
-        chateau->display(joueur->getPosition());
-
-        utilities::display("Vous avez donc le choix d'aller dans les salles suivantes: \n");
-        for (long unsigned int i = 0; i < neighbors.size(); i++) {
-            utilities::display(to_string(i + 1) + ". Salle " + to_string(neighbors[i]->getId()) + "\n");
-        }
-        utilities::display("Quelle salle choisissez-vous?\n");
-        cin >> choice;
-        choice = utilities::validateRange(choice, 1, neighbors.size());
-        newSalleCoordinates = chateau->getSalleCoordinates(neighbors[choice - 1]->getId());
-        moveJoueur(joueur, newSalleCoordinates.first, newSalleCoordinates.second);
-        utilities::display("Vous êtes maintenant dans la salle " + to_string(neighbors[choice - 1]->getId()) + "\n");
-
-
-// TODO; FINISH
-    }
-    utilities::display("Fin de tour pour le Joueur " + joueur->getName() + "\n");
 }
 
 void Jeu::displayMap(Joueur *joueur) const {
@@ -407,8 +377,9 @@ unsigned int Jeu::getNumberOfSalles() const {
     return chateau->width * chateau->length;
 }
 
-pair<int, int> Jeu::getSallePosition(int &num) const {
+pair<int, int> Jeu::getSallePosition(int num) const {
     return chateau->getSalleCoordinates(num);
+
 }
 
 void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
@@ -422,4 +393,9 @@ Salle *Jeu::getSalle(std::pair<int, int> position) const {
     }
     return chateau->map[position.first][position.second];
 
+}
+
+void Jeu::moveJoueurtoSalle(Joueur *joueur, Salle *salle) {
+    pair<int, int> position = getSallePosition(salle->getId());
+    moveJoueur(joueur, position.first, position.second);
 }
