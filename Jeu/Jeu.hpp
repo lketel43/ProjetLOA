@@ -5,7 +5,7 @@
 #ifndef PROJETLOA_JEU_HPP
 #define PROJETLOA_JEU_HPP
 
-#include "vector"
+#include <vector>
 #include "Map/Chateau.hpp"
 #include "../Objets/ObjectFactory.hpp"
 #include "../Personnages/Personnage.hpp"
@@ -20,7 +20,7 @@ private:
     ObjectFactory* objectFactory;
     static std::vector<Objet*> objetsPossibles;
     //les joueurs non-automatisés sont placés d'abord dans le vecteur
-    std::vector<Joueur *> joueurs;
+    std::vector<Joueur*> joueurs;
     Chateau *chateau;
     std::vector<std::pair<Personnage *, int> > personnagesDisponiblesEtFrequences;
 
@@ -59,6 +59,8 @@ public:
     //nombreDeJoueurs = 5
     //Chateau (4,4)
     Jeu();
+    std::vector<Joueur*> getJoueurs() const;
+    void removeJoueur(Personnage*);
     std::pair<int, int> getSallePosition(int&) const;
     void displayMap(Joueur*) const;
     unsigned int getNumberOfSalles() const;

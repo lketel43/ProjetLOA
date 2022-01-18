@@ -144,6 +144,19 @@ Jeu::Jeu() : nombreDeJoueurs(5), nombreJoueurNonAutomatise(1) {
 
 }
 
+vector<Joueur*> Jeu::getJoueurs() const{
+    return joueurs;
+}
+
+void Jeu::removeJoueur(Personnage* mort) {
+    for(unsigned int i = 0; i < joueurs.size(); i++){
+        if(joueurs[i]->getPersonnage() == mort){
+            joueurs.erase(joueurs.begin() + i);
+            break;
+        }
+    }
+}
+
 void Jeu::initJoueurs() {
     int choice;
     //TODO: ecrire text du début

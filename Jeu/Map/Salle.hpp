@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "../../Objets/Objet.hpp"
+#include "../../Personnages/Personnage.hpp"
 
 class Joueur;
 
@@ -28,6 +29,7 @@ public:
     int numOfObjects() const;
     void addPlayer(Joueur*);
     void removePlayer(Joueur*);
+    void removePlayer(Personnage*);
     void placeObject(Objet*);
     Objet* removeObject(int);
     void displayObjects() const;

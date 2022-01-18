@@ -43,6 +43,15 @@ void Salle::removePlayer(Joueur *joueur) {
     }
 }
 
+void Salle::removePlayer(Personnage* mort){
+    for(unsigned int i = 0; i < joueurs.size(); i++){
+        if(joueurs[i]->getPersonnage() == mort){
+            joueurs.erase(joueurs.begin() + i);
+            break;
+        }
+    }
+}
+
 Objet* Salle::removeObject(int index) {
     Objet * object = objets[index];
     objets.erase(objets.begin() + index);

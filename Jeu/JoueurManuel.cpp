@@ -400,3 +400,7 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
     this->nom = name;
     return choice;
 }
+
+void JoueurManuel::mort(Jeu *jeu){
+    
+}

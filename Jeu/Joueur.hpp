@@ -50,6 +50,8 @@ public:
     virtual void pickUpObjects(Jeu*)=0;
     virtual int choosePersonnage(std::vector<std::pair<Personnage *, int> >)=0;
 
+    virtual void mort(Jeu*) = 0;
+
 };
 
 
