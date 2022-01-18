@@ -115,18 +115,17 @@ vector<Objet *> Jeu::objetsPossibles{initVecteurObjets()};
 
 void Jeu::initVecteursJoueurs() {
     for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
-        joueurs.push_back(new JoueurManuel(to_string(i+1)));
+        joueurs.push_back(new JoueurManuel(to_string(i + 1)));
     }
-    for(int i = nombreJoueurNonAutomatise; i<nombreDeJoueurs; i++){
-        joueurs.push_back(new JoueurAutomatique(to_string(i+1)));
+    for (int i = nombreJoueurNonAutomatise; i < nombreDeJoueurs; i++) {
+        joueurs.push_back(new JoueurAutomatique(to_string(i + 1)));
     }
 }
 
 
 //TODO: make it check that value of joueurs> joueurNonAuto
 Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned int chateauWidth)
-        : nombreDeJoueurs(joueurs), nombreJoueurNonAutomatise(joueurNonAuto)
-           {
+        : nombreDeJoueurs(joueurs), nombreJoueurNonAutomatise(joueurNonAuto) {
     chateau = new Chateau(chateauWidth, chateauLength);
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
@@ -135,7 +134,7 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     initVecteursJoueurs();
 }
 
-Jeu::Jeu() : nombreDeJoueurs(5),nombreJoueurNonAutomatise(1) {
+Jeu::Jeu() : nombreDeJoueurs(5), nombreJoueurNonAutomatise(1) {
     chateau = new Chateau(4, 4);
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
@@ -165,7 +164,7 @@ void Jeu::initJoueurs() {
     for (long unsigned int i = 0; i < joueurs.size(); i++) {
         choice = joueurs[i]->choosePersonnage(personnagesDisponiblesEtFrequences);
 
-        if(!joueurs[i]->isAutomatise())
+        if (!joueurs[i]->isAutomatise())
             utilities::display("Le joueur " + joueurs[i]->getName() + " a choisi un(e) "
                                + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
@@ -215,7 +214,6 @@ Personnage *Jeu::forge(int choice) {
 
     }
 }
-
 
 
 void Jeu::lancePartie() {
@@ -347,7 +345,12 @@ void Jeu::tour(Joueur *joueur) {
                     break;
                 }
                 case 4:
-                    endTurn(joueur);
+                    if (salle->hasNoOtherPlayers())
+                        endTurn(joueur);
+                    else {
+                        utilities::display(
+                                "Il vous reste encore des ennemis à combattre ici.\n Vous ne pouvez pas finir votre tour maintenant.\n");
+                    }
                     break;
                 default:
                     utilities::display("Error! choice of action is not a valid one.");
