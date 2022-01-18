@@ -13,7 +13,7 @@ public:
     void consulterSacEtEquipement(Jeu*) override;
     //TODO: IMPLEMENT BELOW FUNCTION
     void pickUpObjects(Jeu*) override;
-    void utiliserPotion(Potion*) const;
+    void utiliserPotion(Potion*) const override;
     void utiliserPotionPosion(Potion*, const Joueur*) const override;
     int choosePersonnage(std::vector<std::pair<Personnage *, int> >) override;
 
