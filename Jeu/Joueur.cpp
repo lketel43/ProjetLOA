@@ -111,6 +111,14 @@ void Joueur::utiliserClef(Clef *c, Jeu *jeu) {
         c->utiliser(jeu, this, pair1.first, pair1.second);
         utilities::display("Vous avez bien été transporté dans la salle " + to_string(choice) + ".\n");
     }
+    int index;
+    for(long unsigned int i = 0; i < this->personnage->getSac().size(); i++){
+        if(this->personnage->getSac()[i] == c){
+            index = i;
+        }
+    }
+    this->personnage->removeFromSac(index);
+    delete c;
 }
 
 

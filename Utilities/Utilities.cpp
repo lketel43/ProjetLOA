@@ -37,7 +37,7 @@ namespace utilities {
         using namespace std::chrono; // nanoseconds, system_clock, seconds
 
         cout<<text;
-        sleep_for(seconds(1));
+        //sleep_for(seconds(1));
     }
 
     static int bernouilli(float param){

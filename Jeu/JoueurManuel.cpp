@@ -164,13 +164,12 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                                 break;
                             case IDTYPE_CLEF:
                                 utiliserClef(dynamic_cast<Clef *>(objetsUtilisables[choice - 1].first), jeu);
+                                personnage->removeFromSac(objetsUtilisables[choice - 1].second);
                                 break;
                             case IDTYPE_POTION:
                                 utiliserPotion(dynamic_cast<Potion *>(objetsUtilisables[choice - 1].first));
                                 break;
                         }
-                        //remove item from sac
-                        personnage->removeFromSac(objetsUtilisables[choice - 1].second);
                     }
                     break;
                 case 3:
