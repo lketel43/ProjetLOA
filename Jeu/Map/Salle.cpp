@@ -20,7 +20,7 @@ int Salle::numOfObjects() const {
     return objets.size();
 }
 
-int Salle::getId() const {
+const int Salle::getId() const {
     return id;
 }
 
@@ -101,21 +101,6 @@ void Salle::placeObject(Objet *object) {
 
 }
 
-Salle *Salle::nord() const {
-    return neighbors[north];
-}
-
-Salle *Salle::sud() const {
-    return neighbors[south];
-}
-
-Salle *Salle::est() const {
-    return neighbors[east];
-}
-
-Salle * Salle::ouest() const {
-    return neighbors[west];
-}
 
 Salle::~Salle(){
     for( long unsigned int i = 0; i < objets.size(); i++){
@@ -126,4 +111,8 @@ Salle::~Salle(){
         if(joueurs[i] != nullptr)
             delete joueurs[i];
     }
+}
+
+std::vector<Salle *> Salle::getNeighbors() const {
+    return neighbors;
 }

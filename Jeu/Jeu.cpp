@@ -255,9 +255,10 @@ void Jeu::lancePartie() {
     //Combat* c = new Combat(joueurs[0], joueurs[1]);
     //c->commencerCombat();
     // TEST COMBAT
-
-    for (int i = 0; i < joueurs.size(); i++) {
-        tour(joueurs[i]);
+    while (true) {
+        for (int i = 0; i < joueurs.size(); i++) {
+            tour(joueurs[i]);
+        }
     }
 }
 
@@ -389,8 +390,9 @@ void Jeu::tour(Joueur *joueur) {
 void Jeu::endTurn(Joueur *joueur) {
     pair<int, int> position = joueur->getPosition();
     Salle *salle = chateau->map[position.first][position.second];
+    vector<Salle *> neighbors = salle->getNeighbors();
+    pair<int, int> newSalleCoordinates;
     int choice;
-    string directions = "";
     utilities::display("Vous avez decidé de finir votre tour.\n");
     utilities::display("Avant de faire ceci, voulez-vous changer de salle?\n");
     utilities::display("1. Oui \n2. Non\n");
@@ -402,18 +404,17 @@ void Jeu::endTurn(Joueur *joueur) {
         utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
         chateau->display(joueur->getPosition());
 
-        if (salle->nord() != nullptr)
-            directions += to_string(salle->nord()->getId()) + ",";
-        if (salle->sud() != nullptr)
-            directions += " " + to_string(salle->sud()->getId()) + ",";
-        if (salle->est() != nullptr)
-            directions += " " + to_string(salle->est()->getId()) + ",";
-        if (salle->ouest() != nullptr)
-            directions += " " + to_string(salle->ouest()->getId()) + ",";
+        utilities::display("Vous avez donc le choix d'aller dans les salles suivantes: \n");
+        for (long unsigned int i = 0; i < neighbors.size(); i++) {
+            utilities::display(to_string(i + 1) + ". Salle " + to_string(neighbors[i]->getId()) + "\n");
+        }
+        utilities::display("Quelle salle choisissez-vous?\n");
+        cin >> choice;
+        choice = utilities::validateRange(choice, 1, neighbors.size());
+        newSalleCoordinates = chateau->getSalleCoordinates(neighbors[choice - 1]->getId());
+        moveJoueur(joueur, newSalleCoordinates.first, newSalleCoordinates.second);
+        utilities::display("Vous êtes maintenant dans la salle " + to_string(neighbors[choice - 1]->getId()) + "\n");
 
-        directions[directions.length() - 1] = '.';
-
-        utilities::display("Vous avez donc le choix d'aller dans les salles suivantes: " + directions + "\n");
 
 // TODO; FINISH
     }

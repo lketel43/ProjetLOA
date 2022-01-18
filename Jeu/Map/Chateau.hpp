@@ -29,7 +29,7 @@ public:
     std::pair<int, int> getEmptiestRoom();
     void display();
     void display(std::pair<int,int>);
-    std::pair<int,int> getSalleCoordinates(int&) const;
+    std::pair<int,int> getSalleCoordinates(int) const;
 
 };
 

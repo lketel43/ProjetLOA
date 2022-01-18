@@ -7,7 +7,7 @@ using namespace std;
 
 Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 
-    int count = 0;
+    int count = 1;
     vector<vector<Salle *> > mapInit;
     for (int i = 0; i < w; i++) {
         vector<Salle *> ligne;
@@ -23,15 +23,15 @@ Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 }
 
 
-pair<int, int> Chateau::getSalleCoordinates(int &num) const {
+pair<int, int> Chateau::getSalleCoordinates(int num) const {
     pair<int, int> pair1;
-    if (map[num / length][num % length]->getId() != num) {
+    if (map[(num-1) / length][(num-1) % length]->getId() != num) {
         cout << "ERROR IN FETCHING PROPER SALLE COORDINATES\n";
         pair1.first = -1;
         pair1.second = -1;
     } else {
-        pair1.first = num / length;
-        pair1.second = num % length;
+        pair1.first = (num-1) / length;
+        pair1.second = (num-1) % length;
     }
     return pair1;
 }
@@ -39,25 +39,17 @@ pair<int, int> Chateau::getSalleCoordinates(int &num) const {
 void Chateau::initializeDirections() {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < length; j++) {
-            if (i == 0)
-                map[i][j]->neighbors[north] = nullptr;
-            else
-                map[i][j]->neighbors[north] = map[i - 1][j];
+            if (i != 0)
+                map[i][j]->neighbors.push_back(map[i - 1][j]);
 
-            if (i == width - 1)
-                map[i][j]->neighbors[south] = nullptr;
-            else
-                map[i][j]->neighbors[south] = map[i + 1][j];
+            if (i != width - 1)
+                map[i][j]->neighbors.push_back(map[i + 1][j]);
 
-            if (j == 0)
-                map[i][j]->neighbors[west] = nullptr;
-            else
-                map[i][j]->neighbors[west] = map[i][j - 1];
+            if (j != 0)
+                map[i][j]->neighbors.push_back(map[i][j - 1]);
 
-            if (j == length - 1)
-                map[i][j]->neighbors[east] = nullptr;
-            else
-                map[i][j]->neighbors[east] = map[i][j + 1];
+            if (j != length - 1)
+                map[i][j]->neighbors.push_back(map[i][j + 1]);
         }
     }
 }
