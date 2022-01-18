@@ -13,6 +13,7 @@ private:
 
 public:
     JoueurManuel(std::string);
+    ~JoueurManuel() override;
     void tourCombat(const Joueur*) const override;
     void consulterSacEtEquipement(Jeu*) override;
     void pickUpObjects(Jeu*) override;

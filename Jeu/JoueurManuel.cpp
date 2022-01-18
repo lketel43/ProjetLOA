@@ -1,10 +1,12 @@
 #include "JoueurManuel.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
+using namespace std;
 
 JoueurManuel::JoueurManuel(std::string _name) : Joueur(_name, false) {
 
 }
+JoueurManuel::~JoueurManuel() = default;
 
 //return true if we need to exit the bigger function
 bool JoueurManuel::consulterEquipement(Jeu *jeu) {
@@ -64,6 +66,8 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
         }
 
     } while (continueLooping);
+
+    return continueLooping;
 
 }
 
@@ -169,9 +173,6 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                                 utiliserPotion(dynamic_cast<Potion *>(objetsUtilisables[choice - 1].first));
                                 break;
                         }
-                        //remove item from sac
-                        personnage->removeFromSac(objetsUtilisables[choice - 1].second);
-                        delete objetsUtilisables[choice-1].first;
                     }
                     break;
                 case 3:
@@ -208,6 +209,9 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
         }
 
     } while (continueLooping);
+
+    //unnecessary
+    return continueLooping;
 
 }
 

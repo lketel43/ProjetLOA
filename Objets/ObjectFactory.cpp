@@ -1,5 +1,5 @@
 #include "ObjectFactory.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 std::vector<Objet*> buildFreq(std::vector<Objet*> v){
     int rareteMax = 0;

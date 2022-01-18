@@ -7,6 +7,7 @@
 class JoueurAutomatique : public Joueur{
 public:
     JoueurAutomatique(std::string);
+    ~JoueurAutomatique() override;
     void tourCombat(const Joueur*) const override;
     //TODO: IMPLEMENT BELOW FUNCTION
     void consulterSacEtEquipement(Jeu*) override;

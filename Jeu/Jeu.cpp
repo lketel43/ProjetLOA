@@ -10,7 +10,7 @@
 #include "../Objets/Arme.hpp"
 #include "../Objets/Clef.hpp"
 #include "../Objets/Potion.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 #include "JoueurAutomatique.hpp"
 #include "JoueurManuel.hpp"
 #include "Combat.hpp"
@@ -125,8 +125,8 @@ void Jeu::initVecteursJoueurs() {
 
 //TODO: make it check that value of joueurs> joueurNonAuto
 Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned int chateauWidth)
-        : nombreJoueurNonAutomatise(joueurNonAuto),
-          nombreDeJoueurs(joueurs) {
+        : nombreDeJoueurs(joueurs), nombreJoueurNonAutomatise(joueurNonAuto)
+           {
     chateau = new Chateau(chateauWidth, chateauLength);
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
@@ -135,7 +135,7 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     initVecteursJoueurs();
 }
 
-Jeu::Jeu() : nombreJoueurNonAutomatise(1), nombreDeJoueurs(5) {
+Jeu::Jeu() : nombreDeJoueurs(5),nombreJoueurNonAutomatise(1) {
     chateau = new Chateau(4, 4);
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
@@ -167,7 +167,7 @@ void Jeu::initJoueurs() {
 
         if(!joueurs[i]->isAutomatise())
             utilities::display("Le joueur " + joueurs[i]->getName() + " a choisi un(e) "
-                           + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
+                               + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
         joueurs[i]->setPersonnage(forge(choice - 1));
     }

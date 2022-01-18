@@ -8,12 +8,12 @@
 #include "Jeu.hpp"
 #include "../Objets/Clef.hpp"
 #include "../Objets/Potion.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 using namespace std;
 
-Joueur::Joueur(const string name, const bool autom) : nom(name), personnage(nullptr),
-                                                                               automatise(autom) {
+Joueur::Joueur(const string name, const bool autom) : personnage(nullptr),
+                                                      automatise(autom), nom(name) {
     //Le joueur n'est pas placé encore
     position.first = position.second = -1;
     score = 0;
@@ -32,7 +32,7 @@ std::string Joueur::getName() const {
     return nom;
 }
 
-Personnage* Joueur::getPersonnage() const{
+Personnage *Joueur::getPersonnage() const {
     return this->personnage;
 }
 
@@ -113,8 +113,8 @@ void Joueur::utiliserClef(Clef *c, Jeu *jeu) {
     }
 }
 
-void Joueur::utiliserPotion(Potion *p) const{
-    if(!p->isUtilisable()){
+void Joueur::utiliserPotion(Potion *p) const {
+    if (!p->isUtilisable()) {
         utilities::display("Cet objet n'est pas utilisable.\n");
         return;
     }

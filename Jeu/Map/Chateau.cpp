@@ -1,6 +1,6 @@
 
 #include "Chateau.hpp"
-#include "../../Utilities/Utilities.cpp"
+#include "../../Utilities/utilities.hpp"
 #include <iomanip>
 
 using namespace std;
@@ -25,13 +25,13 @@ Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 
 pair<int, int> Chateau::getSalleCoordinates(int num) const {
     pair<int, int> pair1;
-    if (map[(num-1) / length][(num-1) % length]->getId() != num) {
+    if (map[(num - 1) / length][(num - 1) % length]->getId() != num) {
         cout << "ERROR IN FETCHING PROPER SALLE COORDINATES\n";
         pair1.first = -1;
         pair1.second = -1;
     } else {
-        pair1.first = (num-1) / length;
-        pair1.second = (num-1) % length;
+        pair1.first = (num - 1) / length;
+        pair1.second = (num - 1) % length;
     }
     return pair1;
 }
@@ -112,10 +112,14 @@ void Chateau::display() {
                 else
                     cout << "|       ";
 
-                if (j == width - 1)
-                    if (currSalleId < 10)
+                if (j == width - 1) {
+                    if (currSalleId < 10) {
                         cout << "  |";
-                    else cout << " |";
+                    } else {
+                        cout << " |";
+                    }
+                }
+
             }
             cout << endl;
         }
@@ -136,7 +140,7 @@ void Chateau::display(pair<int, int> position) {
         for (int k = 0; k < 3; k++) {
             for (int j = 0; j < width; j++) {
                 currSalleId = map[i][j]->getId();
-                if (k == 1)
+                if (k == 1) {
                     if (j == 0)
                         if (currSalleId < 10 || salleId == currSalleId)
                             if (currSalleId == salleId)
@@ -152,14 +156,16 @@ void Chateau::display(pair<int, int> position) {
                             cout << "    " << currSalleId << "   ";
                     else
                         cout << "    " << currSalleId << "  ";
-
-                else
+                } else {
                     cout << "|       ";
+                }
 
-                if (j == width - 1)
+                if (j == width - 1){
                     if (currSalleId < 10)
                         cout << "  |";
                     else cout << " |";
+                }
+
             }
             cout << endl;
         }

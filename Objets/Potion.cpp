@@ -3,7 +3,7 @@
 //
 
 #include "Potion.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
 using namespace std;
 

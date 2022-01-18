@@ -24,7 +24,7 @@ protected:
     int score;
 public:
     Joueur(std::string, bool);
-    ~Joueur();
+    virtual ~Joueur()=0;
 
     void setPosition(const int&, const int&);
     std::string getName() const;

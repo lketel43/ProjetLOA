@@ -1,7 +1,9 @@
 #include "JoueurAutomatique.hpp"
-#include "../Utilities/Utilities.cpp"
+#include "../Utilities/utilities.hpp"
 
+using namespace std;
 JoueurAutomatique::JoueurAutomatique(std::string _name): Joueur(_name, true) {}
+JoueurAutomatique::~JoueurAutomatique() = default;
 
 void JoueurAutomatique::tourCombat(const Joueur* j) const{
     utilities::display("C'est le tour de " + this->nom + " de joueur\n");
