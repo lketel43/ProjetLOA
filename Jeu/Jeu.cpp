@@ -322,8 +322,8 @@ void Jeu::tour(Joueur *joueur) {
             utilities::display("2. Ramasser des objets.\n");
             utilities::display("3. Commencer un combat. \n");
             utilities::display("4. Finir votre tour. \n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 4);
+
+            choice = utilities::validateRange( 1, 4);
             //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
@@ -345,11 +345,9 @@ void Jeu::tour(Joueur *joueur) {
                     vector<pair<Joueur *, int> > ennemies{salle->displayEnnemi(joueur)};
                     utilities::display("Choisissez un ennemi à combattre:\n");
                     // Faire le le choix
-                    int choiceEnnemi;
-                    cin >> choiceEnnemi;
-                    choice = utilities::validateRange(choiceEnnemi, 1, salle->nbEnnemi());
+                    choice = utilities::validateRange( 1, salle->nbEnnemi());
                     // Créer le combat et le lancer
-                    int index = ennemies[choiceEnnemi].second;
+                    int index = ennemies[choice].second;
                     Combat c{joueur, salle->getJoueur()[index]};
                     c.commencerCombat();
                     break;

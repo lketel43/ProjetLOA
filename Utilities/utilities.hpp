@@ -6,10 +6,12 @@
 #define PROJETLOA_UTILITIES_HPP
 
 class utilities{
+private:
+    static bool isNumber(const std::string& str);
 public:
     static int bernouilli(float param);
     static void display(const std::string& text);
-    static int validateRange(int x, int i, int j);
+    static int validateRange(int i, int j);
     static int random(int i, int j);
 };
 

@@ -21,8 +21,7 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             utilities::display("Essayez de vous équiper d'une des armes dans votre sac.\n");
             utilities::display("Voulez-vous revenir au menu des choix possible, ou consulter votre sac?\n");
             utilities::display("1.Consulter sac\n2.Retour au menu\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 2);
+            choice = utilities::validateRange(1, 2);
             return (choice == 2);
         } else {
             utilities::display("Vous êtes équipé de:\n");
@@ -32,8 +31,7 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             utilities::display("Que voulez-vous faire?\n");
             utilities::display(
                     "1.Vous déséquiper d'une de vos armes et la mettre dans votre sac\n2.Jeter une de vos armes\n3.Consulter sac\n4.Retour\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 4);
+            choice = utilities::validateRange( 1, 4);
             if (choice > 2)
                 return (choice == 4);
             switch (choice) {
@@ -42,14 +40,14 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
                     for (long unsigned int i = 0; i < equipement.size(); i++) {
                         utilities::display(to_string(i + 1) + "." + equipement[i]->getNom());
                     }
-                    cin >> choice;
-                    choice = utilities::validateRange(choice, 1, equipement.size());
+
+                    choice = utilities::validateRange( 1, equipement.size());
                     desequiper(choice - 1);
                     break;
                 case 2:
                     utilities::display("Choisissez l'arme que vous souhaitez jeter.\n");
-                    cin >> choice;
-                    choice = utilities::validateRange(choice, 1, equipement.size());
+
+                    choice = utilities::validateRange( 1, equipement.size());
                     jeu->placerDansSalle(this->position, equipement[choice - 1]);
                     equipement.erase(equipement.begin() + choice - 1);
                     break;
@@ -58,8 +56,8 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             }
             utilities::display(
                     "Voulez-vous:\n1.Continuer à consulter votre équipement\n2.Consulter votresac\n3.Retour\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 3);
+
+            choice = utilities::validateRange( 1, 3);
             if (choice == 3)
                 return true;
             continueLooping = (choice == 1);
@@ -86,8 +84,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             utilities::display("Essayez de le remplir avec les objets dans la salle.\n");
             utilities::display("Voulez-vous revenir au menu des choix possible, ou consulter votre équipement?\n");
             utilities::display("1.Consulter équipement\n2.Retour au menu\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 2);
+
+            choice = utilities::validateRange( 1, 2);
             return (choice == 2);
 
         } else {
@@ -102,8 +100,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                     "Voulez-vous: \n");
             utilities::display(
                     "1.Vous équiper d'une arme dans votre sac\n2.Utiliser un objet\n3.Consulter équipement\n4.Vous débarasser d'un objet dans votre sac\n5.Retour\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 5);
+
+            choice = utilities::validateRange( 1, 5);
             switch (choice) {
                 case 1:
                     objetsEquippables.clear();
@@ -131,8 +129,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                             utilities::display(to_string(i + 1) + "." + objetsEquippables[i].first->toString());
                         //then choose arm
                         utilities::display("Que choisissez-vous?\n");
-                        cin >> choice;
-                        choice = utilities::validateRange(choice, 1, objetsEquippables.size());
+
+                        choice = utilities::validateRange( 1, objetsEquippables.size());
                         //then remove arm from bag
                         utilities::display("Vous vous êtes équipé de: "+ objetsEquippables[choice - 1].first->getNom() + "\n");
                         personnage->removeFromSac(objetsEquippables[choice - 1].second);
@@ -160,8 +158,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                             utilities::display(to_string(i + 1) + "." + objetsUtilisables[i].first->toString());
                         //then choose object
                         utilities::display("Que choisissez-vous?\n");
-                        cin >> choice;
-                        choice = utilities::validateRange(choice, 1, objetsUtilisables.size());
+
+                        choice = utilities::validateRange( 1, objetsUtilisables.size());
                         switch (objetsUtilisables[choice - 1].first->getIdType()) {
                             case IDTYPE_ARME:
                                 cout << "ERROR OBJET NON UTILISABLE\n";
@@ -186,8 +184,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                     }
                     utilities::display(
                             to_string(sac.size() + 1) + ".Je ne veux plus me débarrasser d'un de mes objets.\n");
-                    cin >> choice;
-                    choice = utilities::validateRange(choice, 1, sac.size() + 1);
+                    choice = utilities::validateRange( 1, sac.size() + 1);
                     if (choice == sac.size() + 1)
                         break;
                     else {
@@ -202,8 +199,8 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             }
             utilities::display(
                     "Voulez-vous:\n1.Continuer à consulter votre sac\n2.Consulter votre équipement\n3.Retour\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 3);
+
+            choice = utilities::validateRange( 1, 3);
             if (choice == 3)
                 return true;
             continueLooping = (choice == 1);
@@ -244,13 +241,13 @@ void JoueurManuel::pickUpObjects(Jeu *jeu) {
             utilities::display("Voici les objets dans la salle:\n");
             salle->displayObjects();
             utilities::display("Lequel parmi ceux-ci voulez-vous ramasser?\n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, salle->numOfObjects());
+
+            choice = utilities::validateRange( 1, salle->numOfObjects());
             ramasser(salle->removeObject(choice - 1));
         }
         utilities::display("Maintenant, voulez-vous: \n1.Ramasser un autre objet\n2.Retour\n");
-        cin >> choice;
-        choice = utilities::validateRange(choice, 1, 2);
+
+        choice = utilities::validateRange(1, 2);
         continueLooping = (choice == 1);
     } while (continueLooping);
 
@@ -342,8 +339,8 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
     utilities::display("1. attaquer\n");
     utilities::display("2. utiliser un objet\n");
     int choice;
-    std::cin >> choice;
-    choice = utilities::validateRange(choice, 1,2);
+
+    choice = utilities::validateRange( 1,2);
     if(choice == 1){
         int degatsP = Combat::calculDegatsPhysique(this, j);
         int degatsM = Combat::calculDegatsMagique(this, j);
@@ -365,9 +362,9 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
             for(unsigned int i = 0; i < this->personnage->getSac().size(); i++){
                 utilities::display(std::to_string(i) + ". " + this->personnage->getSac()[i]->getNom());
             }
-            std::cin >> choice;
+
             do{
-                choice = utilities::validateRange(choice, 0, this->personnage->getSac().size() - 1);
+                choice = utilities::validateRange( 0, this->personnage->getSac().size() - 1);
                 if(this->personnage->getSac()[choice]->getIdType() != 1){
                     utilities::display("Vous ne pouvez pas utiliser cet objet pendant le combat");
                 }
@@ -392,8 +389,8 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
                        "Choisissez un nombre entre 1 et " +
                        to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
                        + "Attention! Ce choix est définitif." + "\n");
-    cin >> choice;
-    choice = utilities::validateRange(choice, 1, personnagesDisponiblesEtFrequences.size());
+
+    choice = utilities::validateRange( 1, personnagesDisponiblesEtFrequences.size());
     utilities::display("Bon choix. \n");
     utilities::display("Vous êtes digne d'un vrai prénom également. Quel est votre prénom?\n");
     cin >> name;
@@ -409,8 +406,8 @@ void JoueurManuel::endTurn(Jeu * jeu){
     utilities::display("Avant de faire ceci, voulez-vous changer de salle?\n");
     utilities::display("1. Oui \n2. Non\n");
 
-    cin >> choice;
-    choice = utilities::validateRange(choice, 1, 2);
+
+    choice = utilities::validateRange( 1, 2);
     if (choice == 1) {
         utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
         utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
@@ -421,8 +418,7 @@ void JoueurManuel::endTurn(Jeu * jeu){
             utilities::display(to_string(i + 1) + ". Salle " + to_string(neighbors[i]->getId()) + "\n");
         }
         utilities::display("Quelle salle choisissez-vous?\n");
-        cin >> choice;
-        choice = utilities::validateRange(choice, 1, neighbors.size());
+        choice = utilities::validateRange( 1, neighbors.size());
         jeu->moveJoueurtoSalle(this, neighbors[choice - 1]);
         utilities::display("Vous êtes maintenant dans la salle " + to_string(neighbors[choice - 1]->getId()) + "\n");
 

@@ -103,8 +103,7 @@ void Joueur::utiliserClef(Clef *c, Jeu *jeu) {
         utilities::display("Pour rappel, nous vous montrons la carte avec votre position.\n");
         jeu->displayMap(this);
         utilities::display("Quelle salle choisissez vous?\n");
-        cin >> choice;
-        choice = utilities::validateRange(choice, 0, jeu->getNumberOfSalles() - 1);
+        choice = utilities::validateRange( 0, jeu->getNumberOfSalles() - 1);
 
         pair<int, int> pair1 = jeu->getSallePosition(choice);
 

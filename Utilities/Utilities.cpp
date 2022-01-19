@@ -14,20 +14,42 @@ int utilities::random(int i, int j) {
 
 }
 
+bool utilities::isNumber(const string &str) {
+    for (char const &c: str) {
+        if (!isdigit(c)) return false;
+    }
+    return true;
+}
+
 //checks if x, in range [i,j], does validation and returns correct value entered
-int utilities::validateRange(int x, int i, int j) {
-    int entered = x;
+int utilities::validateRange(int i, int j) {
+    string entered;
+    int enteredInt;
+    bool unvalidated = false;
+    cin >> entered;
 
     do {
-        if (entered > j || entered < i) {
-            cout << "Vous avez entré une valeur non-conforme. " << endl
-                 << "Entrez une valeur entre " << i << " et " << j << "." << endl;
+        if (!isNumber(entered)) {
+            display("Vous avez entré une valeur non-conforme. \n");
+            display("Entrez une valeur entre " + to_string(i) + " et " + to_string(j) + ".\n");
             cin >> entered;
+            unvalidated = true;
+        } else {
+            enteredInt = stoi(entered);
+            if (enteredInt > j || enteredInt < i) {
+                cout << "Vous avez entré une valeur non-conforme. " << endl
+                     << "Entrez une valeur entre " << i << " et " << j << "." << endl;
+                cin >> entered;
+                unvalidated = true;
+            } else {
+                unvalidated = false;
+            }
+
         }
 
-    } while ((entered > j || entered < i));
+    } while (unvalidated);
 
-    return entered;
+    return enteredInt;
 }
 
 //displays line then waits for a bit for better readability
