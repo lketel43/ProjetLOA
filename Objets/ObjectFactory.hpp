@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Objet.hpp"
-//class Objet;
+
 
 class ObjectFactory{
     private:
@@ -16,6 +16,7 @@ class ObjectFactory{
         ObjectFactory(std::vector<Objet*>);
         ~ObjectFactory();
         Objet* produce();
+        Objet* produceArmeBasique();
 
 };
 

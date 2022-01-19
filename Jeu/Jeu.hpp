@@ -42,9 +42,6 @@ private:
     //Place objets au début de manière aléatoire dans le chateau
     void placeObjets();
 
-    ///CATEGORIE AUTOMATISATION
-    //Fait un choix automatique d'un personnage selon les frequences, pour permettre d'avoir une bonne répartition
-    // entre les personnages
 
     ///CATEGORIE DEROULEMENT JEU
 
@@ -52,7 +49,6 @@ private:
     friend class Clef;
 
     void tour(Joueur *);
-    void endTurn(Joueur*);
 
 public:
     //default values are :

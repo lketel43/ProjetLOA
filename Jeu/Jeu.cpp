@@ -149,7 +149,6 @@ void Jeu::initJoueurs() {
     //TODO: ecrire text du début
     utilities::display("Introductory text: needs completion \n");
 
-    //TODO: need to figure out name situation
     utilities::display("Il est temps pour chaque joueur de choisir son personnage.\n");
     utilities::display("Voici les personnages possibles, et leur stats.\n");
 
@@ -169,6 +168,11 @@ void Jeu::initJoueurs() {
                                + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
         joueurs[i]->setPersonnage(forge(choice - 1));
+        //Equipage des joueurs automatisés avec des armes basiques
+        if (joueurs[i]->isAutomatise()) {
+            joueurs[i]->equiper(objectFactory->produceArmeBasique());
+            joueurs[i]->equiper(objectFactory->produceArmeBasique());
+        }
     }
 
 }
@@ -329,13 +333,17 @@ void Jeu::tour(Joueur *joueur) {
                     joueur->pickUpObjects(this);
                     break;
                 case 3: {
-                    if (!salle->hasNoOtherPlayers()) {
+                    if (salle->hasNoOtherPlayers()) {
                         utilities::display("Il n'y a pas d'ennemi ici.\n");
                         break;
                     }
                     // Afficher les perso de la salle
-                    vector<pair<Joueur*, int> > ennemies{salle->displayEnnemi(joueur)};
-                    utilities::display("Choisissez un ennemi à combattre\n");
+                    //TODO: BUG, affiche les valeurs de 0->nbEnnemi - 1
+                    //TODO: autre bug dans combat, joueur adversaire peut toujours attaquer meme si a 0 santé
+                    //TODO: les degats sont égaux
+                    //TODO: peut-être montrer les stats des joueurs ennemies (en incluant les armes qu'ils ont)
+                    vector<pair<Joueur *, int> > ennemies{salle->displayEnnemi(joueur)};
+                    utilities::display("Choisissez un ennemi à combattre:\n");
                     // Faire le le choix
                     int choiceEnnemi;
                     cin >> choiceEnnemi;
@@ -351,7 +359,7 @@ void Jeu::tour(Joueur *joueur) {
                         joueur->endTurn(this);
                     else {
                         utilities::display(
-                                "Il vous reste encore des ennemis à combattre ici.\n Vous ne pouvez pas finir votre tour maintenant.\n");
+                                "Il vous reste encore des ennemis à combattre ici.\nVous ne pouvez pas finir votre tour maintenant.\n");
                     }
                     break;
                 default:
@@ -364,9 +372,6 @@ void Jeu::tour(Joueur *joueur) {
 
 }
 
-void Jeu::endTurn(Joueur *joueur) {
-
-}
 
 void Jeu::displayMap(Joueur *joueur) const {
     chateau->display(joueur->getPosition());

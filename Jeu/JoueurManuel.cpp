@@ -101,7 +101,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             utilities::display(
                     "Voulez-vous: \n");
             utilities::display(
-                    "1.Vous équiper d'une nouvelle arme\n2.Utiliser un objet\n3.Consulter équipement\n4.Vous débarasser d'un objet dans votre sac\n5.Retour\n");
+                    "1.Vous équiper d'une arme dans votre sac\n2.Utiliser un objet\n3.Consulter équipement\n4.Vous débarasser d'un objet dans votre sac\n5.Retour\n");
             cin >> choice;
             choice = utilities::validateRange(choice, 1, 5);
             switch (choice) {
