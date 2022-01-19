@@ -150,7 +150,7 @@ vector<Joueur*> Jeu::getJoueurs() const{
 
 void Jeu::removeJoueur(Personnage* mort) {
     for(unsigned int i = 0; i < joueurs.size(); i++){
-        if(joueurs[i]->getPersonnage() == mort){
+        if(&(*joueurs[i]->getPersonnage()) == &(*mort)){
             joueurs.erase(joueurs.begin() + i);
             break;
         }
@@ -352,13 +352,13 @@ void Jeu::tour(Joueur *joueur) {
                     // Faire le le choix
                     int choiceEnnemi;
                     cin >> choiceEnnemi;
-                    choice = utilities::validateRange(choiceEnnemi, 1, salle->nbEnnemi());
+                    choiceEnnemi = utilities::validateRange(choiceEnnemi, 1, salle->nbEnnemi());
                     // Créer le combat et le lancer
-                    int index = ennemies[choiceEnnemi].second;
+                    int index = ennemies[choiceEnnemi - 1].second;
                     Combat c{joueur, salle->getJoueur()[index]};
+                    c.commencerCombat();
                     joueur->mort(this);
                     salle->getJoueur()[index]->mort(this);
-                    c.commencerCombat();
                     break;
                 }
                 case 4:

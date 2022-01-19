@@ -104,7 +104,7 @@ vector<pair<Joueur*, int> > Salle::displayEnnemi(Joueur* j) const{
     }
     utilities::display("Les ennemis suivants sont présents\n");
     for(unsigned int i = 0; i < v.size(); i++){
-        utilities::display(to_string(i) + ". " + v[i].first->getPersonnage()->getName() + "\n" + v[i].first->getPersonnage()->getStats());
+        utilities::display(to_string(i + 1) + ". " + v[i].first->getPersonnage()->getName() + "\n" + v[i].first->getPersonnage()->getStats());
     }
     return v;
 }

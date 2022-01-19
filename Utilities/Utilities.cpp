@@ -36,7 +36,7 @@ void utilities::display(const string &text) {
     using namespace std::chrono; // nanoseconds, system_clock, seconds
 
     cout << text;
-    sleep_for(seconds(1));
+    //sleep_for(seconds(1));
 }
 
 int utilities::bernouilli(float param) {
