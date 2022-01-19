@@ -162,7 +162,6 @@ void Jeu::initJoueurs() {
     //TODO: ecrire text du début
     utilities::display("Introductory text: needs completion \n");
 
-    //TODO: need to figure out name situation
     utilities::display("Il est temps pour chaque joueur de choisir son personnage.\n");
     utilities::display("Voici les personnages possibles, et leur stats.\n");
 
@@ -182,6 +181,11 @@ void Jeu::initJoueurs() {
                                + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
         joueurs[i]->setPersonnage(forge(choice - 1));
+        //Equipage des joueurs automatisés avec des armes basiques
+        if (joueurs[i]->isAutomatise()) {
+            joueurs[i]->equiper(objectFactory->produceArmeBasique());
+            joueurs[i]->equiper(objectFactory->produceArmeBasique());
+        }
     }
 
 }
@@ -331,8 +335,8 @@ void Jeu::tour(Joueur *joueur) {
             utilities::display("2. Ramasser des objets.\n");
             utilities::display("3. Commencer un combat. \n");
             utilities::display("4. Finir votre tour. \n");
-            cin >> choice;
-            choice = utilities::validateRange(choice, 1, 4);
+
+            choice = utilities::validateRange( 1, 4);
             //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
@@ -342,17 +346,20 @@ void Jeu::tour(Joueur *joueur) {
                     joueur->pickUpObjects(this);
                     break;
                 case 3: {
-                    if (!salle->hasNoOtherPlayers()) {
+                    if (salle->hasNoOtherPlayers()) {
                         utilities::display("Il n'y a pas d'ennemi ici.\n");
                         break;
                     }
                     // Afficher les perso de la salle
-                    vector<pair<Joueur*, int> > ennemies{salle->displayEnnemi(joueur)};
-                    utilities::display("Choisissez un ennemi à combattre\n");
+                    //TODO: BUG, affiche les valeurs de 0->nbEnnemi - 1
+                    //TODO: autre bug dans combat, joueur adversaire peut toujours attaquer meme si a 0 santé
+                    //TODO: les degats sont égaux
+                    //TODO: peut-être montrer les stats des joueurs ennemies (en incluant les armes qu'ils ont)
+                    vector<pair<Joueur *, int> > ennemies{salle->displayEnnemi(joueur)};
+                    utilities::display("Choisissez un ennemi à combattre:\n");
                     // Faire le le choix
                     int choiceEnnemi;
-                    cin >> choiceEnnemi;
-                    choiceEnnemi = utilities::validateRange(choiceEnnemi, 1, salle->nbEnnemi());
+                    choiceEnnemi = utilities::validateRange(1, salle->nbEnnemi());
                     // Créer le combat et le lancer
                     int index = ennemies[choiceEnnemi - 1].second;
                     Combat c{joueur, salle->getJoueur()[index]};
@@ -363,10 +370,10 @@ void Jeu::tour(Joueur *joueur) {
                 }
                 case 4:
                     if (salle->hasNoOtherPlayers())
-                        endTurn(joueur);
+                        joueur->endTurn(this);
                     else {
                         utilities::display(
-                                "Il vous reste encore des ennemis à combattre ici.\n Vous ne pouvez pas finir votre tour maintenant.\n");
+                                "Il vous reste encore des ennemis à combattre ici.\nVous ne pouvez pas finir votre tour maintenant.\n");
                     }
                     break;
                 default:
@@ -379,39 +386,6 @@ void Jeu::tour(Joueur *joueur) {
 
 }
 
-void Jeu::endTurn(Joueur *joueur) {
-    pair<int, int> position = joueur->getPosition();
-    Salle *salle = chateau->map[position.first][position.second];
-    vector<Salle *> neighbors = salle->getNeighbors();
-    pair<int, int> newSalleCoordinates;
-    int choice;
-    utilities::display("Vous avez decidé de finir votre tour.\n");
-    utilities::display("Avant de faire ceci, voulez-vous changer de salle?\n");
-    utilities::display("1. Oui \n2. Non\n");
-
-    cin >> choice;
-    choice = utilities::validateRange(choice, 1, 2);
-    if (choice == 1) {
-        utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
-        utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
-        chateau->display(joueur->getPosition());
-
-        utilities::display("Vous avez donc le choix d'aller dans les salles suivantes: \n");
-        for (long unsigned int i = 0; i < neighbors.size(); i++) {
-            utilities::display(to_string(i + 1) + ". Salle " + to_string(neighbors[i]->getId()) + "\n");
-        }
-        utilities::display("Quelle salle choisissez-vous?\n");
-        cin >> choice;
-        choice = utilities::validateRange(choice, 1, neighbors.size());
-        newSalleCoordinates = chateau->getSalleCoordinates(neighbors[choice - 1]->getId());
-        moveJoueur(joueur, newSalleCoordinates.first, newSalleCoordinates.second);
-        utilities::display("Vous êtes maintenant dans la salle " + to_string(neighbors[choice - 1]->getId()) + "\n");
-
-
-// TODO; FINISH
-    }
-    utilities::display("Fin de tour pour le Joueur " + joueur->getName() + "\n");
-}
 
 void Jeu::displayMap(Joueur *joueur) const {
     chateau->display(joueur->getPosition());
@@ -422,8 +396,9 @@ unsigned int Jeu::getNumberOfSalles() const {
     return chateau->width * chateau->length;
 }
 
-pair<int, int> Jeu::getSallePosition(int &num) const {
+pair<int, int> Jeu::getSallePosition(int num) const {
     return chateau->getSalleCoordinates(num);
+
 }
 
 void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
@@ -437,4 +412,9 @@ Salle *Jeu::getSalle(std::pair<int, int> position) const {
     }
     return chateau->map[position.first][position.second];
 
+}
+
+void Jeu::moveJoueurtoSalle(Joueur *joueur, Salle *salle) {
+    pair<int, int> position = getSallePosition(salle->getId());
+    moveJoueur(joueur, position.first, position.second);
 }

@@ -17,6 +17,7 @@ public:
     void utiliserPotionPosion(Potion*, const Joueur*) const override;
     int choosePersonnage(std::vector<std::pair<Personnage *, int> >) override;
     void mort(Jeu*) override;
+    void endTurn(Jeu *) override;
 
 };
 

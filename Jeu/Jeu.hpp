@@ -42,16 +42,13 @@ private:
     //Place objets au début de manière aléatoire dans le chateau
     void placeObjets();
 
-    ///CATEGORIE AUTOMATISATION
-    //Fait un choix automatique d'un personnage selon les frequences, pour permettre d'avoir une bonne répartition
-    // entre les personnages
 
     ///CATEGORIE DEROULEMENT JEU
+
     void moveJoueur(Joueur*, int x, int y);
     friend class Clef;
 
     void tour(Joueur *);
-    void endTurn(Joueur*);
 
 public:
     //default values are :
@@ -61,13 +58,14 @@ public:
     Jeu();
     std::vector<Joueur*> getJoueurs() const;
     void removeJoueur(Personnage*);
-    std::pair<int, int> getSallePosition(int&) const;
     void displayMap(Joueur*) const;
     unsigned int getNumberOfSalles() const;
     void lancePartie();
+    std::pair<int, int> getSallePosition(int num) const;
     void placerDansSalle(std::pair<int,int>, Objet*);
     Salle* getSalle(std::pair<int, int>) const;
     ~Jeu();
+    void moveJoueurtoSalle(Joueur*, Salle*);
 
     //Makes number of players, number of automatised players and chateau dimensions customizable
     Jeu(int, int, unsigned int, unsigned int);

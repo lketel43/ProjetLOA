@@ -72,7 +72,7 @@ bool Salle::hasNoObjects() const {
 }
 
 bool Salle::hasNoOtherPlayers() const {
-    return (joueurs.size() > 1);
+    return (joueurs.size() <= 1);
 }
 
 void Salle::display() const {
