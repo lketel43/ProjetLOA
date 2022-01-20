@@ -32,7 +32,7 @@ private:
     int attaqueMagique;
     int resistancePhysique;
     int resistanceMagique;
-    std::pair<unsigned int, unsigned int> position;
+    std::pair<int, int> position;
 
 public:
     ~Personnage();
@@ -50,13 +50,15 @@ public:
     int getAttaqueMagique() const;
     int getResistancePhysique() const;
     int getResistanceMagique() const;
-    std::pair<unsigned int, unsigned int> getPosition() const;
+    std::pair<int, int> getPosition() const;
 
     std::vector<Objet*> getSac() const;
     void addToSac(Objet*);
     void removeFromSac(int);
     bool isSacFull() const;
     void displaySac() const;
+
+    bool isPlaced() const;
 
     bool isEquipementFull() const;
     std::vector<Objet*> getEquipement();
@@ -69,6 +71,7 @@ public:
     void setAttaqueMagique(int);
     void setResistancePhysique(int);
     void setResistanceMagique(int);
+    void setPosition(int x, int y);
 
     Potion* hasPotionBoostSante() const;
     Potion* hasPotionPoison() const;

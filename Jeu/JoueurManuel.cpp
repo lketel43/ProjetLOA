@@ -48,7 +48,7 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
                     utilities::display("Choisissez l'arme que vous souhaitez jeter.\n");
 
                     choice = utilities::validateRange( 1, equipement.size());
-                    jeu->placerDansSalle(this->position, equipement[choice - 1]);
+                    jeu->placerDansSalle(this->personnage->getPosition(), equipement[choice - 1]);
                     equipement.erase(equipement.begin() + choice - 1);
                     break;
                 default:
@@ -188,7 +188,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                     if (choice == sac.size() + 1)
                         break;
                     else {
-                        jeu->placerDansSalle(this->position, sac[choice - 1]);
+                        jeu->placerDansSalle(this->personnage->getPosition(), sac[choice - 1]);
                         personnage->removeFromSac((choice - 1));
                     }
 
@@ -226,7 +226,7 @@ void JoueurManuel::consulterSacEtEquipement(Jeu *jeu) {
 }
 
 void JoueurManuel::pickUpObjects(Jeu *jeu) {
-    Salle *salle = jeu->getSalle(position);
+    Salle *salle = jeu->getSalle(this->personnage->getPosition());
     int choice;
     bool continueLooping = false;
     do {
@@ -402,7 +402,7 @@ Joueur* JoueurManuel::mort(Jeu *jeu){
     if(this->personnage->getSante() <= 0){
         utilities::display(nom + " est éliminé du jeu.\n");
         jeu->removeJoueur(this->personnage);
-        jeu->getSalle(this->position)->removePlayer(this->personnage);
+        jeu->getSalle(this->personnage->getPosition())->removePlayer(this->personnage);
         this->personnage = nullptr;
         return this;
     }
@@ -410,7 +410,7 @@ Joueur* JoueurManuel::mort(Jeu *jeu){
 }
 
 void JoueurManuel::endTurn(Jeu * jeu){
-    Salle *salle = jeu->getSalle(position);
+    Salle *salle = jeu->getSalle(this->personnage->getPosition());
     vector<Salle *> neighbors = salle->getNeighbors();
     int choice;
     utilities::display("Vous avez decidé de finir votre tour.\n");

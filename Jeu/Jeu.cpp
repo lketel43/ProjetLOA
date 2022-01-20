@@ -262,19 +262,19 @@ void Jeu::placeJoueurs() {
 
             if (chateau->map[x][y]->numOfPlayers() == 0) {
 
-                joueurs[i]->setPosition(x, y);
+                joueurs[i]->getPersonnage()->setPosition(x, y);
                 chateau->map[x][y]->addPlayer(joueurs[i]);
                 utilities::display("Joueur " + joueurs[i]->getName() + " est placé dans la salle " +
                                    to_string(chateau->map[x][y]->getId())
                                    + ".\n");
 
             }
-        } while (!joueurs[i]->isPlaced());
+        } while (!joueurs[i]->getPersonnage()->isPlaced());
     }
 
     for (unsigned int i = nombreJoueurNonAutomatise; i < joueurs.size(); i++) {
         pair<int, int> minCoords = chateau->getEmptiestRoom();
-        joueurs[i]->setPosition(minCoords.first, minCoords.second);
+        joueurs[i]->getPersonnage()->setPosition(minCoords.first, minCoords.second);
         chateau->map[minCoords.first][minCoords.second]->addPlayer(joueurs[i]);
 
     }
@@ -298,11 +298,11 @@ void Jeu::initVecteurPersonnages() {
 }
 
 void Jeu::moveJoueur(Joueur *joueur, int x, int y) {
-    pair<int, int> currPosition = joueur->getPosition();
+    pair<int, int> currPosition = joueur->getPersonnage()->getPosition();
 
     chateau->map[currPosition.first][currPosition.second]->removePlayer(joueur);
 
-    joueur->setPosition(x, y);
+    joueur->getPersonnage()->setPosition(x, y);
     chateau->map[x][y]->addPlayer(joueur);
 
 }
@@ -319,7 +319,7 @@ void Jeu::placeObjets() {
 }
 
 void Jeu::tour(Joueur *joueur) {
-    pair<int, int> position = joueur->getPosition();
+    pair<int, int> position = joueur->getPersonnage()->getPosition();
     Salle *salle = chateau->map[position.first][position.second];
 
     if (!joueur->isAutomatise()) {
@@ -407,7 +407,7 @@ void Jeu::tour(Joueur *joueur) {
 
 
 void Jeu::displayMap(Joueur *joueur) const {
-    chateau->display(joueur->getPosition());
+    chateau->display(joueur->getPersonnage()->getPosition());
 
 }
 

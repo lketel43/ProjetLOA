@@ -14,14 +14,7 @@ using namespace std;
 
 Joueur::Joueur(const string name, const bool autom) : personnage(nullptr),
                                                       automatise(autom), nom(name) {
-    //Le joueur n'est pas placé encore
-    position.first = position.second = -1;
     score = 0;
-}
-
-void Joueur::setPosition(const int &x, const int &y) {
-    position.first = x;
-    position.second = y;
 }
 
 Joueur::~Joueur() {
@@ -34,15 +27,6 @@ std::string Joueur::getName() const {
 
 Personnage *Joueur::getPersonnage() const {
     return this->personnage;
-}
-
-bool Joueur::isPlaced() const {
-
-    return (position.first != -1 && position.second != -1);
-}
-
-pair<int, int> Joueur::getPosition() const {
-    return position;
 }
 
 ostream &operator<<(ostream &out, Joueur *joueur) {
