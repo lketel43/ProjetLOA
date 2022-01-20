@@ -241,7 +241,7 @@ void Jeu::lancePartie() {
     placeObjets();
 
 
-    while (true) {
+    while (!this->partieFinie) {
         renforcerJoueursAutomatises();
         for (unsigned int i = 0; i < joueurs.size(); i++) {
             tour(joueurs[i]);
@@ -464,9 +464,20 @@ void Jeu::tour(Joueur *joueur) {
                         utilities::display("Vous retrouverez également une potion de santé dans la salle pour vous récompenser.\n");
                         delete m2;
                     }
-                    if (m1 != nullptr) {
 
+                    //Si tous les ennemis ont été vaincus
+                    if(this->joueurs.size() == 1){
+                        utilities::display("Tous les ennemis ont été vaincus, la partie se termine.\n");
+                        this->partieFinie = true;
+                        return;
                     }
+                    //Mort joueurManuel
+                    if (m1 != nullptr) {
+                        utilities::display("Vous avez été vaincu, la partie se termine.\n");
+                        this->partieFinie = true;
+                        return;
+                    }
+
                     salle->placeObject(objectFactory->producePotionDeSanteExtra());
                     break;
                 }
