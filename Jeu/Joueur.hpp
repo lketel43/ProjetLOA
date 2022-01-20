@@ -10,11 +10,11 @@
 #include "../Objets/Potion.hpp"
 
 class Salle;
-class Jeu;
 
 class Joueur {
 private:
     friend std::ostream& operator<<(std::ostream&, Joueur*);
+    friend class Jeu;
 
 protected:
     Personnage * personnage;
@@ -22,8 +22,8 @@ protected:
     std::string nom;
     std::pair<int, int> position;
     int score;
-public:
     Joueur(std::string, bool);
+public:
     virtual ~Joueur()=0;
 
     void setPosition(const int&, const int&);
