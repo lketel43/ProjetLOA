@@ -30,3 +30,10 @@ string Clef::toString() const {
 }
 
 Clef::~Clef() = default;
+
+bool Clef::isArmeDattaque() const{
+    return false;
+}
+bool Clef::isArmeDeDefense() const {
+    return false;
+}

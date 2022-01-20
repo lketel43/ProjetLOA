@@ -52,3 +52,11 @@ string Arme::toString() const {
 }
 
 Arme::~Arme() = default;
+
+bool Arme::isArmeDattaque() const {
+    return (dommagePhysique + dommageMagique >= defensePhysique + defenseMagique);
+}
+
+bool Arme::isArmeDeDefense() const {
+    return (dommagePhysique + dommageMagique <= defensePhysique + defenseMagique);
+}

@@ -43,11 +43,42 @@ Objet *ObjectFactory::produceArmeBasique() {
     }
 }
 
-Objet* ObjectFactory::producePotion() {
+Objet *ObjectFactory::producePotion() {
     Objet *objet;
     while (true) {
         objet = produce();
         if (objet->getIdType() == IDTYPE_POTION)
             return objet;
     }
+}
+
+Objet *ObjectFactory::produceArmeExtraordinaire() {
+    Objet *objet;
+    while (true) {
+        objet = produce();
+        if (objet->equipable && objet->getRarete() > 10)
+            return objet;
+    }
+}
+
+Objet *ObjectFactory::produireArmeLegendaire() {
+    for (long unsigned int i = 0; i < disponibles.size(); i++) {
+        if (disponibles[i]->isEquipable()) {
+           if(disponibles[i]->isArmeDattaque() && disponibles[i]->getRarete() >= 50)
+               return disponibles[i]->copy();
+        }
+
+    }
+    return nullptr;
+}
+
+Objet* ObjectFactory::produireBouclierLegendaire() {
+    for (long unsigned int i = 0; i < disponibles.size(); i++) {
+        if (disponibles[i]->isEquipable()) {
+            if(disponibles[i]->isArmeDeDefense() && disponibles[i]->getRarete() >= 50)
+                return disponibles[i]->copy();
+        }
+
+    }
+    return nullptr;
 }

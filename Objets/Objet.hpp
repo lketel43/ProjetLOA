@@ -31,6 +31,8 @@ public:
     int getIdType() const;
     bool isEquipable();
     bool isUtilisable();
+    virtual bool isArmeDattaque() const=0;
+    virtual bool isArmeDeDefense() const=0;
     virtual void display() const =0;
     virtual std::string toString() const =0;
 

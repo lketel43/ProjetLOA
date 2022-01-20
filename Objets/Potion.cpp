@@ -40,3 +40,11 @@ Potion *Potion::copy() {
 }
 
 Potion::~Potion() = default;
+
+bool Potion::isArmeDeDefense() const {
+    return false;
+}
+
+bool Potion::isArmeDattaque() const {
+    return false;
+}

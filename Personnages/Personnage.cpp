@@ -198,3 +198,7 @@ Potion* Personnage::hasPotionBoost() const{
     }
     return nullptr;
 }
+
+bool Personnage::isSacEmpty() const {
+    return sac.empty();
+}

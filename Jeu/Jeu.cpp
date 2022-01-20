@@ -144,13 +144,13 @@ Jeu::Jeu() : nombreDeJoueurs(5), nombreJoueurNonAutomatise(1) {
 
 }
 
-vector<Joueur*> Jeu::getJoueurs() const{
+vector<Joueur *> Jeu::getJoueurs() const {
     return joueurs;
 }
 
-void Jeu::removeJoueur(Personnage* mort) {
-    for(unsigned int i = 0; i < joueurs.size(); i++){
-        if(&(*joueurs[i]->getPersonnage()) == &(*mort)){
+void Jeu::removeJoueur(Personnage *mort) {
+    for (unsigned int i = 0; i < joueurs.size(); i++) {
+        if (&(*joueurs[i]->getPersonnage()) == &(*mort)) {
             joueurs.erase(joueurs.begin() + i);
             break;
         }
@@ -239,13 +239,88 @@ void Jeu::lancePartie() {
     placeJoueurs();
     placeObjets();
 
-    //joueurs[0]->getPersonnage()->setHabilete(90);
-    //Combat* c = new Combat(joueurs[0], joueurs[1]);
-    //c->commencerCombat();
-    // TEST COMBAT
+
     while (true) {
+        renforcerJoueursAutomatises();
         for (unsigned int i = 0; i < joueurs.size(); i++) {
             tour(joueurs[i]);
+        }
+    }
+}
+
+void Jeu::renforcerJoueursAutomatises() {
+    int random;
+    int count;
+    Personnage *personnage;
+    vector<Objet *> equipement;
+
+    if (joueurs.size() < nombreDeJoueurs / 2) {
+        if (joueurs.size() < nombreDeJoueurs / 4) {
+            if (joueurs.size() == 2) {
+                //trouver l'autre joueur et le transformer en big boss
+                for (long unsigned int i = 0; i < joueurs.size(); i++) {
+                    if(joueurs[i]->isAutomatise()){
+                        personnage = joueurs[i]->getPersonnage();
+                        equipement = personnage->getEquipement();
+                        //TODO might be source of error
+                        while (!equipement.empty()) {
+                            delete equipement[0];
+                            personnage->removeFromEquipement(0);
+                        }
+                        joueurs[i]->ramasser(objectFactory->produireArmeLegendaire());
+                        joueurs[i]->ramasser(objectFactory->produireBouclierLegendaire());
+                    }
+                }
+            } else {
+                //donner a tous les joueurs des armes automatiques fortes
+                for (long unsigned int i = 0; i < joueurs.size(); i++) {
+                    //chercher tous les joueurs AUTOMATIQUES
+                    if (joueurs[i]->isAutomatise()) {
+                        personnage = joueurs[i]->getPersonnage();
+                        equipement = personnage->getEquipement();
+                        //TODO might be source of error
+                        //delete leur equipement
+                        while (!equipement.empty()) {
+                            delete equipement[0];
+                            personnage->removeFromEquipement(0);
+                        }
+                        //leur donner deux armes fortes
+                        joueurs[i]->equiper(objectFactory->produceArmeExtraordinaire());
+                        joueurs[i]->equiper(objectFactory->produceArmeExtraordinaire());
+                    }
+
+                }
+            }
+        } else {
+            //choisir deux joueurs et leur donner deux potions(au plus)
+            count = 1;
+            for (long unsigned int i = 0; i < joueurs.size(); i++) {
+                random = utilities::random(0, joueurs.size() - 1);
+                if (joueurs[random]->isAutomatise()) {
+                    if (!joueurs[random]->getPersonnage()->isSacFull()) {
+                        count++;
+                        joueurs[random]->ramasser(objectFactory->producePotion());
+                        if (!joueurs[random]->getPersonnage()->isSacFull()) {
+                            joueurs[random]->ramasser(objectFactory->producePotion());
+                        }
+                        if (count > 2)
+                            return;
+                        i = 0;
+                    }
+                }
+            }
+        }
+
+    } else {
+        //choisir joueur random et lui donner une potion
+        for (long unsigned int i = 0; i < joueurs.size(); i++) {
+            random = utilities::random(0, joueurs.size() - 1);
+            if (joueurs[random]->isAutomatise()) {
+                if (!joueurs[random]->getPersonnage()->isSacFull()) {
+                    joueurs[random]->ramasser(objectFactory->producePotion());
+                    return;
+                }
+            }
         }
     }
 }
@@ -337,7 +412,7 @@ void Jeu::tour(Joueur *joueur) {
             utilities::display("3. Commencer un combat. \n");
             utilities::display("4. Finir votre tour. \n");
 
-            choice = utilities::validateRange( 1, 4);
+            choice = utilities::validateRange(1, 4);
             //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
@@ -361,15 +436,15 @@ void Jeu::tour(Joueur *joueur) {
                     choiceEnnemi = utilities::validateRange(1, salle->nbEnnemi());
                     // Créer le combat et le lancer
                     int index = ennemies[choiceEnnemi - 1].second;
-                    if(joueur->getPersonnage()->getHabilete() >= salle->getJoueur()[index]->getPersonnage()->getHabilete()){
+                    if (joueur->getPersonnage()->getHabilete() >=
+                        salle->getJoueur()[index]->getPersonnage()->getHabilete()) {
                         Combat c{joueur, salle->getJoueur()[index]};
                         c.commencerCombat();
-                    }
-                    else{
+                    } else {
                         Combat c{salle->getJoueur()[index], joueur};
                         c.commencerCombat();
                     }
-                    
+
 
                     //Mort éventuelle des joueurs
                     Joueur* m1 = joueur->mort(this);
@@ -386,22 +461,19 @@ void Jeu::tour(Joueur *joueur) {
                         }
                         delete m2;
                     }
-                    if(m1 != nullptr){
+                    if (m1 != nullptr) {
 
                     }
                     break;
                 }
                 case 4:
-                    if (salle->hasNoOtherPlayers()){
+                    if (salle->hasNoOtherPlayers()) {
                         //rajouter objets dans la salle qu'il va quitter
                         salle->placeObject(objectFactory->produce());
                         salle->placeObject(objectFactory->produce());
                         joueur->endTurn(this);
 
-                    }
-
-
-                    else {
+                    } else {
                         utilities::display(
                                 "Il vous reste encore des ennemis à combattre ici.\nVous ne pouvez pas finir votre tour maintenant.\n");
                     }

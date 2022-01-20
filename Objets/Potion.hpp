@@ -25,6 +25,8 @@ class Potion: public Objet{
         void display() const override;
         std::string toString() const override;
         bool getPoison() const;
+        bool isArmeDattaque() const override;
+        bool isArmeDeDefense() const override;
 
 };
 

@@ -17,7 +17,10 @@ class ObjectFactory{
         ~ObjectFactory();
         Objet* produce();
         Objet* produceArmeBasique();
+        Objet* produceArmeExtraordinaire();
         Objet* producePotion();
+        Objet* produireArmeLegendaire();
+        Objet* produireBouclierLegendaire();
 
 };
 

@@ -43,6 +43,7 @@ private:
 
     ///CATEGORIE DEROULEMENT JEU
     void moveJoueur(Joueur*, int x, int y);
+    void renforcerJoueursAutomatises();
     friend class Clef;
     void tour(Joueur *);
 

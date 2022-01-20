@@ -25,6 +25,8 @@ class Arme: public Objet{
         float getDommageMagique() const;
         float getDefensePhysique() const;
         float getDefenseMagique() const;
+        bool isArmeDattaque() const override;
+        bool isArmeDeDefense() const override;
         void display() const override;
         std::string toString() const override;
         ~Arme() override;

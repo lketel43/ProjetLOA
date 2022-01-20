@@ -56,6 +56,7 @@ public:
     void addToSac(Objet*);
     void removeFromSac(int);
     bool isSacFull() const;
+    bool isSacEmpty() const;
     void displaySac() const;
 
     bool isPlaced() const;
@@ -64,6 +65,7 @@ public:
     std::vector<Objet*> getEquipement();
     void addToEquipement(Objet*);
     void removeFromEquipement(int);
+
 
     void setSante(int);
     void setHabilete(int);
