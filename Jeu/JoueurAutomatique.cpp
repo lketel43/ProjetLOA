@@ -39,7 +39,7 @@ void JoueurAutomatique::pickUpObjects(Jeu *) {
 
 void JoueurAutomatique::utiliserPotion(Potion* p) const{
     if(!p->getPoison()){
-        utilities::display("Le joueur " + this->getName() + " utilise une potion de " + p->getType() + ".\n");
+        utilities::display("L'ennemi utilise une potion de " + p->getType() + ".\n");
         if (p->getType() == "sante") {
             this->personnage->setSante(p->getBoost());
         }
