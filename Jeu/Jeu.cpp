@@ -238,7 +238,8 @@ Personnage *Jeu::forge(int choice) {
 }
 
 
-void Jeu::lancePartie() {
+bool Jeu::lancePartie() {
+    unsigned int choice;
     initJoueurs();
     placeJoueurs();
     placeObjets();
@@ -250,6 +251,12 @@ void Jeu::lancePartie() {
             tour(joueurs[i]);
         }
     }
+
+    utilities::display("Voulez-vous relancer une autre partie?\n");
+    utilities::display("1.Oui\n2.Non\n");
+    choice = utilities::validateRange(1,2);
+    return (choice == 1);
+
 
 }
 
@@ -263,6 +270,7 @@ void Jeu::renforcerJoueursAutomatises() {
         if (joueurs.size() < nombreDeJoueurs / 4) {
             if (joueurs.size() == 2) {
                 //trouver l'autre joueur et le transformer en big boss
+                utilities::display("Il vous reste un ennemi final. Mais attention: il est légendaire!\n");
                 for (long unsigned int i = 0; i < joueurs.size(); i++) {
                     if (joueurs[i]->isAutomatise()) {
                         personnage = joueurs[i]->getPersonnage();
@@ -272,12 +280,14 @@ void Jeu::renforcerJoueursAutomatises() {
                             delete equipement[0];
                             personnage->removeFromEquipement(0);
                         }
-                        joueurs[i]->ramasser(objectFactory->produireArmeLegendaire());
-                        joueurs[i]->ramasser(objectFactory->produireBouclierLegendaire());
+                        joueurs[i]->equiper(objectFactory->produireArmeLegendaire());
+                        joueurs[i]->equiper(objectFactory->produireBouclierLegendaire());
+
                     }
                 }
             } else {
                 //donner a tous les joueurs des armes automatiques fortes
+                utilities::display("Vos ennemis deviennent plus forts!\n");
                 for (long unsigned int i = 0; i < joueurs.size(); i++) {
                     //chercher tous les joueurs AUTOMATIQUES
                     if (joueurs[i]->isAutomatise()) {
@@ -432,7 +442,6 @@ void Jeu::tour(Joueur *joueur) {
                         break;
                     }
                     // Afficher les perso de la salle
-                    //TODO: les degats sont égaux
                     utilities::display("Pour rappel, voici vos statistiques: \n");
                     utilities::display(joueur->getPersonnage()->getStats());
                     vector<pair<Joueur *, int> > ennemies{salle->displayEnnemi(joueur)};

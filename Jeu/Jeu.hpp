@@ -59,7 +59,7 @@ public:
     void removeJoueur(Personnage*);
     void displayMap(Joueur*) const;
     unsigned int getNumberOfSalles() const;
-    void lancePartie();
+    bool lancePartie();
     std::pair<int, int> getSallePosition(int num) const;
     void placerDansSalle(std::pair<int,int>, Objet*);
     Salle* getSalle(std::pair<unsigned int, unsigned int>) const;
