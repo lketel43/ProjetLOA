@@ -33,7 +33,6 @@ void Salle::addPlayer(Joueur *j) {
 
 }
 
-//TODO: need to verify it works
 void Salle::removePlayer(Joueur *joueur) {
     for (long unsigned int i = 0; i < joueurs.size(); i++) {
         if (joueurs[i] == joueur) {

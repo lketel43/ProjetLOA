@@ -29,7 +29,6 @@ vector<Objet *> initVecteurObjets() {
     ret.push_back(new Potion("Potion de santé légendaire", 30, 50, "sante"));
 
     //Potions d'habileté
-    //TODO: a quoi sert l'habilete??
     ret.push_back(new Potion("Potion d'habileté  ordinaire", 1, 10, "habilete"));
     ret.push_back(new Potion("Potion d'habileté extraordinaire", 5, 20, "habilete"));
     ret.push_back(new Potion("Potion d'habileté  légendaire", 10, 50, "habilete"));
@@ -123,9 +122,9 @@ void Jeu::initVecteursJoueurs() {
 }
 
 
-//TODO: make it check that value of joueurs> joueurNonAuto
 Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned int chateauWidth)
         : nombreDeJoueurs(joueurs), nombreJoueurNonAutomatise(joueurNonAuto) {
+    if(joueurNonAuto >= joueurs) throw std::invalid_argument("joueurNon is not suppose to be higher than joueurs");
     chateau = new Chateau(chateauWidth, chateauLength);
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
@@ -159,8 +158,6 @@ void Jeu::removeJoueur(Personnage *mort) {
 
 void Jeu::initJoueurs() {
     int choice;
-    //TODO: ecrire text du début
-    utilities::display("Introductory text: needs completion \n");
 
     utilities::display("Il est temps pour chaque joueur de choisir son personnage.\n");
     utilities::display("Voici les personnages possibles, et leur stats.\n");
@@ -346,7 +343,6 @@ void Jeu::placeJoueurs() {
 
     //Vrais joueurs sont placés de manière random
     for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
-        //TODO: careful, might be source of slow execution
         do {
             x = utilities::random(0, chateau->getWidth() - 1);
             y = utilities::random(0, chateau->getLength() - 1);
@@ -418,7 +414,6 @@ void Jeu::tour(Joueur *joueur) {
             utilities::display("Tour du Joueur " + joueur->getName() + "\n");
         }
         salle->display();
-        //TODO: make joueur display its stats
         int choice;
         do {
             utilities::display("Que voulez-vous faire?\n");
@@ -428,7 +423,6 @@ void Jeu::tour(Joueur *joueur) {
             utilities::display("4. Finir votre tour. \n");
 
             choice = utilities::validateRange(1, 4);
-            //TODO: take into consideration that some options might not be viable (ex. can't battle if nobody's there, etc.)
             switch (choice) {
                 case 1:
                     joueur->consulterSacEtEquipement(this);

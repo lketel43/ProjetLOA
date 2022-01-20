@@ -12,7 +12,6 @@ class Chateau {
 
 private:
     //pour faciliter l'acces à map
-    //TODO: ajouter overload à [][] pour peut-être changer ça, ou rendre ça plus elegant
     friend class Jeu;
     unsigned int width;
     unsigned int length;

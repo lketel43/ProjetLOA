@@ -36,8 +36,6 @@ private:
 
 public:
     ~Personnage();
-    //Retourne les dégats commits <Physique, Magique>
-    std::pair<int, int> attaque();
 
     //Subit l'attaque <Physique, Magique> indiquée en tenant en compte la resistance du personnage
     void subitAttaque(int);

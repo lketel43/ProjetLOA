@@ -14,12 +14,6 @@ Personnage::Personnage(string n, int aP, int aM, int rP, int rM) : nom(n), attaq
     position.first = position.second = -1;
 }
 
-//TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
-pair<int, int> Personnage::attaque() {
-    pair<int, int> pair(attaquePhysique, attaqueMagique);
-    return pair;
-}
-
 void Personnage::subitAttaque(int d) {
     if (this->sante - d < 0) this->sante = 0;
     else this->sante -= d;

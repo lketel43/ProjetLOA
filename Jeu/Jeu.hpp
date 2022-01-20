@@ -6,6 +6,7 @@
 #define PROJETLOA_JEU_HPP
 
 #include <vector>
+#include <stdexcept>
 #include "Map/Chateau.hpp"
 #include "../Objets/ObjectFactory.hpp"
 #include "../Personnages/Personnage.hpp"
@@ -39,7 +40,6 @@ private:
     void initVecteursJoueurs();
     //Place les joueurs de manière uniforme aléatoire dans le chateau
     void placeJoueurs();
-    //TODO: penser à comment rajouter de plus en plus d'objets au fur et a mesure des tours
     //Place objets au début de manière aléatoire dans le chateau
     void placeObjets();
 

@@ -12,7 +12,6 @@
 using namespace std;
 
 int main() {
-    //TODO: make sure number of players is not > the number of chambers
     srand(static_cast<unsigned int>(time(nullptr)));
     int length, width, ennemis, joueurManuel = 1;
     unsigned int choix;
