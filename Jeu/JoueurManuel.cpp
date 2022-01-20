@@ -334,13 +334,12 @@ void JoueurManuel::utiliserPotionPosion(Potion* p, const Joueur* j) const{
 
 
 void JoueurManuel::tourCombat(const Joueur* j) const{
-    utilities::display("C'est votre tour de jouer.\n");
     utilities::display("Voulez-vous :\n");
     utilities::display("1. attaquer\n");
     utilities::display("2. utiliser un objet\n");
     int choice;
 
-    choice = utilities::validateRange( 1,2);
+    choice = utilities::validateRange(1,2);
     if(choice == 1){
         int degatsP = Combat::calculDegatsPhysique(this, j);
         int degatsM = Combat::calculDegatsMagique(this, j);
@@ -358,24 +357,36 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
             utilities::display("Il lui reste " + std::to_string(j->getPersonnage()->getSante()) + " points de sante\n");
         }
         else{
-            utilities::display("Votre sac contient les objets suivants, lequel voulez-vous utiliser ?\n");
-            for(unsigned int i = 0; i < this->personnage->getSac().size(); i++){
-                utilities::display(std::to_string(i) + ". " + this->personnage->getSac()[i]->getNom());
-            }
-
-            do{
-                choice = utilities::validateRange( 0, this->personnage->getSac().size() - 1);
-                if(this->personnage->getSac()[choice]->getIdType() != 1){
-                    utilities::display("Vous ne pouvez pas utiliser cet objet pendant le combat");
+            vector<pair<Objet *, long unsigned int> > objetsUtilisables;
+            for(long unsigned int i = 0; i < this->personnage->getSac().size(); i++) {
+                if (this->personnage->getSac()[i]->isUtilisable()) {
+                    pair<Objet *, long unsigned int> pair2(this->personnage->getSac()[i], i);
+                    objetsUtilisables.push_back(pair2);
                 }
             }
-            while(this->personnage->getSac()[choice]->getIdType() != 1);
-            utilities::display("Vous avez choisi d'utiliser l'objet " + this->personnage->getSac()[choice]->getNom());
-            if(!(dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getPoison()){ //Si ce n'est pas une potion de poison
-                this->utiliserPotion(dynamic_cast<Potion*>(this->personnage->getSac()[choice]));
+            if(objetsUtilisables.size() == 0){
+                utilities::display("Aucun objet de votre sac n'est utilisable, vous attaquez donc votre ennemi.\n");
+                int degatsP = Combat::calculDegatsPhysique(this, j);
+                int degatsM = Combat::calculDegatsMagique(this, j);
+                j->getPersonnage()->subitAttaque(degatsP + degatsM);
+                utilities::display("Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
+                utilities::display("Il lui reste " + std::to_string(j->getPersonnage()->getSante()) + " points de sante\n");
             }
-            else{
-                this->utiliserPotionPosion((dynamic_cast<Potion*>(this->personnage->getSac()[choice])), j);
+            else{     
+                utilities::display("Votre sac contient les objets utilisables suivants, lequel voulez-vous utiliser ?\n");
+                for(unsigned int i = 1; i < objetsUtilisables.size() + 1; i++){
+                    utilities::display(std::to_string(i) + ". " + objetsUtilisables[i - 1].first->getNom() + "\n");
+                }
+
+                choice = utilities::validateRange(1, this->personnage->getSac().size());
+                choice -= 1;
+                utilities::display("Vous avez choisi d'utiliser l'objet " + this->personnage->getSac()[objetsUtilisables[choice].second]->getNom());
+                if(!(dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getPoison()){ //Si ce n'est pas une potion de poison
+                    this->utiliserPotion(dynamic_cast<Potion*>(this->personnage->getSac()[objetsUtilisables[choice].second]));
+                }
+                else{
+                    this->utiliserPotionPosion((dynamic_cast<Potion*>(this->personnage->getSac()[objetsUtilisables[choice].second])), j);
+                }
             }
         }
     }
