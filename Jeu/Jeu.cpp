@@ -106,6 +106,7 @@ vector<Objet *> initVecteurObjets() {
 
 
     //TODO: clef de teleportation
+    ret.push_back(new Clef("Clef de téléportation", 1, "Cette clef vous permet de changer de salle sans finir votre tour.\n Attention, elle est à utilisation unique.\n "));
 
     return ret;
 }

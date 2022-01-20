@@ -6,6 +6,7 @@ using namespace std;
 JoueurManuel::JoueurManuel(std::string _name) : Joueur(_name, false) {
 
 }
+
 JoueurManuel::~JoueurManuel() = default;
 
 //return true if we need to exit the bigger function
@@ -13,9 +14,11 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
     vector<Objet *> equipement;
     int choice;
     bool continueLooping = false;
+    vector<Objet *> sac;
 
     do {
         equipement = personnage->getEquipement();
+        sac = personnage->getSac();
         if (equipement.empty()) {
             utilities::display("Vous n'avez aucun équipement.\n");
             utilities::display("Essayez de vous équiper d'une des armes dans votre sac.\n");
@@ -31,33 +34,37 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
             utilities::display("Que voulez-vous faire?\n");
             utilities::display(
                     "1.Vous déséquiper d'une de vos armes et la mettre dans votre sac\n2.Jeter une de vos armes\n3.Consulter sac\n4.Retour\n");
-            choice = utilities::validateRange( 1, 4);
+            choice = utilities::validateRange(1, 4);
             if (choice > 2)
                 return (choice == 4);
             switch (choice) {
                 case 1:
                     utilities::display("Choisissez l'arme que vous souhaitez mettre dans votre sac.\n");
                     for (long unsigned int i = 0; i < equipement.size(); i++) {
-                        utilities::display(to_string(i + 1) + "." + equipement[i]->getNom());
+                        utilities::display(to_string(i + 1) + "." + equipement[i]->getNom() + "\n");
                     }
 
-                    choice = utilities::validateRange( 1, equipement.size());
+                    choice = utilities::validateRange(1, equipement.size());
+                    utilities::display("Vous avez placé " + equipement[choice - 1]->getNom() + " dans votre sac.\n");
                     desequiper(choice - 1);
                     break;
                 case 2:
                     utilities::display("Choisissez l'arme que vous souhaitez jeter.\n");
-
-                    choice = utilities::validateRange( 1, equipement.size());
+                    for (long unsigned int i = 0; i < equipement.size(); i++) {
+                        utilities::display(to_string(i + 1) + "." + equipement[i]->getNom() + "\n");
+                    }
+                    choice = utilities::validateRange(1, equipement.size());
+                    utilities::display("Vous avez jeter: " + equipement[choice - 1]->getNom() + "\n");
                     jeu->placerDansSalle(this->personnage->getPosition(), equipement[choice - 1]);
-                    equipement.erase(equipement.begin() + choice - 1);
+                    personnage->removeFromEquipement(choice -1);
                     break;
                 default:
                     cout << "ERROR IN CHOICE VALIDATION AND/OR PROCESSING \n";
             }
             utilities::display(
-                    "Voulez-vous:\n1.Continuer à consulter votre équipement\n2.Consulter votresac\n3.Retour\n");
+                    "Voulez-vous:\n1.Continuer à consulter votre équipement\n2.Consulter votre sac\n3.Retour\n");
 
-            choice = utilities::validateRange( 1, 3);
+            choice = utilities::validateRange(1, 3);
             if (choice == 3)
                 return true;
             continueLooping = (choice == 1);
@@ -85,7 +92,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             utilities::display("Voulez-vous revenir au menu des choix possible, ou consulter votre équipement?\n");
             utilities::display("1.Consulter équipement\n2.Retour au menu\n");
 
-            choice = utilities::validateRange( 1, 2);
+            choice = utilities::validateRange(1, 2);
             return (choice == 2);
 
         } else {
@@ -101,7 +108,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             utilities::display(
                     "1.Vous équiper d'une arme dans votre sac\n2.Utiliser un objet\n3.Consulter équipement\n4.Vous débarasser d'un objet dans votre sac\n5.Retour\n");
 
-            choice = utilities::validateRange( 1, 5);
+            choice = utilities::validateRange(1, 5);
             switch (choice) {
                 case 1:
                     objetsEquippables.clear();
@@ -130,9 +137,10 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         //then choose arm
                         utilities::display("Que choisissez-vous?\n");
 
-                        choice = utilities::validateRange( 1, objetsEquippables.size());
+                        choice = utilities::validateRange(1, objetsEquippables.size());
                         //then remove arm from bag
-                        utilities::display("Vous vous êtes équipé de: "+ objetsEquippables[choice - 1].first->getNom() + "\n");
+                        utilities::display(
+                                "Vous vous êtes équipé de: " + objetsEquippables[choice - 1].first->getNom() + "\n");
                         personnage->removeFromSac(objetsEquippables[choice - 1].second);
                         // then equip arm
                         personnage->addToEquipement(objetsEquippables[choice - 1].first);
@@ -159,7 +167,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                         //then choose object
                         utilities::display("Que choisissez-vous?\n");
 
-                        choice = utilities::validateRange( 1, objetsUtilisables.size());
+                        choice = utilities::validateRange(1, objetsUtilisables.size());
                         switch (objetsUtilisables[choice - 1].first->getIdType()) {
                             case IDTYPE_ARME:
                                 cout << "ERROR OBJET NON UTILISABLE\n";
@@ -184,7 +192,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                     }
                     utilities::display(
                             to_string(sac.size() + 1) + ".Je ne veux plus me débarrasser d'un de mes objets.\n");
-                    choice = utilities::validateRange( 1, sac.size() + 1);
+                    choice = utilities::validateRange(1, sac.size() + 1);
                     if (choice == sac.size() + 1)
                         break;
                     else {
@@ -200,7 +208,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
             utilities::display(
                     "Voulez-vous:\n1.Continuer à consulter votre sac\n2.Consulter votre équipement\n3.Retour\n");
 
-            choice = utilities::validateRange( 1, 3);
+            choice = utilities::validateRange(1, 3);
             if (choice == 3)
                 return true;
             continueLooping = (choice == 1);
@@ -242,7 +250,7 @@ void JoueurManuel::pickUpObjects(Jeu *jeu) {
             salle->displayObjects();
             utilities::display("Lequel parmi ceux-ci voulez-vous ramasser?\n");
 
-            choice = utilities::validateRange( 1, salle->numOfObjects());
+            choice = utilities::validateRange(1, salle->numOfObjects());
             ramasser(salle->removeObject(choice - 1));
         }
         utilities::display("Maintenant, voulez-vous: \n1.Ramasser un autre objet\n2.Retour\n");
@@ -254,8 +262,8 @@ void JoueurManuel::pickUpObjects(Jeu *jeu) {
 
 }
 
-void JoueurManuel::utiliserPotion(Potion *p) const{
-    if(!p->isUtilisable()){
+void JoueurManuel::utiliserPotion(Potion *p) const {
+    if (!p->isUtilisable()) {
         utilities::display("Cet objet n'est pas utilisable.\n");
         return;
     }
@@ -283,8 +291,8 @@ void JoueurManuel::utiliserPotion(Potion *p) const{
         utilities::display(this->personnage->getStats());
     }
     int index;
-    for(long unsigned int i = 0; i < this->personnage->getSac().size(); i++){
-        if(this->personnage->getSac()[i] == p){
+    for (long unsigned int i = 0; i < this->personnage->getSac().size(); i++) {
+        if (this->personnage->getSac()[i] == p) {
             index = i;
         }
     }
@@ -292,15 +300,19 @@ void JoueurManuel::utiliserPotion(Potion *p) const{
     delete p;
 }
 
-void JoueurManuel::utiliserPotionPosion(Potion* p, const Joueur* j) const{
-    if(!p->isUtilisable()){
+void JoueurManuel::utiliserPotionPosion(Potion *p, const Joueur *j) const {
+    if (!p->isUtilisable()) {
         utilities::display("Cet objet n'est pas utilisable.\n");
         return;
     }
     if (p->getIdType() == IDTYPE_POTION) {
-        utilities::display("Vous avez choisi d'utiliser une potion de poison affectant la caractéristique " + p->getType() + ".\n");
+        utilities::display(
+                "Vous avez choisi d'utiliser une potion de poison affectant la caractéristique " + p->getType() +
+                ".\n");
         if (p->getType() == "sante") {
-            utilities::display("La potion inflige " + to_string(-(p->getBoost() / 100) * j->getPersonnage()->getSante()) + " dégâts.\n");
+            utilities::display(
+                    "La potion inflige " + to_string(-(p->getBoost() / 100) * j->getPersonnage()->getSante()) +
+                    " dégâts.\n");
             j->getPersonnage()->subitAttaque(-(p->getBoost() / 100) * j->getPersonnage()->getSante());
         }
         if (p->getType() == "habilete") {
@@ -313,7 +325,8 @@ void JoueurManuel::utiliserPotionPosion(Potion* p, const Joueur* j) const{
             this->personnage->setAttaqueMagique((p->getBoost() / 100) * j->getPersonnage()->getAttaqueMagique());
         }
         if (p->getType() == "resistancePhysique") {
-            this->personnage->setResistancePhysique((p->getBoost() / 100) * j->getPersonnage()->getResistancePhysique());
+            this->personnage->setResistancePhysique(
+                    (p->getBoost() / 100) * j->getPersonnage()->getResistancePhysique());
         }
         if (p->getType() == "resistanceMagique") {
             this->personnage->setResistanceMagique((p->getBoost() / 100) * j->getPersonnage()->getResistanceMagique());
@@ -322,8 +335,8 @@ void JoueurManuel::utiliserPotionPosion(Potion* p, const Joueur* j) const{
         utilities::display(this->personnage->getStats());
     }
     int index;
-    for(long unsigned int i = 0; i < this->personnage->getSac().size(); i++){
-        if(this->personnage->getSac()[i] == p){
+    for (long unsigned int i = 0; i < this->personnage->getSac().size(); i++) {
+        if (this->personnage->getSac()[i] == p) {
             index = i;
         }
     }
@@ -332,57 +345,55 @@ void JoueurManuel::utiliserPotionPosion(Potion* p, const Joueur* j) const{
 }
 
 
-
-void JoueurManuel::tourCombat(const Joueur* j) const{
+void JoueurManuel::tourCombat(const Joueur *j) const {
     utilities::display("C'est votre tour de jouer.\n");
     utilities::display("Voulez-vous :\n");
     utilities::display("1. attaquer\n");
     utilities::display("2. utiliser un objet\n");
     int choice;
 
-    choice = utilities::validateRange( 1,2);
-    if(choice == 1){
+    choice = utilities::validateRange(1, 2);
+    if (choice == 1) {
         int degatsP = Combat::calculDegatsPhysique(this, j);
         int degatsM = Combat::calculDegatsMagique(this, j);
         j->getPersonnage()->subitAttaque(degatsP + degatsM);
-        utilities::display("Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
+        utilities::display(
+                "Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
         utilities::display("Il lui reste " + std::to_string(j->getPersonnage()->getSante()) + " points de sante\n");
     }
-    if(choice == 2){
-        if(this->personnage->getSac().empty()){
+    if (choice == 2) {
+        if (this->personnage->getSac().empty()) {
             utilities::display("Votre sac est vide, vous attaquez donc votre adversaire\n");
             int degatsP = Combat::calculDegatsPhysique(this, j);
             int degatsM = Combat::calculDegatsMagique(this, j);
             j->getPersonnage()->subitAttaque(degatsP + degatsM);
-            utilities::display("Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
+            utilities::display(
+                    "Vous infligez " + std::to_string(degatsP + degatsM) + " points de dégâts à votre adversaire\n");
             utilities::display("Il lui reste " + std::to_string(j->getPersonnage()->getSante()) + " points de sante\n");
-        }
-        else{
+        } else {
             utilities::display("Votre sac contient les objets suivants, lequel voulez-vous utiliser ?\n");
-            for(unsigned int i = 0; i < this->personnage->getSac().size(); i++){
+            for (unsigned int i = 0; i < this->personnage->getSac().size(); i++) {
                 utilities::display(std::to_string(i) + ". " + this->personnage->getSac()[i]->getNom());
             }
 
-            do{
-                choice = utilities::validateRange( 0, this->personnage->getSac().size() - 1);
-                if(this->personnage->getSac()[choice]->getIdType() != 1){
+            do {
+                choice = utilities::validateRange(0, this->personnage->getSac().size() - 1);
+                if (this->personnage->getSac()[choice]->getIdType() != 1) {
                     utilities::display("Vous ne pouvez pas utiliser cet objet pendant le combat");
                 }
-            }
-            while(this->personnage->getSac()[choice]->getIdType() != 1);
+            } while (this->personnage->getSac()[choice]->getIdType() != 1);
             utilities::display("Vous avez choisi d'utiliser l'objet " + this->personnage->getSac()[choice]->getNom());
-            if(!(dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getPoison()){ //Si ce n'est pas une potion de poison
-                this->utiliserPotion(dynamic_cast<Potion*>(this->personnage->getSac()[choice]));
-            }
-            else{
-                this->utiliserPotionPosion((dynamic_cast<Potion*>(this->personnage->getSac()[choice])), j);
+            if (!(dynamic_cast<Potion *>(this->personnage->getSac()[choice]))->getPoison()) { //Si ce n'est pas une potion de poison
+                this->utiliserPotion(dynamic_cast<Potion *>(this->personnage->getSac()[choice]));
+            } else {
+                this->utiliserPotionPosion((dynamic_cast<Potion *>(this->personnage->getSac()[choice])), j);
             }
         }
     }
     utilities::display("C'est la fin de votre tour\n\n");
 }
 
-int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>personnagesDisponiblesEtFrequences) {
+int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>> personnagesDisponiblesEtFrequences) {
     int choice;
     string name;
     utilities::display("À vous Joueur " + nom + " de choisir votre personnage." + "\n" +
@@ -390,7 +401,7 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
                        to_string(personnagesDisponiblesEtFrequences.size()) + "." + "\n"
                        + "Attention! Ce choix est définitif." + "\n");
 
-    choice = utilities::validateRange( 1, personnagesDisponiblesEtFrequences.size());
+    choice = utilities::validateRange(1, personnagesDisponiblesEtFrequences.size());
     utilities::display("Bon choix. \n");
     utilities::display("Vous êtes digne d'un vrai prénom également. Quel est votre prénom?\n");
     cin >> name;
@@ -398,8 +409,8 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
     return choice;
 }
 
-Joueur* JoueurManuel::mort(Jeu *jeu){
-    if(this->personnage->getSante() <= 0){
+Joueur *JoueurManuel::mort(Jeu *jeu) {
+    if (this->personnage->getSante() <= 0) {
         utilities::display(nom + " est éliminé du jeu.\n");
         jeu->removeJoueur(this->personnage);
         jeu->getSalle(this->personnage->getPosition())->removePlayer(this->personnage);
@@ -409,7 +420,7 @@ Joueur* JoueurManuel::mort(Jeu *jeu){
     return nullptr;
 }
 
-void JoueurManuel::endTurn(Jeu * jeu){
+void JoueurManuel::endTurn(Jeu *jeu) {
     Salle *salle = jeu->getSalle(this->personnage->getPosition());
     vector<Salle *> neighbors = salle->getNeighbors();
     int choice;
@@ -418,7 +429,7 @@ void JoueurManuel::endTurn(Jeu * jeu){
     utilities::display("1. Oui \n2. Non\n");
 
 
-    choice = utilities::validateRange( 1, 2);
+    choice = utilities::validateRange(1, 2);
     if (choice == 1) {
         utilities::display("Vous avez choisi de changer de salle avant la fin de votre tour.\n");
         utilities::display("Voici la carte du chateau, votre position est marquée par un 'x'\n");
@@ -429,10 +440,10 @@ void JoueurManuel::endTurn(Jeu * jeu){
             utilities::display(to_string(i + 1) + ". Salle " + to_string(neighbors[i]->getId()) + "\n");
         }
         utilities::display("Quelle salle choisissez-vous?\n");
-        choice = utilities::validateRange( 1, neighbors.size());
+        choice = utilities::validateRange(1, neighbors.size());
         jeu->moveJoueurtoSalle(this, neighbors[choice - 1]);
         utilities::display("Vous êtes maintenant dans la salle " + to_string(neighbors[choice - 1]->getId()) + "\n");
 
     }
-    utilities::display("Fin de tour pour le Joueur " + this->getName()+ "\n");
+    utilities::display("Fin de tour pour le Joueur " + this->getName() + "\n");
 }
