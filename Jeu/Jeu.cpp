@@ -428,7 +428,8 @@ void Jeu::tour(Joueur *joueur) {
                     }
                     // Afficher les perso de la salle
                     //TODO: les degats sont égaux
-                    //TODO: peut-être montrer les stats des joueurs ennemies (en incluant les armes qu'ils ont)
+                    utilities::display("Pour rappel, voici vos statistiques: \n");
+                    utilities::display(joueur->getPersonnage()->getStats());
                     vector<pair<Joueur *, int> > ennemies{salle->displayEnnemi(joueur)};
                     utilities::display("Choisissez un ennemi à combattre:\n");
                     // Faire le le choix
