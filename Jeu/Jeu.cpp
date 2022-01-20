@@ -241,7 +241,7 @@ void Jeu::lancePartie() {
     placeObjets();
 
 
-    while (true) {
+    while (this->etat) {
         renforcerJoueursAutomatises();
         for (unsigned int i = 0; i < joueurs.size(); i++) {
             tour(joueurs[i]);
@@ -463,8 +463,9 @@ void Jeu::tour(Joueur *joueur) {
                         }
                         delete m2;
                     }
+                    //Mort joueurManuel
                     if (m1 != nullptr) {
-
+                        this->etat = false;
                     }
                     salle->placeObject(objectFactory->producePotionDeSanteExtra());
                     break;

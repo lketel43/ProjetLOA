@@ -24,6 +24,8 @@ private:
     Chateau *chateau;
     std::vector<std::pair<Personnage *, int> > personnagesDisponiblesEtFrequences;
 
+    bool etat = true;
+
     //Input: index d'un type de personnage dans personnagesDisponiblesEtFrequences
     //Output: Nouveau personnage* à un personnage de ce type
     Personnage* forge(int);
