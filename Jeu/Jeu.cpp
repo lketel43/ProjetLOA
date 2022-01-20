@@ -375,10 +375,13 @@ void Jeu::tour(Joueur *joueur) {
                     Joueur* m1 = joueur->mort(this);
                     Joueur* m2 = salle->getJoueur()[index]->mort(this);
                     if(m2 != nullptr){
+                        utilities::display("L'ennemi " + m2->getPersonnage()->getName() + " fait tomber au sol les objets suivants:\n");
                         for(unsigned int i = 0; i < m2->getPersonnage()->getSac().size(); i++){
                             salle->placeObject(m2->getPersonnage()->getSac()[i]);
+                            utilities::display(m2->getPersonnage()->getSac()[i]->getNom() + "\n");
                         }
                         for(unsigned int i = 0; i < m2->getPersonnage()->getEquipement().size(); i++){
+                            utilities::display(m2->getPersonnage()->getEquipement()[i]->getNom() + "\n");
                             salle->placeObject(m2->getPersonnage()->getEquipement()[i]);
                         }
                         delete m2;

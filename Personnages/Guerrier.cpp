@@ -4,6 +4,6 @@
 
 #include "Guerrier.hpp"
 
-Guerrier::Guerrier(): Personnage("Guerrier", 17, 3, 5, 15){
+Guerrier::Guerrier(): Personnage("Guerrier", 70, 3, 5, 15){
 
 }
