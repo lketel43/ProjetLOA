@@ -181,10 +181,11 @@ void Jeu::initJoueurs() {
                                + personnagesDisponiblesEtFrequences[choice - 1].first->getName() + "\n");
 
         joueurs[i]->setPersonnage(forge(choice - 1));
-        //Equipage des joueurs automatisés avec des armes basiques
+        //Equipage des joueurs automatisés avec des armes basiques et une potion
         if (joueurs[i]->isAutomatise()) {
             joueurs[i]->equiper(objectFactory->produceArmeBasique());
             joueurs[i]->equiper(objectFactory->produceArmeBasique());
+            joueurs[i]->ramasser(objectFactory->producePotion());
         }
     }
 

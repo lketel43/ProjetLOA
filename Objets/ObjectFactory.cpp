@@ -42,3 +42,12 @@ Objet *ObjectFactory::produceArmeBasique() {
             return objet;
     }
 }
+
+Objet* ObjectFactory::producePotion() {
+    Objet *objet;
+    while (true) {
+        objet = produce();
+        if (objet->getIdType() == IDTYPE_POTION)
+            return objet;
+    }
+}
