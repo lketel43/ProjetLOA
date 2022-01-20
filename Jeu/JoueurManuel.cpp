@@ -379,7 +379,7 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
             }
         }
     }
-    utilities::display("C'est la fin de votre tour\n");
+    utilities::display("C'est la fin de votre tour\n\n");
 }
 
 int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>personnagesDisponiblesEtFrequences) {

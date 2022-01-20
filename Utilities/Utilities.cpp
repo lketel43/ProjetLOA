@@ -61,13 +61,19 @@ void utilities::display(const string &text) {
     //sleep_for(seconds(1));
 }
 
-int utilities::bernouilli(float param) {
-    int borne = 1000000;
-    float tirage = (rand() % borne) / borne;
+int utilities::bernouilli(double param) {
+    double borneD = 1000000.0;
+    int borneI = 1000000;
+    double tirage = (rand() % borneI) / borneD;
     if (tirage < param) {
         return 1;
     }
     return 0;
+}
+
+int utilities::calcPercentage(int stat, int per){
+    double boost = ((double) per / 100.0) * (double) stat;
+    return floor(boost) + 1;
 }
 
 
