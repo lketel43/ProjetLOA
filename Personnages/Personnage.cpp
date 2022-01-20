@@ -53,10 +53,13 @@ int Personnage::getResistanceMagique() const{
 
 string Personnage::getStats() const{
     string stat;
-    stat = "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";
+    stat += "Santé: " + std::to_string(sante) + "\n";
+    stat += "Habileté: " + std::to_string(habilite) + "\n";
+    stat += "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";
     stat += "Attaque Magique: " + std::to_string(attaqueMagique) + "\n";
     stat += "Résistance Physique: " + std::to_string(resistancePhysique) + "\n";
     stat += "Résistance Magique: " + std::to_string(resistanceMagique) + "\n";
+
 
     return stat;
 }
