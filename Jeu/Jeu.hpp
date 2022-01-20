@@ -37,17 +37,13 @@ private:
     void initVecteursJoueurs();
     //Place les joueurs de manière uniforme aléatoire dans le chateau
     void placeJoueurs();
-
     //TODO: penser à comment rajouter de plus en plus d'objets au fur et a mesure des tours
     //Place objets au début de manière aléatoire dans le chateau
     void placeObjets();
 
-
     ///CATEGORIE DEROULEMENT JEU
-
     void moveJoueur(Joueur*, int x, int y);
     friend class Clef;
-
     void tour(Joueur *);
 
 public:

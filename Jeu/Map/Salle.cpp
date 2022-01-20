@@ -88,7 +88,7 @@ void Salle::display() const {
     utilities::display("Elle contient les joueurs suivants:\n");
 
     for (unsigned int i = 0; i < joueurs.size(); i++)
-        utilities::display("Joueur " + joueurs[i]->getName() + "\n");
+        utilities::display(joueurs[i]->getPersonnage()->getName() + " " + joueurs[i]->getName() + "\n");
 
 
 }
@@ -119,8 +119,8 @@ void Salle::placeObject(Objet *object) {
 }
 
 
-Salle::~Salle(){
-    for( long unsigned int i = 0; i < objets.size(); i++){
+Salle::~Salle() {
+    for (long unsigned int i = 0; i < objets.size(); i++) {
         delete objets[i];
     }
 
