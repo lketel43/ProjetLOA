@@ -388,8 +388,15 @@ void Jeu::tour(Joueur *joueur) {
                     break;
                 }
                 case 4:
-                    if (salle->hasNoOtherPlayers())
+                    if (salle->hasNoOtherPlayers()){
+                        //rajouter objets dans la salle qu'il va quitter
+                        salle->placeObject(objectFactory->produce());
+                        salle->placeObject(objectFactory->produce());
                         joueur->endTurn(this);
+
+                    }
+
+
                     else {
                         utilities::display(
                                 "Il vous reste encore des ennemis à combattre ici.\nVous ne pouvez pas finir votre tour maintenant.\n");
