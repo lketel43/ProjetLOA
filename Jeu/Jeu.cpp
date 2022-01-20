@@ -461,9 +461,9 @@ void Jeu::tour(Joueur *joueur) {
                     }
 
                     //Mort éventuelle des joueurs
-                    Joueur *m1 = joueur->mort(this);
                     Joueur *m2 = salle->getJoueur()[index]->mort(this);
                     if (m2 != nullptr) {
+                        cout << "M22222222 \n\n";
                         utilities::display("L'ennemi " + m2->getPersonnage()->getName() +
                                            " fait tomber au sol les objets suivants:\n");
                         for (unsigned int i = 0; i < m2->getPersonnage()->getSac().size(); i++) {
@@ -486,8 +486,11 @@ void Jeu::tour(Joueur *joueur) {
                         this->partieFinie = true;
                         return;
                     }
+                    
                     //Mort joueurManuel
+                    Joueur *m1 = joueur->mort(this);
                     if (m1 != nullptr) {
+                        cout << "M11111111 \n\n";
                         utilities::display("Vous avez été vaincu, la partie se termine.\n");
                         this->partieFinie = true;
                         return;
