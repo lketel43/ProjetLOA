@@ -1,5 +1,7 @@
 #include "ObjectFactory.hpp"
 #include "../Utilities/utilities.hpp"
+#include "Potion.hpp"
+#include "Clef.hpp"
 
 std::vector<Objet *> buildFreq(std::vector<Objet *> v) {
     int rareteMax = 0;
@@ -72,21 +74,29 @@ Objet *ObjectFactory::produceArmeExtraordinaire() {
 Objet *ObjectFactory::produireArmeLegendaire() {
     for (long unsigned int i = 0; i < disponibles.size(); i++) {
         if (disponibles[i]->isEquipable()) {
-           if(disponibles[i]->isArmeDattaque() && disponibles[i]->getRarete() >= 50)
-               return disponibles[i]->copy();
+            if (disponibles[i]->isArmeDattaque() && disponibles[i]->getRarete() >= 50)
+                return disponibles[i]->copy();
         }
 
     }
     return nullptr;
 }
 
-Objet* ObjectFactory::produireBouclierLegendaire() {
+Objet *ObjectFactory::produireBouclierLegendaire() {
     for (long unsigned int i = 0; i < disponibles.size(); i++) {
         if (disponibles[i]->isEquipable()) {
-            if(disponibles[i]->isArmeDeDefense() && disponibles[i]->getRarete() >= 50)
+            if (disponibles[i]->isArmeDeDefense() && disponibles[i]->getRarete() >= 50)
                 return disponibles[i]->copy();
         }
 
     }
     return nullptr;
+}
+
+Objet *ObjectFactory::producePotionDeSanteExtra() {
+    return new Potion("Potion de santé légendaire", 30, 100, "sante");
+}
+
+Objet* ObjectFactory::produceClefDeTeleportation() {
+    return new Clef("Clef de téléportation", 1, "Cette clef vous permet de changer de salle sans finir votre tour.\n Attention, elle est à utilisation unique.\n ");
 }

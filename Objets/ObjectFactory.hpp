@@ -23,6 +23,8 @@ class ObjectFactory{
         Objet* produireArmeLegendaire();
         Objet* produireBouclierLegendaire();
         Objet* producePoison();
+        Objet* producePotionDeSanteExtra();
+        Objet * produceClefDeTeleportation();
 
 };
 

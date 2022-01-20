@@ -14,9 +14,12 @@ class Joueur;
 class Clef : public Objet {
 
 private:
+    friend std::vector<Objet*> initVecteurObjets();
+    friend class ObjectFactory;
     const std::string description;
     Clef(std::string , int, std::string);
     Clef* copy() override;
+
 
 
 public:
