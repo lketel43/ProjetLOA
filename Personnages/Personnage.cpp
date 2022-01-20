@@ -10,6 +10,7 @@ using namespace std;
 
 Personnage::Personnage(string n, int aP, int aM, int rP, int rM) : nom(n), attaquePhysique(aP), attaqueMagique(aM),
                                                                     resistancePhysique(rP),resistanceMagique(rM) {
+    position.first = position.second = -1;
 }
 
 //TODO: a voir si on change la fonction attaque pour prendre en compte habileté, santé etc.
@@ -49,6 +50,10 @@ int Personnage::getResistancePhysique() const{
 
 int Personnage::getResistanceMagique() const{
     return this->resistanceMagique;
+}
+
+std::pair<int, int> Personnage::getPosition() const{
+    return this->position;
 }
 
 string Personnage::getStats() const{
@@ -111,6 +116,11 @@ bool Personnage::isEquipementFull() const{
     return true;
 }
 
+bool Personnage::isPlaced() const {
+
+    return (position.first != -1 && position.second != -1);
+}
+
 vector<Objet*> Personnage::getEquipement() {
     return this->equipement;
 }
@@ -153,6 +163,11 @@ void Personnage::setResistanceMagique(int n) {
     if(this->resistanceMagique + n > 100) this->resistanceMagique = 100;
     if(this->resistanceMagique + n < 0) this->resistanceMagique = 0;
     else this->resistanceMagique += n;
+}
+
+void Personnage::setPosition(int x, int y){
+    position.first = x;
+    position.second = y;
 }
 
 Personnage::~Personnage() = default;

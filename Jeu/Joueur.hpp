@@ -20,19 +20,16 @@ protected:
     Personnage * personnage;
     const bool automatise;
     std::string nom;
-    std::pair<int, int> position;
     int score;
     Joueur(std::string, bool);
 public:
     virtual ~Joueur()=0;
 
-    void setPosition(const int&, const int&);
     std::string getName() const;
 
     Personnage* getPersonnage() const;
     void setPersonnage(Personnage*);
     bool isAutomatise() const;
-    std::pair<int, int> getPosition() const;
     bool isPlaced() const;
 
     void ramasser(Objet*);

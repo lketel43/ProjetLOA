@@ -17,7 +17,7 @@ private:
     unsigned int width;
     unsigned int length;
     std::vector < std::vector<Salle *>> map;
-    void placeDansSalle(std::pair<int,int>, Objet*);
+    void placeDansSalle(std::pair<unsigned int,unsigned int>, Objet*);
     //initializes the direction pointers of the salles inside the map
     void initializeDirections();
 

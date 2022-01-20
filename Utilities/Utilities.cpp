@@ -22,7 +22,7 @@ bool utilities::isNumber(const string &str) {
 }
 
 //checks if x, in range [i,j], does validation and returns correct value entered
-int utilities::validateRange(int i, int j) {
+unsigned int utilities::validateRange(int i, int j) {
     string entered;
     int enteredInt;
     bool unvalidated = false;

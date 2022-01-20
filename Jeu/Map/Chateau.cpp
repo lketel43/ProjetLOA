@@ -9,9 +9,9 @@ Chateau::Chateau(unsigned int w, unsigned int l) : width(w), length(l) {
 
     int count = 1;
     vector<vector<Salle *> > mapInit;
-    for (int i = 0; i < w; i++) {
+    for (unsigned int i = 0; i < w; i++) {
         vector<Salle *> ligne;
-        for (int j = 0; j < l; j++) {
+        for (unsigned int j = 0; j < l; j++) {
             Salle *salle = new Salle(count);
             ligne.push_back(salle);
             count++;
@@ -37,8 +37,8 @@ pair<int, int> Chateau::getSalleCoordinates(int num) const {
 }
 
 void Chateau::initializeDirections() {
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < length; j++) {
+    for (unsigned int i = 0; i < width; i++) {
+        for (unsigned int j = 0; j < length; j++) {
             if (i != 0)
                 map[i][j]->neighbors.push_back(map[i - 1][j]);
 
@@ -71,8 +71,8 @@ pair<int, int> Chateau::getEmptiestRoom() {
     int x_rand = utilities::random(0, width - 1);
     int y_rand = utilities::random(0, length - 1);
 
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < length; j++) {
+    for (unsigned int i = 0; i < width; i++) {
+        for (unsigned int j = 0; j < length; j++) {
             if (map[i][j]->numOfPlayers() < minNumOfPeople) {
                 minNumOfPeople = map[i][j]->numOfPlayers();
                 coords.first = i;
@@ -92,11 +92,11 @@ pair<int, int> Chateau::getEmptiestRoom() {
 void Chateau::display() {
     int currSalleId;
     cout << "----------------------------------" << endl;
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         if (i > 0)
             cout << "----  ------  ------  ------  ----" << endl;
         for (int k = 0; k < 3; k++) {
-            for (int j = 0; j < width; j++) {
+            for (unsigned int j = 0; j < width; j++) {
                 currSalleId = map[i][j]->getId();
                 if (k == 1)
                     if (j == 0)
@@ -134,11 +134,11 @@ void Chateau::display(pair<int, int> position) {
     int currSalleId;
 
     cout << "----------------------------------" << endl;
-    for (int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < length; i++) {
         if (i > 0)
             cout << "----  ------  ------  ------  ----" << endl;
         for (int k = 0; k < 3; k++) {
-            for (int j = 0; j < width; j++) {
+            for (unsigned int j = 0; j < width; j++) {
                 currSalleId = map[i][j]->getId();
                 if (k == 1) {
                     if (j == 0)
@@ -176,14 +176,14 @@ void Chateau::display(pair<int, int> position) {
 
 
 Chateau::~Chateau() {
-    for (int i = 0; i < map.size(); i++) {
-        for (int j = 0; j < map[i].size(); j++) {
+    for (unsigned int i = 0; i < map.size(); i++) {
+        for (unsigned int j = 0; j < map[i].size(); j++) {
             delete map[i][j];
         }
     }
 }
 
-void Chateau::placeDansSalle(std::pair<int, int> salleCoords, Objet *object) {
+void Chateau::placeDansSalle(std::pair<unsigned int, unsigned int> salleCoords, Objet *object) {
     if (salleCoords.first > width || salleCoords.second > length) {
         cout << "ERROR WITH SALLE COORDINATES\n";
         return;

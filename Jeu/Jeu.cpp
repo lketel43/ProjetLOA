@@ -197,7 +197,7 @@ Jeu::~Jeu() {
 //        delete personnagesDisponiblesEtFrequences[i].first;
 //    }
 
-    for (long int i = 0; i < joueurs.size(); i++) {
+    for (unsigned int i = 0; i < joueurs.size(); i++) {
         if (joueurs[i] != nullptr)
             delete joueurs[i];
     }
@@ -244,7 +244,7 @@ void Jeu::lancePartie() {
     //c->commencerCombat();
     // TEST COMBAT
     while (true) {
-        for (int i = 0; i < joueurs.size(); i++) {
+        for (unsigned int i = 0; i < joueurs.size(); i++) {
             tour(joueurs[i]);
         }
     }
@@ -255,7 +255,7 @@ void Jeu::placeJoueurs() {
     int x, y;
 
     //Vrais joueurs sont placés de manière random
-    for (unsigned int i = 0; i < nombreJoueurNonAutomatise; i++) {
+    for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
         //TODO: careful, might be source of slow execution
         do {
             x = utilities::random(0, chateau->getWidth() - 1);
@@ -263,19 +263,19 @@ void Jeu::placeJoueurs() {
 
             if (chateau->map[x][y]->numOfPlayers() == 0) {
 
-                joueurs[i]->setPosition(x, y);
+                joueurs[i]->getPersonnage()->setPosition(x, y);
                 chateau->map[x][y]->addPlayer(joueurs[i]);
                 utilities::display("Joueur " + joueurs[i]->getName() + " est placé dans la salle " +
                                    to_string(chateau->map[x][y]->getId())
                                    + ".\n");
 
             }
-        } while (!joueurs[i]->isPlaced());
+        } while (!joueurs[i]->getPersonnage()->isPlaced());
     }
 
     for (unsigned int i = nombreJoueurNonAutomatise; i < joueurs.size(); i++) {
         pair<int, int> minCoords = chateau->getEmptiestRoom();
-        joueurs[i]->setPosition(minCoords.first, minCoords.second);
+        joueurs[i]->getPersonnage()->setPosition(minCoords.first, minCoords.second);
         chateau->map[minCoords.first][minCoords.second]->addPlayer(joueurs[i]);
 
     }
@@ -299,11 +299,11 @@ void Jeu::initVecteurPersonnages() {
 }
 
 void Jeu::moveJoueur(Joueur *joueur, int x, int y) {
-    pair<int, int> currPosition = joueur->getPosition();
+    pair<int, int> currPosition = joueur->getPersonnage()->getPosition();
 
     chateau->map[currPosition.first][currPosition.second]->removePlayer(joueur);
 
-    joueur->setPosition(x, y);
+    joueur->getPersonnage()->setPosition(x, y);
     chateau->map[x][y]->addPlayer(joueur);
 
 }
@@ -320,7 +320,7 @@ void Jeu::placeObjets() {
 }
 
 void Jeu::tour(Joueur *joueur) {
-    pair<int, int> position = joueur->getPosition();
+    pair<int, int> position = joueur->getPersonnage()->getPosition();
     Salle *salle = chateau->map[position.first][position.second];
 
     if (!joueur->isAutomatise()) {
@@ -415,7 +415,7 @@ void Jeu::tour(Joueur *joueur) {
 
 
 void Jeu::displayMap(Joueur *joueur) const {
-    chateau->display(joueur->getPosition());
+    chateau->display(joueur->getPersonnage()->getPosition());
 
 }
 
@@ -432,7 +432,7 @@ void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
     chateau->placeDansSalle(position, objet);
 }
 
-Salle *Jeu::getSalle(std::pair<int, int> position) const {
+Salle *Jeu::getSalle(std::pair<unsigned int, unsigned int> position) const {
     if (position.first > chateau->width || position.second > chateau->length) {
         cout << "ERROR WITH SALLE COORDINATES\n";
         return nullptr;
