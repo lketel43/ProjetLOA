@@ -104,8 +104,7 @@ vector<Objet *> initVecteurObjets() {
     ret.push_back(new Arme("Épée ultime", 50, 40, 20, 4, 4));
     ret.push_back(new Arme("Bouclier ultime", 50, 0, 40, 0, 40));
 
-    //TODO: clef de teleportation
-    ret.push_back(new Clef("Clef de téléportation", 1,
+    ret.push_back(new Clef("Clef de téléportation", 10,
                            "Cette clef vous permet de changer de salle sans finir votre tour.\nAttention, elle est à utilisation unique.\n "));
 
     return ret;
@@ -200,8 +199,11 @@ Jeu::~Jeu() {
 //    }
 
     for (unsigned int i = 0; i < joueurs.size(); i++) {
-        if (joueurs[i] != nullptr)
+        if (joueurs[i] != nullptr){
             delete joueurs[i];
+
+        }
+
     }
 
 //    for(long unsigned int i = 0; i< objetsPossibles.size(); i++)
@@ -248,6 +250,7 @@ void Jeu::lancePartie() {
             tour(joueurs[i]);
         }
     }
+
 }
 
 void Jeu::renforcerJoueursAutomatises() {

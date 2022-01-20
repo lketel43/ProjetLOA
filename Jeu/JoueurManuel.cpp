@@ -138,7 +138,7 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
 
                         utilities::display("Voici les objets dans votre sac dont vous pouvez vous équipper:\n");
                         for (long unsigned int i = 0; i < objetsEquippables.size(); i++)
-                            utilities::display(to_string(i + 1) + "." + objetsEquippables[i].first->toString());
+                            utilities::display(to_string(i + 1) + "." + objetsEquippables[i].first->toString() + "\n");
                         //then choose arm
                         utilities::display("Que choisissez-vous?\n");
 

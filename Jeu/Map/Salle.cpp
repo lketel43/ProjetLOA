@@ -83,7 +83,9 @@ void Salle::display() const {
     for (unsigned int i = 0; i < objets.size(); i++) {
         utilities::display("Objet " + to_string(i + 1) + ":\n");
         objets[i]->display();
+        utilities::display("\n");
     }
+
 
     utilities::display("Elle contient les joueurs suivants:\n");
 
@@ -102,7 +104,7 @@ vector<pair<Joueur*, int> > Salle::displayEnnemi(Joueur* j) const{
             v.push_back(p);
         }
     }
-    utilities::display("Les ennemis suivants sont présents\n");
+    utilities::display("Les ennemis suivants sont présents:\n");
     for(unsigned int i = 0; i < v.size(); i++){
         utilities::display(to_string(i + 1) + ". " + v[i].first->getPersonnage()->getName() + "\n" + v[i].first->getPersonnage()->getStats());
     }
@@ -124,10 +126,6 @@ Salle::~Salle() {
         delete objets[i];
     }
 
-    for(long unsigned int i = 0; i< joueurs.size(); i++){
-        if(joueurs[i] != nullptr)
-            delete joueurs[i];
-    }
 }
 
 std::vector<Salle *> Salle::getNeighbors() const {
