@@ -398,13 +398,15 @@ int JoueurManuel::choosePersonnage(std::vector<std::pair<Personnage *, int>>pers
     return choice;
 }
 
-void JoueurManuel::mort(Jeu *jeu){
+Joueur* JoueurManuel::mort(Jeu *jeu){
     if(this->personnage->getSante() <= 0){
         utilities::display(nom + " est éliminé du jeu.\n");
         jeu->removeJoueur(this->personnage);
         jeu->getSalle(this->position)->removePlayer(this->personnage);
         this->personnage = nullptr;
+        return this;
     }
+    return nullptr;
 }
 
 void JoueurManuel::endTurn(Jeu * jeu){

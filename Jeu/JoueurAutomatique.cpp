@@ -123,12 +123,14 @@ int JoueurAutomatique::choosePersonnage(std::vector<std::pair<Personnage *, int>
     return choice;
 }
 
-void JoueurAutomatique::mort(Jeu *jeu){
+Joueur* JoueurAutomatique::mort(Jeu *jeu){
     if(this->personnage->getSante() <= 0){
-        utilities::display(nom + " est éliminé du jeu.\n");
+        utilities::display("Le joueur " + nom + " est éliminé du jeu.\n");
         jeu->removeJoueur(this->personnage);
         jeu->getSalle(this->position)->removePlayer(this->personnage);
+        return this;
     }
+    return nullptr;
 }
 void JoueurAutomatique::endTurn(Jeu *jeu) {
     Salle *salle = jeu->getSalle(position);

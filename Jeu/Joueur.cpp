@@ -25,7 +25,7 @@ void Joueur::setPosition(const int &x, const int &y) {
 }
 
 Joueur::~Joueur() {
-    delete personnage;
+    if(personnage != nullptr) delete personnage;
 }
 
 std::string Joueur::getName() const {

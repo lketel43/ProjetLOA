@@ -152,16 +152,7 @@ void Personnage::setResistanceMagique(int n) {
     else this->resistanceMagique += n;
 }
 
-Personnage::~Personnage() {
-    for (int i = 0; i < TAILLE_SAC; i++)
-        if (sac[i] != nullptr)
-            delete sac[i];
-
-    for (int i = 0; i < TAILLE_EQ; i++)
-        if (equipement[i] != nullptr)
-            delete equipement[i];
-
-}
+Personnage::~Personnage() = default;
 
 Potion* Personnage::hasPotionBoostSante() const{
     for(unsigned int i = 0; i < this->sac.size(); i++){

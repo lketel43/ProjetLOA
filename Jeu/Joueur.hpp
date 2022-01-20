@@ -51,7 +51,7 @@ public:
     virtual int choosePersonnage(std::vector<std::pair<Personnage *, int> >)=0;
     virtual void endTurn(Jeu *) = 0;
 
-    virtual void mort(Jeu*) = 0;
+    virtual Joueur* mort(Jeu*) = 0;
 
 };
 

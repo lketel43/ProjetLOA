@@ -364,8 +364,11 @@ void Jeu::tour(Joueur *joueur) {
                     int index = ennemies[choiceEnnemi - 1].second;
                     Combat c{joueur, salle->getJoueur()[index]};
                     c.commencerCombat();
-                    joueur->mort(this);
-                    salle->getJoueur()[index]->mort(this);
+                    Joueur* m1 = joueur->mort(this);
+                    Joueur* m2 = salle->getJoueur()[index]->mort(this);
+                    if(m2 != nullptr){
+                        delete m2;
+                    }
                     break;
                 }
                 case 4:
