@@ -110,8 +110,6 @@ vector<Objet *> initVecteurObjets() {
 }
 
 
-vector<Objet *> Jeu::objetsPossibles{initVecteurObjets()};
-
 void Jeu::initVecteursJoueurs() {
     for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
         joueurs.push_back(new JoueurManuel(to_string(i + 1)));
@@ -124,22 +122,24 @@ void Jeu::initVecteursJoueurs() {
 
 Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned int chateauWidth)
         : nombreDeJoueurs(joueurs), nombreJoueurNonAutomatise(joueurNonAuto) {
-    if(joueurNonAuto >= joueurs) throw std::invalid_argument("joueurNon is not suppose to be higher than joueurs");
+    if (joueurNonAuto >= joueurs) throw std::invalid_argument("joueurNon is not suppose to be higher than joueurs");
     chateau = new Chateau(chateauWidth, chateauLength);
-    objectFactory = new ObjectFactory(objetsPossibles);
+
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
     initVecteurPersonnages();
     initVecteursJoueurs();
+    objetsPossibles = initVecteurObjets();
 }
 
 Jeu::Jeu() : nombreDeJoueurs(16), nombreJoueurNonAutomatise(1) {
     chateau = new Chateau(4, 4);
-    objectFactory = new ObjectFactory(objetsPossibles);
+    delete objectFactory;
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
     // et effectuer un changement dans la fonction forge
     initVecteurPersonnages();
     initVecteursJoueurs();
+    objetsPossibles = initVecteurObjets();
 
 }
 
@@ -196,9 +196,8 @@ Jeu::~Jeu() {
 //    }
 
     for (unsigned int i = 0; i < joueurs.size(); i++) {
-        if (joueurs[i] != nullptr){
+        if (joueurs[i] != nullptr) {
             delete joueurs[i];
-
         }
 
     }
@@ -237,6 +236,7 @@ Personnage *Jeu::forge(int choice) {
 
 bool Jeu::lancePartie() {
     unsigned int choice;
+    objectFactory = new ObjectFactory(objetsPossibles);
     initJoueurs();
     placeJoueurs();
     placeObjets();
@@ -251,7 +251,7 @@ bool Jeu::lancePartie() {
 
     utilities::display("Voulez-vous relancer une autre partie?\n");
     utilities::display("1.Oui\n2.Non\n");
-    choice = utilities::validateRange(1,2);
+    choice = utilities::validateRange(1, 2);
     return (choice == 1);
 
 
@@ -457,7 +457,6 @@ void Jeu::tour(Joueur *joueur) {
                     //Mort éventuelle des joueurs
                     Joueur *m2 = salle->getJoueur()[index]->mort(this);
                     if (m2 != nullptr) {
-                        cout << "M22222222 \n\n";
                         utilities::display("L'ennemi " + m2->getPersonnage()->getName() +
                                            " fait tomber au sol les objets suivants:\n");
                         for (unsigned int i = 0; i < m2->getPersonnage()->getSac().size(); i++) {
@@ -475,16 +474,15 @@ void Jeu::tour(Joueur *joueur) {
                     }
 
                     //Si tous les ennemis ont été vaincus
-                    if(this->joueurs.size() == 1){
+                    if (this->joueurs.size() == 1) {
                         utilities::display("Tous les ennemis ont été vaincus, la partie se termine.\n");
                         this->partieFinie = true;
                         return;
                     }
-                    
+
                     //Mort joueurManuel
                     Joueur *m1 = joueur->mort(this);
                     if (m1 != nullptr) {
-                        cout << "M11111111 \n\n";
                         utilities::display("Vous avez été vaincu, la partie se termine.\n");
                         this->partieFinie = true;
                         return;

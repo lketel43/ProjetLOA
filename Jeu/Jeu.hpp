@@ -19,7 +19,7 @@ private:
     const int nombreDeJoueurs;
     const int nombreJoueurNonAutomatise;
     ObjectFactory* objectFactory;
-    static std::vector<Objet*> objetsPossibles;
+    std::vector<Objet*> objetsPossibles;
     //les joueurs non-automatisés sont placés d'abord dans le vecteur
     std::vector<Joueur*> joueurs;
     Chateau *chateau;
