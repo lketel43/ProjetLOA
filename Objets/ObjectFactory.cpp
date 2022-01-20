@@ -52,6 +52,14 @@ Objet *ObjectFactory::producePotion() {
     }
 }
 
+Objet *ObjectFactory::producePoison(){
+    Objet *objet;
+    while(true){
+        objet = produce();
+        if(objet->getIdType() == IDTYPE_POTION && (dynamic_cast<Potion*>(objet))->getPoison()) return objet;
+    }
+}
+
 Objet *ObjectFactory::produceArmeExtraordinaire() {
     Objet *objet;
     while (true) {

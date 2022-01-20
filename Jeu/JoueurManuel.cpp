@@ -319,7 +319,7 @@ void JoueurManuel::utiliserPotionPosion(Potion* p, const Joueur* j) const{
             this->personnage->setResistanceMagique((p->getBoost() / 100) * j->getPersonnage()->getResistanceMagique());
         }
         utilities::display("Voici les statistiques de l'ennemi après cette potion:\n");
-        utilities::display(this->personnage->getStats());
+        utilities::display(j->getPersonnage()->getStats());
     }
     int index;
     for(long unsigned int i = 0; i < this->personnage->getSac().size(); i++){
@@ -380,7 +380,7 @@ void JoueurManuel::tourCombat(const Joueur* j) const{
 
                 choice = utilities::validateRange(1, this->personnage->getSac().size());
                 choice -= 1;
-                utilities::display("Vous avez choisi d'utiliser l'objet " + this->personnage->getSac()[objetsUtilisables[choice].second]->getNom());
+                utilities::display("Vous avez choisi d'utiliser l'objet " + this->personnage->getSac()[objetsUtilisables[choice].second]->getNom() + "\n");
                 if(!(dynamic_cast<Potion*>(this->personnage->getSac()[choice]))->getPoison()){ //Si ce n'est pas une potion de poison
                     this->utiliserPotion(dynamic_cast<Potion*>(this->personnage->getSac()[objetsUtilisables[choice].second]));
                 }

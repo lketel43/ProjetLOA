@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Objet.hpp"
+#include "Potion.hpp"
 
 
 class ObjectFactory{
@@ -21,6 +22,7 @@ class ObjectFactory{
         Objet* producePotion();
         Objet* produireArmeLegendaire();
         Objet* produireBouclierLegendaire();
+        Objet* producePoison();
 
 };
 
