@@ -9,9 +9,7 @@ public:
     JoueurAutomatique(std::string);
     ~JoueurAutomatique() override;
     void tourCombat(const Joueur*) const override;
-    //TODO: IMPLEMENT BELOW FUNCTION
     void consulterSacEtEquipement(Jeu*) override;
-    //TODO: IMPLEMENT BELOW FUNCTION
     void pickUpObjects(Jeu*) override;
     void utiliserPotion(Potion*) const override;
     void utiliserPotionPosion(Potion*, const Joueur*) const override;
