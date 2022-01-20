@@ -174,7 +174,6 @@ bool JoueurManuel::consulterSac(Jeu *jeu) {
                                 break;
                             case IDTYPE_CLEF:
                                 utiliserClef(dynamic_cast<Clef *>(objetsUtilisables[choice - 1].first), jeu);
-                                personnage->removeFromSac(objetsUtilisables[choice - 1].second);
                                 break;
                             case IDTYPE_POTION:
                                 utiliserPotion(dynamic_cast<Potion *>(objetsUtilisables[choice - 1].first));
@@ -268,7 +267,7 @@ void JoueurManuel::utiliserPotion(Potion *p) const {
         return;
     }
     if (p->getIdType() == IDTYPE_POTION) {
-        utilities::display("Vous avez choisi d'utiliser une potion de type" + p->getType() + ".\n");
+        utilities::display("Vous avez choisi d'utiliser une potion de type " + p->getType() + ".\n");
         if (p->getType() == "sante") {
             this->personnage->setSante(p->getBoost());
         }

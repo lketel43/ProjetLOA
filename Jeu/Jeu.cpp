@@ -104,9 +104,8 @@ vector<Objet *> initVecteurObjets() {
     ret.push_back(new Arme("Épée ultime", 50, 40, 20, 4, 4));
     ret.push_back(new Arme("Bouclier ultime", 50, 0, 40, 0, 40));
 
-
     //TODO: clef de teleportation
-    ret.push_back(new Clef("Clef de téléportation", 1, "Cette clef vous permet de changer de salle sans finir votre tour.\n Attention, elle est à utilisation unique.\n "));
+    ret.push_back(new Clef("Clef de téléportation", 1, "Cette clef vous permet de changer de salle sans finir votre tour.\nAttention, elle est à utilisation unique.\n "));
 
     return ret;
 }
@@ -447,7 +446,6 @@ void Jeu::tour(Joueur *joueur) {
                         c.commencerCombat();
                     }
 
-
                     //Mort éventuelle des joueurs
                     Joueur* m1 = joueur->mort(this);
                     Joueur* m2 = salle->getJoueur()[index]->mort(this);
@@ -457,6 +455,7 @@ void Jeu::tour(Joueur *joueur) {
                             salle->placeObject(m2->getPersonnage()->getSac()[i]);
                             utilities::display(m2->getPersonnage()->getSac()[i]->getNom() + "\n");
                         }
+                        utilities::display("Vous retrouverez également une potion de santé dans la salle pour vous récompenser.\n");
                         for(unsigned int i = 0; i < m2->getPersonnage()->getEquipement().size(); i++){
                             utilities::display(m2->getPersonnage()->getEquipement()[i]->getNom() + "\n");
                             salle->placeObject(m2->getPersonnage()->getEquipement()[i]);
@@ -466,6 +465,7 @@ void Jeu::tour(Joueur *joueur) {
                     if (m1 != nullptr) {
 
                     }
+                    salle->placeObject(objectFactory->producePotionDeSanteExtra());
                     break;
                 }
                 case 4:
