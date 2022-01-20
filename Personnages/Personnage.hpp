@@ -32,6 +32,7 @@ private:
     int attaqueMagique;
     int resistancePhysique;
     int resistanceMagique;
+    std::pair<unsigned int, unsigned int> position;
 
 public:
     ~Personnage();
@@ -49,6 +50,7 @@ public:
     int getAttaqueMagique() const;
     int getResistancePhysique() const;
     int getResistanceMagique() const;
+    std::pair<unsigned int, unsigned int> getPosition() const;
 
     std::vector<Objet*> getSac() const;
     void addToSac(Objet*);

@@ -4,10 +4,10 @@
 std::vector<Objet *> buildFreq(std::vector<Objet *> v) {
     int rareteMax = 0;
     std::vector<Objet *> ret;
-    for (int i = 0; i < v.size(); i++) {
+    for (unsigned int i = 0; i < v.size(); i++) {
         if (v.at(i)->getRarete() > rareteMax) rareteMax = v.at(i)->getRarete();
     }
-    for (int i = 0; i < v.size(); i++) {
+    for (unsigned int i = 0; i < v.size(); i++) {
         for (int j = 0; j < rareteMax / v.at(i)->getRarete(); j++) {
             ret.push_back(v.at(i));
         }

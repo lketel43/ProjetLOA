@@ -20,7 +20,6 @@ protected:
     Personnage * personnage;
     const bool automatise;
     std::string nom;
-    std::pair<int, int> position;
     int score;
 public:
     Joueur(std::string, bool);

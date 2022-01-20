@@ -196,7 +196,7 @@ Jeu::~Jeu() {
 //        delete personnagesDisponiblesEtFrequences[i].first;
 //    }
 
-    for (long int i = 0; i < joueurs.size(); i++) {
+    for (unsigned int i = 0; i < joueurs.size(); i++) {
         if (joueurs[i] != nullptr)
             delete joueurs[i];
     }
@@ -243,7 +243,7 @@ void Jeu::lancePartie() {
     //c->commencerCombat();
     // TEST COMBAT
     while (true) {
-        for (int i = 0; i < joueurs.size(); i++) {
+        for (unsigned int i = 0; i < joueurs.size(); i++) {
             tour(joueurs[i]);
         }
     }
@@ -254,7 +254,7 @@ void Jeu::placeJoueurs() {
     int x, y;
 
     //Vrais joueurs sont placés de manière random
-    for (unsigned int i = 0; i < nombreJoueurNonAutomatise; i++) {
+    for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
         //TODO: careful, might be source of slow execution
         do {
             x = utilities::random(0, chateau->getWidth() - 1);
@@ -424,7 +424,7 @@ void Jeu::placerDansSalle(std::pair<int, int> position, Objet *objet) {
     chateau->placeDansSalle(position, objet);
 }
 
-Salle *Jeu::getSalle(std::pair<int, int> position) const {
+Salle *Jeu::getSalle(std::pair<unsigned int, unsigned int> position) const {
     if (position.first > chateau->width || position.second > chateau->length) {
         cout << "ERROR WITH SALLE COORDINATES\n";
         return nullptr;

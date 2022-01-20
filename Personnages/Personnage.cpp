@@ -51,6 +51,10 @@ int Personnage::getResistanceMagique() const{
     return this->resistanceMagique;
 }
 
+std::pair<unsigned int, unsigned int> Personnage::getPosition() const{
+    return this->position;
+}
+
 string Personnage::getStats() const{
     string stat;
     stat = "Attaque Physique: " + std::to_string(attaquePhysique) + "\n";
