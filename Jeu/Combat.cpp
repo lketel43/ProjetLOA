@@ -12,14 +12,11 @@ void Combat::commencerCombat(){
         this->j2->tourCombat(this->j1);
         if(this->j1->getPersonnage()->getSante() <= 0) break;
     }
-    if(this->j1->getPersonnage()->getSante() <= 0 && this->j2->getPersonnage()->getSante() <= 0){
-        utilities::display("Le combat est terminé. Les deux joueurs sont morts.\n");
-    }
     if(this->j1->getPersonnage()->getSante() <= 0){
-        utilities::display("Le combat est terminé. " + this->j1->getName() + " a perdu.\n\n");
+        utilities::display("Le combat est terminé. Le joueur " + this->j1->getName() + " a perdu.\n\n");
     }
     else{
-        utilities::display("Le combat est terminé. " + this->j2->getName() + " a perdu.\n\n");
+        utilities::display("Le combat est terminé. Le joueuer " + this->j2->getName() + " a perdu.\n\n");
     }
 }
 
