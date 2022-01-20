@@ -351,8 +351,6 @@ void Jeu::tour(Joueur *joueur) {
                         break;
                     }
                     // Afficher les perso de la salle
-                    //TODO: BUG, affiche les valeurs de 0->nbEnnemi - 1
-                    //TODO: autre bug dans combat, joueur adversaire peut toujours attaquer meme si a 0 santé
                     //TODO: les degats sont égaux
                     //TODO: peut-être montrer les stats des joueurs ennemies (en incluant les armes qu'ils ont)
                     vector<pair<Joueur *, int> > ennemies{salle->displayEnnemi(joueur)};
@@ -364,10 +362,21 @@ void Jeu::tour(Joueur *joueur) {
                     int index = ennemies[choiceEnnemi - 1].second;
                     Combat c{joueur, salle->getJoueur()[index]};
                     c.commencerCombat();
+
+                    //Mort éventuelle des joueurs
                     Joueur* m1 = joueur->mort(this);
                     Joueur* m2 = salle->getJoueur()[index]->mort(this);
                     if(m2 != nullptr){
+                        for(unsigned int i = 0; i < m2->getPersonnage()->getSac().size(); i++){
+                            salle->placeObject(m2->getPersonnage()->getSac()[i]);
+                        }
+                        for(unsigned int i = 0; i < m2->getPersonnage()->getEquipement().size(); i++){
+                            salle->placeObject(m2->getPersonnage()->getEquipement()[i]);
+                        }
                         delete m2;
+                    }
+                    if(m1 != nullptr){
+
                     }
                     break;
                 }
