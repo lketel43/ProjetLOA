@@ -360,8 +360,15 @@ void Jeu::tour(Joueur *joueur) {
                     choiceEnnemi = utilities::validateRange(1, salle->nbEnnemi());
                     // Créer le combat et le lancer
                     int index = ennemies[choiceEnnemi - 1].second;
-                    Combat c{joueur, salle->getJoueur()[index]};
-                    c.commencerCombat();
+                    if(joueur->getPersonnage()->getHabilete() >= salle->getJoueur()[index]->getPersonnage()->getHabilete()){
+                        Combat c{joueur, salle->getJoueur()[index]};
+                        c.commencerCombat();
+                    }
+                    else{
+                        Combat c{salle->getJoueur()[index], joueur};
+                        c.commencerCombat();
+                    }
+                    
 
                     //Mort éventuelle des joueurs
                     Joueur* m1 = joueur->mort(this);
