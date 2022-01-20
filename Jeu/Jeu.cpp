@@ -113,10 +113,10 @@ vector<Objet *> initVecteurObjets() {
 vector<Objet *> Jeu::objetsPossibles{initVecteurObjets()};
 
 void Jeu::initVecteursJoueurs() {
-    for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
+    for (unsigned int i = 0; i < nombreJoueurNonAutomatise; i++) {
         joueurs.push_back(new JoueurManuel(to_string(i + 1)));
     }
-    for (int i = nombreJoueurNonAutomatise; i < nombreDeJoueurs; i++) {
+    for (unsigned int i = nombreJoueurNonAutomatise; i < nombreDeJoueurs; i++) {
         joueurs.push_back(new JoueurAutomatique(to_string(i + 1)));
     }
 }
@@ -342,7 +342,7 @@ void Jeu::placeJoueurs() {
     int x, y;
 
     //Vrais joueurs sont placés de manière random
-    for (int i = 0; i < nombreJoueurNonAutomatise; i++) {
+    for (unsigned int i = 0; i < nombreJoueurNonAutomatise; i++) {
         do {
             x = utilities::random(0, chateau->getWidth() - 1);
             y = utilities::random(0, chateau->getLength() - 1);
