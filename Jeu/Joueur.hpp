@@ -32,9 +32,9 @@ public:
     bool isAutomatise() const;
     bool isPlaced() const;
 
-    void ramasser(Objet*);
-    void equiper(Objet*);
-    void desequiper(int index);
+    bool ramasser(Objet*);
+    bool equiper(Objet*);
+    bool desequiper(int index);
     Objet* jeterDeEquipement(int index);
     void utiliserClef(Clef*, Jeu*);
     virtual void utiliserPotion(Potion*) const = 0;
@@ -42,7 +42,6 @@ public:
     Objet* jeterDeSac(int index);
 
     virtual void tourCombat(const Joueur*) const = 0;
-
     virtual void consulterSacEtEquipement(Jeu*)=0;
     virtual void pickUpObjects(Jeu*)=0;
     virtual int choosePersonnage(std::vector<std::pair<Personnage *, int> >)=0;

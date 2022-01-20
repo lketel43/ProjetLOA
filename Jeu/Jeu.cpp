@@ -105,7 +105,8 @@ vector<Objet *> initVecteurObjets() {
     ret.push_back(new Arme("Bouclier ultime", 50, 0, 40, 0, 40));
 
     //TODO: clef de teleportation
-    ret.push_back(new Clef("Clef de téléportation", 1, "Cette clef vous permet de changer de salle sans finir votre tour.\nAttention, elle est à utilisation unique.\n "));
+    ret.push_back(new Clef("Clef de téléportation", 1,
+                           "Cette clef vous permet de changer de salle sans finir votre tour.\nAttention, elle est à utilisation unique.\n "));
 
     return ret;
 }
@@ -260,7 +261,7 @@ void Jeu::renforcerJoueursAutomatises() {
             if (joueurs.size() == 2) {
                 //trouver l'autre joueur et le transformer en big boss
                 for (long unsigned int i = 0; i < joueurs.size(); i++) {
-                    if(joueurs[i]->isAutomatise()){
+                    if (joueurs[i]->isAutomatise()) {
                         personnage = joueurs[i]->getPersonnage();
                         equipement = personnage->getEquipement();
                         //TODO might be source of error
@@ -448,20 +449,22 @@ void Jeu::tour(Joueur *joueur) {
                     }
 
                     //Mort éventuelle des joueurs
-                    Joueur* m1 = joueur->mort(this);
-                    Joueur* m2 = salle->getJoueur()[index]->mort(this);
-                    if(m2 != nullptr){
-                        utilities::display("L'ennemi " + m2->getPersonnage()->getName() + " fait tomber au sol les objets suivants:\n");
-                        for(unsigned int i = 0; i < m2->getPersonnage()->getSac().size(); i++){
+                    Joueur *m1 = joueur->mort(this);
+                    Joueur *m2 = salle->getJoueur()[index]->mort(this);
+                    if (m2 != nullptr) {
+                        utilities::display("L'ennemi " + m2->getPersonnage()->getName() +
+                                           " fait tomber au sol les objets suivants:\n");
+                        for (unsigned int i = 0; i < m2->getPersonnage()->getSac().size(); i++) {
                             salle->placeObject(m2->getPersonnage()->getSac()[i]);
                             utilities::display(m2->getPersonnage()->getSac()[i]->getNom() + "\n");
                         }
 
-                        for(unsigned int i = 0; i < m2->getPersonnage()->getEquipement().size(); i++){
+                        for (unsigned int i = 0; i < m2->getPersonnage()->getEquipement().size(); i++) {
                             utilities::display(m2->getPersonnage()->getEquipement()[i]->getNom() + "\n");
                             salle->placeObject(m2->getPersonnage()->getEquipement()[i]);
                         }
-                        utilities::display("Vous retrouverez également une potion de santé dans la salle pour vous récompenser.\n");
+                        utilities::display(
+                                "Vous retrouverez également une potion de santé dans la salle pour vous récompenser.\n");
                         delete m2;
                     }
 
@@ -484,7 +487,7 @@ void Jeu::tour(Joueur *joueur) {
                 case 4:
                     if (salle->hasNoOtherPlayers()) {
                         //changer objets dans la salle qu'il va quitter
-                        while(!salle->hasNoObjects()){
+                        while (!salle->hasNoObjects()) {
                             salle->removeObject(0);
                         }
 
@@ -503,6 +506,8 @@ void Jeu::tour(Joueur *joueur) {
 
         } while (choice != 4);
 
+    } else {
+        joueur->endTurn(this);
     }
 
 }

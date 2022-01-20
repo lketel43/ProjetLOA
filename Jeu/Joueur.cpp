@@ -39,35 +39,40 @@ bool Joueur::isAutomatise() const {
     return automatise;
 }
 
-void Joueur::ramasser(Objet *o) {
+bool Joueur::ramasser(Objet *o) {
     if (this->personnage->isSacFull()) {
         utilities::display("Sac plein, veuillez jeter un objet.\n");
+        return false;
     } else {
         this->personnage->addToSac(o);
+        return true;
     }
 }
 
-void Joueur::equiper(Objet *o) {
+bool Joueur::equiper(Objet *o) {
     if (!o->isEquipable()) {
-        cout << "Cet objet n'est pas équipable.\n";
-        return;
+        utilities::display("Cet objet n'est pas équipable.\n");
+        return false;
     }
     if (this->personnage->isEquipementFull()) {
-        cout << "Équipement plein veuillez déséquiper un objet.\n";
+        utilities::display("Équipement plein veuillez déséquiper un objet.\n");
+        return false;
     } else {
         this->personnage->addToEquipement(o);
+        return true;
     }
 }
 
-void Joueur::desequiper(int index) {
+bool Joueur::desequiper(int index) {
     if (this->personnage->isSacFull()) {
         utilities::display("Votre sac est plein. Veuillez vider votre sac, ou jeter l'objet.\n");
-        return;
+        return false;
     }
     Objet *o = this->personnage->getEquipement()[index];
     this->personnage->removeFromEquipement(index);
     this->personnage->addToSac(o);
     utilities::display("Cette arme est maintenant dans votre sac\n");
+    return true;
 }
 
 Objet *Joueur::jeterDeEquipement(int index) {
