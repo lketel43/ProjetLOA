@@ -137,7 +137,7 @@ void JoueurAutomatique::endTurn(Jeu *jeu) {
     vector<Salle *> neighbors = salle->getNeighbors();
 
     //choix neighbors.size() veut dire rester sur place
-    int choice = utilities::random(0, neighbors.size());
+    unsigned int choice = utilities::random(0, neighbors.size());
 
     if (choice != neighbors.size())
         jeu->moveJoueurtoSalle(this, neighbors[choice]);

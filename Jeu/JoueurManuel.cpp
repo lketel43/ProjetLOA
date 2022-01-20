@@ -74,7 +74,7 @@ bool JoueurManuel::consulterEquipement(Jeu *jeu) {
 bool JoueurManuel::consulterSac(Jeu *jeu) {
     bool continueLooping = false;
     vector<Objet *> sac;
-    int choice;
+    unsigned int choice;
     vector<pair<Objet *, long unsigned int> > objetsEquippables;
     vector<pair<Objet *, long unsigned int> > objetsUtilisables;
     do {

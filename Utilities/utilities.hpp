@@ -13,7 +13,7 @@ private:
 public:
     static int bernouilli(double param);
     static void display(const std::string& text);
-    static int validateRange(int i, int j);
+    static unsigned int validateRange(int i, int j);
     static int random(int i, int j);
     static int calcPercentage(int, int);
 };
