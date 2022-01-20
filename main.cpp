@@ -14,7 +14,7 @@ using namespace std;
 int main() {
     //TODO: make sure number of players is not > the number of chambers
     srand(static_cast<unsigned int>(time(nullptr)));
-    Jeu jeu(1, 21, 2, 2);
+    Jeu jeu;
     jeu.lancePartie();
 
 

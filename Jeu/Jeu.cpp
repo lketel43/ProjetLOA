@@ -134,7 +134,7 @@ Jeu::Jeu(int joueurNonAuto, int joueurs, unsigned int chateauLength, unsigned in
     initVecteursJoueurs();
 }
 
-Jeu::Jeu() : nombreDeJoueurs(5), nombreJoueurNonAutomatise(1) {
+Jeu::Jeu() : nombreDeJoueurs(16), nombreJoueurNonAutomatise(1) {
     chateau = new Chateau(4, 4);
     objectFactory = new ObjectFactory(objetsPossibles);
     //Si jamais on ajoute un nouveau type de personnages, on a qu'à ajouter ça ici,
@@ -456,11 +456,12 @@ void Jeu::tour(Joueur *joueur) {
                             salle->placeObject(m2->getPersonnage()->getSac()[i]);
                             utilities::display(m2->getPersonnage()->getSac()[i]->getNom() + "\n");
                         }
-                        utilities::display("Vous retrouverez également une potion de santé dans la salle pour vous récompenser.\n");
+
                         for(unsigned int i = 0; i < m2->getPersonnage()->getEquipement().size(); i++){
                             utilities::display(m2->getPersonnage()->getEquipement()[i]->getNom() + "\n");
                             salle->placeObject(m2->getPersonnage()->getEquipement()[i]);
                         }
+                        utilities::display("Vous retrouverez également une potion de santé dans la salle pour vous récompenser.\n");
                         delete m2;
                     }
                     if (m1 != nullptr) {
