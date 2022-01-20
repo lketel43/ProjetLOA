@@ -472,7 +472,11 @@ void Jeu::tour(Joueur *joueur) {
                 }
                 case 4:
                     if (salle->hasNoOtherPlayers()) {
-                        //rajouter objets dans la salle qu'il va quitter
+                        //changer objets dans la salle qu'il va quitter
+                        while(!salle->hasNoObjects()){
+                            salle->removeObject(0);
+                        }
+
                         salle->placeObject(objectFactory->produce());
                         salle->placeObject(objectFactory->produce());
                         joueur->endTurn(this);
