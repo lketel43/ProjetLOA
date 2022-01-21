@@ -53,7 +53,7 @@ run:main
 	./main
 
 tar:
-	tar -czvf ElkoussyKetels.tar.gz Jeu/ Makefile Objets/ Personnages/ README.md Utilities/ main.cpp
+	tar -czvf ElkoussyKetels.tar.gz Jeu/ Makefile Objets/ Personnages/ README.md Utilities/ main.cpp ProjetLOA-UML.pdf Rapport.pdf
 
 print:
 	@echo $(UTILITIES_SRCS)
