@@ -49,6 +49,12 @@ OBJ_UTILITIES := $(addprefix $(OBJ_DIR_UTILITIES), $(OBJ_UTILITIES))
 
 all:main
 
+run:main
+	./main
+
+tar:
+	tar -czvf ElkoussyKetels.tar.gz Jeu/ Makefile Objets/ Personnages/ README.md Utilities/ main.cpp
+
 print:
 	@echo $(UTILITIES_SRCS)
 	@echo $(OBJ_UTILITIES)
