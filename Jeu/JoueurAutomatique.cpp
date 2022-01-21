@@ -77,7 +77,7 @@ void JoueurAutomatique::utiliserPotionPosion(Potion* p, const Joueur* j) const {
         return;
     }
     if (p->getIdType() == IDTYPE_POTION) {
-        utilities::display(j->getName() + " choisi d'utiliser une potion de poison affectant la caractéristique " + p->getType() + ".\n");
+        utilities::display("L'ennemi choisi d'utiliser une potion de poison affectant la caractéristique " + p->getType() + ".\n");
         if (p->getType() == "sante") {
             utilities::display("La potion inflige " + to_string(-(p->getBoost() / 100) * j->getPersonnage()->getSante()) + " dégâts.\n");
             j->getPersonnage()->subitAttaque(-(p->getBoost() / 100) * j->getPersonnage()->getSante());

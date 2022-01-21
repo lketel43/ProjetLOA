@@ -16,8 +16,8 @@ class Combat;
 class Jeu {
 
 private:
-    const int nombreDeJoueurs;
-    const int nombreJoueurNonAutomatise;
+    const unsigned int nombreDeJoueurs;
+    const unsigned int nombreJoueurNonAutomatise;
     ObjectFactory* objectFactory;
     std::vector<Objet*> objetsPossibles;
     //les joueurs non-automatisés sont placés d'abord dans le vecteur

@@ -6,6 +6,7 @@
 #define PROJETLOA_UTILITIES_HPP
 
 #include <cmath>
+#include <vector>
 
 class utilities{
 private:
@@ -16,6 +17,7 @@ public:
     static unsigned int validateRange(int i, int j);
     static int random(int i, int j);
     static int calcPercentage(int, int);
+    template<typename T> static std::vector<T> filtre(bool (*func)(T), std::vector<T>);
 };
 
 #endif //PROJETLOA_UTILITIES_HPP
