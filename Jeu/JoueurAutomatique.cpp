@@ -57,7 +57,7 @@ void JoueurAutomatique::utiliserPotion(Potion* p) const{
         if (p->getType() == "resistanceMagique") {
             this->personnage->setResistanceMagique(p->getBoost());
         }
-        utilities::display("Voici les statistiques de " + this->getName() + " après cette potion:\n");
+        utilities::display("Voici les statistiques de l'ennemi après cette potion:\n");
         utilities::display(this->personnage->getStats());
     }
     int index;
