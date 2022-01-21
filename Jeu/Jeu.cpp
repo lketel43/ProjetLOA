@@ -243,10 +243,9 @@ bool Jeu::lancePartie() {
 
 
     while (!this->partieFinie) {
-
+        renforcerJoueursAutomatises();
+        spotLast();
         for (unsigned int i = 0; i < joueurs.size(); i++) {
-            renforcerJoueursAutomatises();
-            spotLast();
             tour(joueurs[i]);
         }
     }
@@ -265,8 +264,8 @@ void Jeu::renforcerJoueursAutomatises() {
     Personnage *personnage;
     vector<Objet *> equipement;
 
-    if (joueurs.size() < nombreDeJoueurs / 2) {
-        if (joueurs.size() < nombreDeJoueurs / 4) {
+    if (joueurs.size() - 1 <= nombreDeJoueurs / 2) {
+        if (joueurs.size() - 1 < nombreDeJoueurs / 4) {
             if (joueurs.size() == 2) {
                 //trouver l'autre joueur et le transformer en big boss
                 utilities::display("Il vous reste un ennemi final. Mais attention: il est légendaire!\n");
@@ -287,7 +286,7 @@ void Jeu::renforcerJoueursAutomatises() {
             } else {
                 //donner a tous les joueurs des armes automatiques fortes
                 utilities::display("Vos ennemis deviennent plus forts!\n");
-                for (long unsigned int i = 0; i < joueurs.size(); i++) {
+                for (long unsigned int i = 0; i <= joueurs.size(); i++) {
                     //chercher tous les joueurs AUTOMATIQUES
                     if (joueurs[i]->isAutomatise()) {
                         personnage = joueurs[i]->getPersonnage();
@@ -555,7 +554,7 @@ void Jeu::moveJoueurtoSalle(Joueur *joueur, Salle *salle) {
 }
 
 void Jeu::spotLast() {
-    if (joueurs.size() < nombreDeJoueurs / 2) {
+    if (joueurs.size() - 1 <= nombreDeJoueurs / 2) {
         for (unsigned int i = 0; i < joueurs.size(); i++) {
             utilities::display("Le joueur " + joueurs[i]->getName() + " est dans la salle " +
                                to_string(getSalle(joueurs[i]->getPersonnage()->getPosition())->getId()) + "\n");
