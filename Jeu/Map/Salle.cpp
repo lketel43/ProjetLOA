@@ -82,7 +82,6 @@ void Salle::display() const {
     for (unsigned int i = 0; i < objets.size(); i++) {
         utilities::display("Objet " + to_string(i + 1) + ":\n");
         objets[i]->display();
-        utilities::display("\n");
     }
 
 

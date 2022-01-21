@@ -21,7 +21,7 @@ float Potion::getBoost() const {
 }
 
 void Potion::display() const {
-    utilities::display("Nom: " + nom + "\nRareté:" + to_string(rarete) +
+    utilities::display("Nom: " + nom + "\nRareté: " + to_string(rarete) +
                        "\nBoost: " + type + " " + ((boost > 0) ? "+" : "") + to_string(boost) + "\n");
 
 }

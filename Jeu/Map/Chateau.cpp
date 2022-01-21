@@ -91,12 +91,22 @@ pair<int, int> Chateau::getEmptiestRoom() {
 
 void Chateau::display() {
     int currSalleId;
-    cout << "----------------------------------" << endl;
-    for (unsigned int i = 0; i < length; i++) {
-        if (i > 0)
-            cout << "----  ------  ------  ------  ----" << endl;
+    for (int i = 0; i < length; i++)
+        cout << "---------";
+    cout << endl;
+    //cout << "----------------------------------" << endl;
+    for (unsigned int i = 0; i < width; i++) {
+        if (i > 0) {
+            cout << "-";
+            for (unsigned int m = 0; m < length; m++) {
+                cout << "---  ---";
+            }
+            cout << "-";
+            cout << endl;
+        }
+//            cout << "----  ------  ------  ------  ----" << endl;
         for (int k = 0; k < 3; k++) {
-            for (unsigned int j = 0; j < width; j++) {
+            for (unsigned int j = 0; j < length; j++) {
                 currSalleId = map[i][j]->getId();
                 if (k == 1)
                     if (j == 0)
@@ -112,7 +122,7 @@ void Chateau::display() {
                 else
                     cout << "|       ";
 
-                if (j == width - 1) {
+                if (j == length - 1) {
                     if (currSalleId < 10) {
                         cout << "  |";
                     } else {
@@ -126,53 +136,69 @@ void Chateau::display() {
 //        cout << endl;
 
     }
-    cout << "----------------------------------" << endl;
+    for (int i = 0; i < length; i++)
+        cout << "---------";
+    cout << endl;
 }
 
 void Chateau::display(pair<int, int> position) {
     int salleId = map[position.first][position.second]->getId();
     int currSalleId;
 
-    cout << "----------------------------------" << endl;
-    for (unsigned int i = 0; i < length; i++) {
-        if (i > 0)
-            cout << "----  ------  ------  ------  ----" << endl;
-        for (int k = 0; k < 3; k++) {
-            for (unsigned int j = 0; j < width; j++) {
-                currSalleId = map[i][j]->getId();
-                if (k == 1) {
-                    if (j == 0)
-                        if (currSalleId < 10 || salleId == currSalleId)
-                            if (currSalleId == salleId)
-                                cout << "|   " << "x" << "   ";
-                            else
-                                cout << "|   " << currSalleId << "   ";
-                        else
-                            cout << "|   " << currSalleId << "  ";
-                    else if (currSalleId < 10 || salleId == currSalleId)
-                        if (currSalleId == salleId)
-                            cout << "    " << "x" << "   ";
-                        else
-                            cout << "    " << currSalleId << "   ";
-                    else
-                        cout << "    " << currSalleId << "  ";
-                } else {
-                    cout << "|       ";
-                }
-
-                if (j == width - 1){
-                    if (currSalleId < 10)
-                        cout << "  |";
-                    else cout << " |";
-                }
-
+    for (int i = 0; i < length; i++)
+        cout << "---------";
+    cout << endl;
+    //cout << "----------------------------------" << endl;
+    for (unsigned int i = 0; i < width; i++) {
+        if (i > 0) {
+            cout << "-";
+            for (unsigned int m = 0; m < length; m++) {
+                cout << "---  ---";
             }
+            cout << "-";
             cout << endl;
         }
+//            cout << "----  ------  ------  ------  ----" << endl;
+            for (int k = 0; k < 3; k++) {
+                for (unsigned int j = 0; j < length; j++) {
+                    currSalleId = map[i][j]->getId();
+                    if (k == 1) {
+                        if (j == 0)
+                            if (currSalleId < 10 || salleId == currSalleId)
+                                if (currSalleId == salleId)
+                                    cout << "|   " << "x" << "   ";
+                                else
+                                    cout << "|   " << currSalleId << "   ";
+                            else
+                                cout << "|   " << currSalleId << "  ";
+                        else if (currSalleId < 10 || salleId == currSalleId)
+                            if (currSalleId == salleId)
+                                cout << "    " << "x" << "   ";
+                            else
+                                cout << "    " << currSalleId << "   ";
+                        else
+                            cout << "    " << currSalleId << "  ";
+                    } else {
+                        cout << "|       ";
+                    }
 
+                    if (j == length - 1) {
+                        if (currSalleId < 10)
+                            cout << "  |";
+                        else cout << " |";
+                    }
+
+                }
+                cout << endl;
+            }
+
+
+        }
+    for (int i = 0; i < length; i++)
+        cout << "---------";
+    cout << endl;
     }
-    cout << "----------------------------------" << endl;
-}
+
 
 
 Chateau::~Chateau() {

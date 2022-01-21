@@ -103,7 +103,7 @@ vector<Objet *> initVecteurObjets() {
     ret.push_back(new Arme("Épée ultime", 50, 40, 20, 4, 4));
     ret.push_back(new Arme("Bouclier ultime", 50, 0, 40, 0, 40));
 
-    ret.push_back(new Clef("Clef de téléportation", 10,
+    ret.push_back(new Clef("Clef de téléportation", 7,
                            "Cette clef vous permet de changer de salle sans finir votre tour.\nAttention, elle est à utilisation unique.\n "));
 
     return ret;
@@ -160,7 +160,7 @@ void Jeu::initJoueurs() {
     int choice;
 
     utilities::display("Il est temps pour chaque joueur de choisir son personnage.\n");
-    utilities::display("Voici les personnages possibles, et leur stats.\n");
+    utilities::display("Voici les personnages possibles, et leurs statistiques.\n");
 
     for (long unsigned int i = 0; i < personnagesDisponiblesEtFrequences.size(); i++) {
         utilities::display("Personnage " + to_string(i + 1) + ": \n"
@@ -243,9 +243,10 @@ bool Jeu::lancePartie() {
 
 
     while (!this->partieFinie) {
-        renforcerJoueursAutomatises();
-        spotLast();
+
         for (unsigned int i = 0; i < joueurs.size(); i++) {
+            renforcerJoueursAutomatises();
+            spotLast();
             tour(joueurs[i]);
         }
     }
@@ -553,11 +554,11 @@ void Jeu::moveJoueurtoSalle(Joueur *joueur, Salle *salle) {
     moveJoueur(joueur, position.first, position.second);
 }
 
-void Jeu::spotLast(){
-    if (joueurs.size() < nombreDeJoueurs / 2){
-        for(unsigned int i = 0; i < joueurs.size(); i++){
-            utilities::display("Le joueur " + joueurs[i]->getName() + " est dans la salle " + 
-            to_string(getSalle(joueurs[i]->getPersonnage()->getPosition())->getId()) + "\n");
+void Jeu::spotLast() {
+    if (joueurs.size() < nombreDeJoueurs / 2) {
+        for (unsigned int i = 0; i < joueurs.size(); i++) {
+            utilities::display("Le joueur " + joueurs[i]->getName() + " est dans la salle " +
+                               to_string(getSalle(joueurs[i]->getPersonnage()->getPosition())->getId()) + "\n");
         }
     }
 }

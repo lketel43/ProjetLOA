@@ -28,8 +28,9 @@ int main() {
         utilities::display("1. Niveau facile: château de taille 3x3, 8 ennemis. \n");
         utilities::display("2. Niveau intermédiaire: château de taille 3x3, 16 ennemis. \n");
         utilities::display("3. Niveau expert: château de taille 4x4, 32 ennemis.\n");
+        utilities::display("4. Mode démonstration: château de taille 2x2, 3 ennemis.\n");
 
-        choix = utilities::validateRange(1, 3);
+        choix = utilities::validateRange(1, 4);
         switch (choix) {
             case 1:
                 length = width = 3;
@@ -42,6 +43,11 @@ int main() {
             case 3:
                 length = width = 4;
                 ennemis = 32;
+                break;
+            case 4:
+                length = 2;
+                width = 2;
+                ennemis = 3;
                 break;
             default:
                 cout << "ERROR IN CHOICE VALIDATION" << endl;
