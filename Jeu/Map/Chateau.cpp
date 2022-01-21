@@ -91,7 +91,7 @@ pair<int, int> Chateau::getEmptiestRoom() {
 
 void Chateau::display() {
     int currSalleId;
-    for (int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++)
         cout << "---------";
     cout << endl;
     //cout << "----------------------------------" << endl;
@@ -136,7 +136,7 @@ void Chateau::display() {
 //        cout << endl;
 
     }
-    for (int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++)
         cout << "---------";
     cout << endl;
 }
@@ -145,7 +145,7 @@ void Chateau::display(pair<int, int> position) {
     int salleId = map[position.first][position.second]->getId();
     int currSalleId;
 
-    for (int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++)
         cout << "---------";
     cout << endl;
     //cout << "----------------------------------" << endl;
@@ -194,7 +194,7 @@ void Chateau::display(pair<int, int> position) {
 
 
         }
-    for (int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++)
         cout << "---------";
     cout << endl;
     }
