@@ -14,8 +14,7 @@ void JoueurAutomatique::tourCombat(const Joueur *j) const {
         return;
     }
     if(utilities::random(1, 3) == 3 && this->getPersonnage()->hasPotionPoison() != nullptr){
-        utilities::display(this->getName() + " utilise une potion de poison.\n");
-        this->utiliserPotionPosion(this->getPersonnage()->hasPotionPoison(), j); //TODO Gérer disparition des potions de l'inventaire
+        this->utiliserPotionPosion(this->getPersonnage()->hasPotionPoison(), j);
         return;
     }
     if(utilities::random(1, 3) == 3 && this->getPersonnage()->hasPotionBoost() != nullptr){

@@ -65,6 +65,7 @@ public:
     Salle* getSalle(std::pair<unsigned int, unsigned int>) const;
     ~Jeu();
     void moveJoueurtoSalle(Joueur*, Salle*);
+    void spotLast();
 
     //Makes number of players, number of automatised players and chateau dimensions customizable
     Jeu(int, int, unsigned int, unsigned int);

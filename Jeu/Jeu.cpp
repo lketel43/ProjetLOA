@@ -244,6 +244,7 @@ bool Jeu::lancePartie() {
 
     while (!this->partieFinie) {
         renforcerJoueursAutomatises();
+        spotLast();
         for (unsigned int i = 0; i < joueurs.size(); i++) {
             tour(joueurs[i]);
         }
@@ -550,4 +551,13 @@ Salle *Jeu::getSalle(std::pair<unsigned int, unsigned int> position) const {
 void Jeu::moveJoueurtoSalle(Joueur *joueur, Salle *salle) {
     pair<int, int> position = getSallePosition(salle->getId());
     moveJoueur(joueur, position.first, position.second);
+}
+
+void Jeu::spotLast(){
+    if (joueurs.size() < nombreDeJoueurs / 2){
+        for(unsigned int i = 0; i < joueurs.size(); i++){
+            utilities::display("Le joueur " + joueurs[i]->getName() + " est dans la salle " + 
+            to_string(getSalle(joueurs[i]->getPersonnage()->getPosition())->getId()) + "\n");
+        }
+    }
 }
