@@ -243,9 +243,9 @@ bool Jeu::lancePartie() {
 
 
     while (!this->partieFinie) {
-        renforcerJoueursAutomatises();
         spotLast();
         for (unsigned int i = 0; i < joueurs.size(); i++) {
+            renforcerJoueursAutomatises();
             tour(joueurs[i]);
         }
     }
@@ -555,6 +555,7 @@ void Jeu::moveJoueurtoSalle(Joueur *joueur, Salle *salle) {
 
 void Jeu::spotLast() {
     if (joueurs.size() - 1 <= nombreDeJoueurs / 2) {
+        utilities::display("Il ne vous reste plus beaucoup d'ennemis à battre.\n");
         for (unsigned int i = 0; i < joueurs.size(); i++) {
             utilities::display("Le joueur " + joueurs[i]->getName() + " est dans la salle " +
                                to_string(getSalle(joueurs[i]->getPersonnage()->getPosition())->getId()) + "\n");
