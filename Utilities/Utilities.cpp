@@ -76,7 +76,7 @@ int utilities::calcPercentage(int stat, int per){
     return floor(boost) + 1;
 }
 
-template<typename T> vector<T> filtre(bool (*func)(T), vector<T> v){
+template<typename T> vector<T> utilities::filtre(bool (*func)(T), vector<T> v){
     vector<T> ret;
     for(unsigned int i = 0; i < v.size(); i++){
         if(func(v[i])) ret.push_back(v[i]);
